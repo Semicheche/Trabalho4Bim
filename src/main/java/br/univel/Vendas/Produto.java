@@ -43,6 +43,18 @@ public class Produto {
 	public void setUnidade(Unidade unidade) {
 		this.unidade = unidade;
 	}
+	public BigDecimal getCusto() {
+		return custo;
+	}
+	public void setCusto(BigDecimal custo) {
+		this.custo = custo;
+	}
+	public BigDecimal getMargemdelucro() {
+		return margemdelucro;
+	}
+	public void setMargemdelucro(BigDecimal margemdelucro) {
+		this.margemdelucro = margemdelucro;
+	}
 	
 	
 
