@@ -10,15 +10,19 @@ import javax.swing.JButton;
 import java.awt.FlowLayout;
 import java.awt.SystemColor;
 import java.awt.event.ActionListener;
+
 import javax.swing.JToggleButton;
 import javax.swing.ImageIcon;
 import javax.swing.JTextField;
+import javax.xml.ws.Action;
 
 public abstract class MolduraAbstract extends JPanel {
 	private JPanel panel;
 	private JButton btnfechar;
 
+	
 	/**
+	 * @author Luciano Semicheche - 29/10/2015 19:24:34
 	 * Create the panel.
 	 */
 	protected abstract void configuraConteudo();
