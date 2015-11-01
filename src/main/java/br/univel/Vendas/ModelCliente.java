@@ -18,7 +18,7 @@ public abstract class ModelCliente extends AbstractTableModel {
 	@Override
 	public int getColumnCount() {
 		
-		return 7;
+		return 8;
 	}
 	
 	@Override
@@ -39,7 +39,7 @@ public abstract class ModelCliente extends AbstractTableModel {
 		case 6:
 			return "Genero";
 		default:
-			return "Houve algun erro";
+			return "email";
 			
 		}
 		

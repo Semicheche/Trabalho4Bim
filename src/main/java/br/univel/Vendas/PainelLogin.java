@@ -28,17 +28,19 @@ public class PainelLogin extends JPanel {
 	private JTextField txtlogin;
 	private JButton btnentrar;
 	private JPasswordField passwordField;
+	private JPanel panel;
 
 	/**
 	 * Create the panel.
 	 */
 	public PainelLogin() {
-		setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+
+		
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{0, 0, 0, 0, 0, 0};
 		gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0};
-		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
+		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
 		
 		JLabel lblNewLabel = new JLabel("Entre com seu usuario");
@@ -95,11 +97,20 @@ public class PainelLogin extends JPanel {
 		btnentrar = new JButton("Entrar");
 		GridBagConstraints gbc_btnentrar = new GridBagConstraints();
 		gbc_btnentrar.anchor = GridBagConstraints.WEST;
-		gbc_btnentrar.insets = new Insets(0, 0, 5, 0);
+		gbc_btnentrar.insets = new Insets(0, 0, 5, 5);
 		gbc_btnentrar.gridwidth = 4;
 		gbc_btnentrar.gridx = 3;
 		gbc_btnentrar.gridy = 5;
 		add(btnentrar, gbc_btnentrar);
+		
+		panel = new JPanel();
+		GridBagConstraints gbc_panel = new GridBagConstraints();
+		gbc_panel.gridwidth = 3;
+		gbc_panel.insets = new Insets(0, 0, 0, 5);
+		gbc_panel.fill = GridBagConstraints.BOTH;
+		gbc_panel.gridx = 4;
+		gbc_panel.gridy = 7;
+		add(panel, gbc_panel);
 
 	}
 	

@@ -15,6 +15,8 @@ import javax.swing.JToggleButton;
 import javax.swing.ImageIcon;
 import javax.swing.JTextField;
 import javax.xml.ws.Action;
+import java.awt.Color;
+import java.awt.Font;
 
 public abstract class MolduraAbstract extends JPanel {
 	private JPanel panel;
@@ -32,6 +34,7 @@ public abstract class MolduraAbstract extends JPanel {
 	}
 	
 	public MolduraAbstract() {
+		setForeground(new Color(0, 0, 0));
 		setLayout(new BorderLayout(0, 0));
 		
 		panel = new JPanel();
@@ -43,6 +46,8 @@ public abstract class MolduraAbstract extends JPanel {
 		add(panel, BorderLayout.NORTH);
 		
 		btnfechar = new JButton("X");
+		btnfechar.setFont(new Font("Square721 BT", Font.BOLD, 11));
+		btnfechar.setBackground(Color.WHITE);
 		panel.add(btnfechar);
 		
 		JPanel panel_1 = new JPanel();
