@@ -23,8 +23,8 @@ public class Conexao {
 	
 	private void abrirConexao() throws SQLException {
 		String url = "jdbc:postgresql://127.0.0.1:5432/trabalho4bimjava";
-		String user = "postgress";
-		String pass = "postgress";
+		String user = "postgres";
+		String pass = "postgres";
 		con = DriverManager.getConnection(url, user, pass);
 	}
 

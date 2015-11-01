@@ -14,7 +14,7 @@ public class ClienteDaoImpl implements ClienteDao {
 
 	@Override
 	public void inserir(Cliente c) {
-		String sql = "INSERT INTO CLIENTES (ID, NOME, FONE, ENDERECO, CIDADE, UF , EMAIL, GENERO) VALUES (null, ?, ?, ?, ?, ?, ?, ?)";
+		String sql = "INSERT INTO CLIENTE ( NOME, FONE, ENDERECO, CIDADE, ESTADO, EMAIL, GENERO) VALUES (?, ?, ?, ?, ?, ?, ?)";
 		
 		try (PreparedStatement ps = conexao.getConnection().prepareStatement(sql)) {
 			ps.setString(1, c.getNome());
@@ -24,6 +24,7 @@ public class ClienteDaoImpl implements ClienteDao {
 			ps.setString(5, c.getEstado().toString());
 			ps.setString(6, c.getEmail());
 			ps.setString(7, c.getGenero().toString());
+			
 
 			ps.executeUpdate();
 
@@ -37,7 +38,7 @@ public class ClienteDaoImpl implements ClienteDao {
 
 	@Override
 	public void atualizar(Cliente c) {
-		String sql = "UPDATE CLIENTES SET NOME = ?, TELEFONE = ?, ENDERECO = ?, CIDADE = ?, ESTADO = ?, EMAIL = ?, GENERO = ? WHERE ID = ? ";
+		String sql = "UPDATE CLIENTE SET NOME = ?, TELEFONE = ?, ENDERECO = ?, CIDADE = ?, ESTADO = ?, EMAIL = ?, GENERO = ? WHERE ID = ? ";
 		try {
 			PreparedStatement ps = conexao.getConnection().prepareStatement(sql);
 			ps.setString(1, c.getNome());
@@ -56,7 +57,7 @@ public class ClienteDaoImpl implements ClienteDao {
 
 	@Override
 	public void excluir(Cliente c) {
-		String sql = "DELETE * FROM CLIENTES WHRERE ID = ?";
+		String sql = "DELETE * FROM CLIENTE WHRERE ID = ?";
 		try {
 			PreparedStatement ps = conexao.getConnection().prepareStatement(sql);
 			ps.setInt(1, c.getId());
@@ -88,7 +89,7 @@ public class ClienteDaoImpl implements ClienteDao {
 		Statement st = null;
 		ResultSet result = null;
 
-		String sql = "SELECT * FROM CLIENTES";
+		String sql = "SELECT * FROM CLIENTE";
 
 		ArrayList<Cliente> lista = new ArrayList<>();
 		
