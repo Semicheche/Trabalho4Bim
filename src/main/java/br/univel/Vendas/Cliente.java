@@ -10,6 +10,7 @@ public class Cliente {
 	private String cidade;
 	private Estado estado;
 	private Genero genero;
+	private String email;
 	
 	
 	public int getId() {
@@ -53,6 +54,12 @@ public class Cliente {
 	}
 	public void setGenero(Genero genero) {
 		this.genero = genero;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 }

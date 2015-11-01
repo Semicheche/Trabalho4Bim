@@ -3,4 +3,14 @@
   <groupId>SistemaVenda</groupId>
   <artifactId>SistemaVenda</artifactId>
   <version>1.0</version>
+  
+  <dependencies>
+  	<dependency>
+    <groupId>org.postgresql</groupId>
+    <artifactId>postgresql</artifactId>
+    <version>9.4-1204-jdbc42</version>
+</dependency>
+  
+  
+  </dependencies>
 </project>
