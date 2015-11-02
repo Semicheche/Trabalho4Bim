@@ -48,6 +48,7 @@ public class ConteudoCadastroCliente extends JPanel {
 	private JButton btneditar;
 	private JLabel lblEmail;
 	private JTextField txtemail;
+	private char[] senha;
 	
 	
 	
@@ -247,8 +248,6 @@ public class ConteudoCadastroCliente extends JPanel {
 		add(lblSenha, gbc_lblSenha);
 		
 		passUsuario = new JPasswordField();
-		passUsuario.setEnabled(false);
-		passUsuario.setEditable(false);
 		GridBagConstraints gbc_passUsuario = new GridBagConstraints();
 		gbc_passUsuario.insets = new Insets(0, 0, 5, 0);
 		gbc_passUsuario.fill = GridBagConstraints.HORIZONTAL;
@@ -289,8 +288,10 @@ public class ConteudoCadastroCliente extends JPanel {
 		}
 
 	protected void salvar() {
+		Usuario u = new Usuario();
 		Cliente c = new Cliente();
-		ClienteDaoImpl dao = new ClienteDaoImpl();
+		ClienteDaoImpl cdao = new ClienteDaoImpl();
+		UsuarioDaoImpl udao = new UsuarioDaoImpl();
 		
 		//txtid.setText(String.valueOf(dao.listar().get(0).getId()));
 		c.setNome(txtnome.getText());
@@ -300,8 +301,15 @@ public class ConteudoCadastroCliente extends JPanel {
 		c.setEmail(txtemail.getText());
 		c.setEstado((Estado) comboBoxuf.getSelectedItem());
 		c.setGenero((Genero) comboBoxgenero.getSelectedItem());
+		if(chckbxClienteEUsuario.isSelected()){
+			
+				u.setSenha(passUsuario.getPassword());
+				u.setId_cliente(c.getId());
+				udao.inserir(u);
+			
+		}
 		
-		dao.inserir(c);
+		cdao.inserir(c);
 		
 		cancelar();
 		
