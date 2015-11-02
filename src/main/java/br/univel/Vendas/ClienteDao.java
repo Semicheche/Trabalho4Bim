@@ -2,6 +2,12 @@ package br.univel.Vendas;
 
 import java.util.List;
 
+/**
+ * @author Luciano Semicheche - 02/11/2015 21:27:38
+ * 
+ *
+ */
+
 public interface ClienteDao {
 	
 	public void inserir(Cliente c);

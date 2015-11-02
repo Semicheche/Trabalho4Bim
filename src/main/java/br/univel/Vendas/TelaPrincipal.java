@@ -16,7 +16,7 @@ import javax.swing.JTabbedPane;
 public class TelaPrincipal extends JFrame {
 
 	/**
-	 * 
+	 * @author Luciano Semicheche - 02/11/2015 21:29:00
 	 */
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;

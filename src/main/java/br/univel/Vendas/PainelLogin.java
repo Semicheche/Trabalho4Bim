@@ -25,6 +25,12 @@ import javax.swing.JSeparator;
 import javax.swing.JButton;
 import javax.swing.JPasswordField;
 
+/**
+ * 
+ * @author Luciano Semicheche - 02/11/2015 21:28:48
+ *
+ */
+
 public class PainelLogin extends JPanel {
 	private JTextField txtlogin;
 	private JButton btnentrar;

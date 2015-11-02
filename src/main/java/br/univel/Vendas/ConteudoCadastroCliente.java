@@ -68,7 +68,7 @@ public class ConteudoCadastroCliente extends JPanel {
 	
 
 	/**
-	 * 
+	 * @author Luciano Semicheche - 02/11/2015 21:26:55
 	 *Create the panel.
 	 */
 	

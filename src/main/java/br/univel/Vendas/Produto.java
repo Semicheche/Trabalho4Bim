@@ -2,6 +2,11 @@ package br.univel.Vendas;
 
 import java.math.BigDecimal;
 
+/**
+ * 
+ * @author Luciano Semicheche - 02/11/2015 21:30:03
+ *
+ */
 public class Produto {
 	
 	private int id;

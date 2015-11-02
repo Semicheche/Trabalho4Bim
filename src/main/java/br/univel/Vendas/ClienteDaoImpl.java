@@ -7,6 +7,11 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 
+ * @author Luciano Semicheche - 02/11/2015 21:28:03
+ *
+ */
 
 public class ClienteDaoImpl implements ClienteDao {
 	

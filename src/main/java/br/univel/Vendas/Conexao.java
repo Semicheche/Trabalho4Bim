@@ -4,6 +4,11 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+/**
+ * 
+ * @author Luciano Semicheche - 02/11/2015 21:28:25
+ *
+ */
 public class Conexao {
 	
 	private Connection con;
