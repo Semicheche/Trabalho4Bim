@@ -11,12 +11,19 @@ public class Produto {
 	
 	private int id;
 	private int codigodebarras;
+	private String nome;
 	private Categoria categoria;
 	private String descricao;
 	private Unidade unidade;
 	private BigDecimal custo;
 	private BigDecimal margemdelucro;
 	
+	public String getNome() {
+		return nome;
+	}
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
 	
 	public int getId() {
 		return id;
