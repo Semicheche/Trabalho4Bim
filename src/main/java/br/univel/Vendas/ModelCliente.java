@@ -6,8 +6,10 @@ import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
 public abstract class ModelCliente extends AbstractTableModel {
-
-	List<Cliente> clientes = new ArrayList<>();
+	
+	ClienteDaoImpl cdao = new ClienteDaoImpl();
+	
+	List<Cliente> clientes = cdao.listar();
 	
 	@Override
 	public int getRowCount() {
@@ -18,12 +20,14 @@ public abstract class ModelCliente extends AbstractTableModel {
 	@Override
 	public int getColumnCount() {
 		
-		return 8;
+		return 7;
 	}
 	
 	@Override
 	public String getColumnName(int column) {
+		
 		switch (column) {
+		
 		case 0:
 			return "ID";
 		case 1:
@@ -35,7 +39,7 @@ public abstract class ModelCliente extends AbstractTableModel {
 		case 4:
 			return "Cidade";
 		case 5:
-			return "UF";
+			return"Estado";
 		case 6:
 			return "Genero";
 		default:
@@ -47,8 +51,29 @@ public abstract class ModelCliente extends AbstractTableModel {
 
 	@Override
 	public Object getValueAt(int rowIndex, int columnIndex) {
-		// TODO Auto-generated method stub
-		return null;
+	
+		Cliente c = cdao.listar().get(rowIndex);
+		
+		switch (columnIndex) {
+	
+		case 0:
+			return c.getId();
+		case 1:
+			return c.getNome();
+		case 2:
+			return c.getEndereco();
+		case 3:
+			return c.getTelefone();
+		case 4:
+			return c.getCidade();
+		case 5:
+			return c.getEstado();
+		case 6:
+			return c.getGenero();
+		default:
+			return c.getEmail();
+			
+		}
 	}
 
 }

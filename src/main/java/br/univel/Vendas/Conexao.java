@@ -6,7 +6,7 @@ import java.sql.SQLException;
 
 public class Conexao {
 	
-	private static Connection con;
+	private Connection con;
 	
 	public Connection getConnection(){
 		

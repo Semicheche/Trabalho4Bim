@@ -1,22 +1,34 @@
 package br.univel.Vendas;
 
 import javax.swing.JPanel;
+
 import java.awt.GridBagLayout;
+
 import javax.swing.JLabel;
+
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+import java.awt.List;
+
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
+
 import java.awt.BorderLayout;
+
 import javax.swing.JCheckBox;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+
 import javax.swing.JPasswordField;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.FlowLayout;
+import java.util.ArrayList;
+
 import javax.swing.JButton;
 
 public class ConteudoCadastroCliente extends JPanel {
@@ -49,6 +61,8 @@ public class ConteudoCadastroCliente extends JPanel {
 	private JLabel lblEmail;
 	private JTextField txtemail;
 	private char[] senha;
+	private JButton btnNewButton;
+	private JButton btnExcluir;
 	
 	
 	
@@ -67,13 +81,6 @@ public class ConteudoCadastroCliente extends JPanel {
 		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
 		
-		chckbxClienteEUsuario = new JCheckBox("Cliente e Usuario");
-		chckbxClienteEUsuario.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				ativaUsuario();
-			}
-		});
-		
 		panel = new JPanel();
 		GridBagConstraints gbc_panel = new GridBagConstraints();
 		gbc_panel.gridwidth = 4;
@@ -85,6 +92,27 @@ public class ConteudoCadastroCliente extends JPanel {
 		panel.setLayout(new FlowLayout(FlowLayout.RIGHT, 5, 5));
 		
 		btneditar = new JButton("Editar");
+		btneditar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Editar();
+			}
+		});
+		
+		btnNewButton = new JButton("Salvar");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				atualizar();
+			}
+		});
+		
+		btnExcluir = new JButton("Excluir");
+		btnExcluir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				excluir();
+			}
+		});
+		panel.add(btnExcluir);
+		panel.add(btnNewButton);
 		panel.add(btneditar);
 		
 		btncancelar = new JButton("Cancelar");
@@ -95,19 +123,13 @@ public class ConteudoCadastroCliente extends JPanel {
 		});
 		panel.add(btncancelar);
 		
-		btnsalvar = new JButton("Salvar");
+		btnsalvar = new JButton("Cadastrar");
 		btnsalvar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				salvar();
 			}
 		});
 		panel.add(btnsalvar);
-		GridBagConstraints gbc_chckbxClienteEUsuario = new GridBagConstraints();
-		gbc_chckbxClienteEUsuario.anchor = GridBagConstraints.EAST;
-		gbc_chckbxClienteEUsuario.insets = new Insets(0, 0, 5, 0);
-		gbc_chckbxClienteEUsuario.gridx = 3;
-		gbc_chckbxClienteEUsuario.gridy = 1;
-		add(chckbxClienteEUsuario, gbc_chckbxClienteEUsuario);
 		
 		lblId = new JLabel("ID");
 		GridBagConstraints gbc_lblId = new GridBagConstraints();
@@ -248,6 +270,8 @@ public class ConteudoCadastroCliente extends JPanel {
 		add(lblSenha, gbc_lblSenha);
 		
 		passUsuario = new JPasswordField();
+		passUsuario.setEnabled(false);
+		passUsuario.setEditable(false);
 		GridBagConstraints gbc_passUsuario = new GridBagConstraints();
 		gbc_passUsuario.insets = new Insets(0, 0, 5, 0);
 		gbc_passUsuario.fill = GridBagConstraints.HORIZONTAL;
@@ -272,6 +296,19 @@ public class ConteudoCadastroCliente extends JPanel {
 		gbc_txtemail.gridy = 6;
 		add(txtemail, gbc_txtemail);
 		txtemail.setColumns(10);
+		
+		chckbxClienteEUsuario = new JCheckBox("Usuario");
+		chckbxClienteEUsuario.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ativaUsuario();
+			}
+		});
+		GridBagConstraints gbc_chckbxClienteEUsuario = new GridBagConstraints();
+		gbc_chckbxClienteEUsuario.anchor = GridBagConstraints.EAST;
+		gbc_chckbxClienteEUsuario.insets = new Insets(0, 0, 5, 0);
+		gbc_chckbxClienteEUsuario.gridx = 3;
+		gbc_chckbxClienteEUsuario.gridy = 6;
+		add(chckbxClienteEUsuario, gbc_chckbxClienteEUsuario);
 		GridBagConstraints gbc_scrollPane = new GridBagConstraints();
 		gbc_scrollPane.gridwidth = 4;
 		gbc_scrollPane.insets = new Insets(0, 0, 5, 0);
@@ -282,18 +319,31 @@ public class ConteudoCadastroCliente extends JPanel {
 		
 		tablecliente = new JTable(model);
 		scrollPane.setViewportView(tablecliente);
+		model.fireTableDataChanged();
 		
 		
 		
 		}
 
-	protected void salvar() {
-		Usuario u = new Usuario();
+	protected void excluir() {
+		
 		Cliente c = new Cliente();
 		ClienteDaoImpl cdao = new ClienteDaoImpl();
+		
+		c.setId(Integer.valueOf(txtid.getText()));
+		cdao.excluir(c);
+		
+		model.fireTableDataChanged();
+		
+	}
+
+	protected void atualizar() {
+		Cliente c = new Cliente();
+		ClienteDaoImpl cdao = new ClienteDaoImpl();
+		
+		Usuario u = new Usuario();
 		UsuarioDaoImpl udao = new UsuarioDaoImpl();
 		
-		//txtid.setText(String.valueOf(dao.listar().get(0).getId()));
 		c.setNome(txtnome.getText());
 		c.setEndereco(txtendereco.getText());
 		c.setCidade(txtcidade.getText());
@@ -301,17 +351,42 @@ public class ConteudoCadastroCliente extends JPanel {
 		c.setEmail(txtemail.getText());
 		c.setEstado((Estado) comboBoxuf.getSelectedItem());
 		c.setGenero((Genero) comboBoxgenero.getSelectedItem());
-		if(chckbxClienteEUsuario.isSelected()){
+		
+	if(chckbxClienteEUsuario.isSelected()){
 			
-				u.setSenha(passUsuario.getPassword());
-				u.setId_cliente(c.getId());
-				udao.inserir(u);
-			
-		}
+			u.setSenha(passUsuario.getPassword());
+			u.setId_cliente(Integer.valueOf(txtid.getText()));
+			udao.inserir(u);
+		
+	}
+		
+		cdao.atualizar(c);
+		cancelar();
+		
+		model.fireTableDataChanged();
+	}
+
+	protected void salvar() {
+		Usuario u = new Usuario();
+		Cliente c = new Cliente();
+		ClienteDaoImpl cdao = new ClienteDaoImpl();
+		
+		if(!cdao.listar().isEmpty())
+			txtid.setText(String.valueOf(cdao.listar().get(0).getId()));
+		
+		c.setNome(txtnome.getText());
+		c.setTelefone(txttelefone.getText());
+		c.setEndereco(txtendereco.getText());
+		c.setCidade(txtcidade.getText());
+		c.setEstado((Estado) comboBoxuf.getSelectedItem());
+		c.setEmail(txtemail.getText());
+		c.setGenero((Genero) comboBoxgenero.getSelectedItem());
+		
 		
 		cdao.inserir(c);
 		
 		cancelar();
+		model.fireTableDataChanged();
 		
 	}
 
@@ -326,6 +401,7 @@ public class ConteudoCadastroCliente extends JPanel {
 	}
 
 	protected void ativaUsuario() {
+		
 		if(chckbxClienteEUsuario.isSelected()){
 			passUsuario.setEditable(true);
 			passUsuario.setEnabled(true);
@@ -337,6 +413,22 @@ public class ConteudoCadastroCliente extends JPanel {
 	}
 
 	protected void Editar() {
+		
+		ClienteDaoImpl cdao = new ClienteDaoImpl();
+
+		
+	ArrayList<Cliente> lista = (ArrayList<Cliente>) cdao.listar();
+		
+		txtid.setText(String.valueOf(lista.get(0).getId()));
+		txtnome.setText(lista.get(1).getNome());
+		txttelefone.setText(lista.get(1).getTelefone());
+		txtendereco.setText(lista.get(1).getEndereco());
+		txtcidade.setText(lista.get(1).getCidade());
+		comboBoxuf.setSelectedItem(lista.get(1).getEstado().toString());
+		txtemail.setText(lista.get(1).getEmail());
+		comboBoxgenero.setSelectedItem(lista.get(1).getGenero().toString());
+		
+			
 		
 		
 	}

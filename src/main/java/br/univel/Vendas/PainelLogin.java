@@ -18,6 +18,7 @@ import javax.swing.JTextField;
 
 import java.awt.Insets;
 import java.awt.Font;
+import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 import javax.swing.JSeparator;
@@ -29,12 +30,16 @@ public class PainelLogin extends JPanel {
 	private JButton btnentrar;
 	private JPasswordField passwordField;
 	private JPanel panel;
+	UsuarioDaoImpl u = new UsuarioDaoImpl();
+	
+	ArrayList<Usuario> usuario = (ArrayList<Usuario>) u.listar();
 
 	/**
 	 * Create the panel.
 	 */
 	public PainelLogin() {
 
+		
 		
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{0, 0, 0, 0, 0, 0};
@@ -116,9 +121,9 @@ public class PainelLogin extends JPanel {
 	
 	public PainelLogin(Runnable acaoOk) {
 		this();
+		
 		btnentrar.addActionListener(e -> {
-			if (txtlogin.getText().trim().equals("1")
-					&& new String(passwordField.getPassword()).equals("1")) {
+			if (txtlogin.getText().trim().equals("1")&& new String(passwordField.getPassword()).equals("1")) {
 				acaoOk.run();
 			} else {
 				JOptionPane.showMessageDialog(PainelLogin.this,

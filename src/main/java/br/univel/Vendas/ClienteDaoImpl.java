@@ -14,12 +14,14 @@ public class ClienteDaoImpl implements ClienteDao {
 
 	@Override
 	public void inserir(Cliente c) {
+		
+		
 		String sql = "INSERT INTO CLIENTE ( NOME, FONE, ENDERECO, CIDADE, ESTADO, EMAIL, GENERO) VALUES (?, ?, ?, ?, ?, ?, ?)";
 		
 		try (PreparedStatement ps = conexao.getConnection().prepareStatement(sql)) {
 			ps.setString(1, c.getNome());
-			ps.setString(3, c.getTelefone());
-			ps.setString(2, c.getEndereco());
+			ps.setString(2, c.getTelefone());
+			ps.setString(3, c.getEndereco());
 			ps.setString(4, c.getCidade());
 			ps.setString(5, c.getEstado().toString());
 			ps.setString(6, c.getEmail());
@@ -42,8 +44,8 @@ public class ClienteDaoImpl implements ClienteDao {
 		try {
 			PreparedStatement ps = conexao.getConnection().prepareStatement(sql);
 			ps.setString(1, c.getNome());
-			ps.setString(3, c.getTelefone());
-			ps.setString(2, c.getEndereco());
+			ps.setString(2, c.getTelefone());
+			ps.setString(3, c.getEndereco());
 			ps.setString(4, c.getCidade());
 			ps.setString(5, c.getEstado().toString());
 			ps.setString(6, c.getEmail());
@@ -101,14 +103,16 @@ public class ClienteDaoImpl implements ClienteDao {
 				result = st.executeQuery(sql);
 
 				while (result.next()) {
-
+					
+					c.setId(result.getInt("idcliente"));
 					c.setNome(result.getString("nome"));
 					c.setTelefone(result.getString("fone"));
 					c.setEndereco(result.getString("endereco"));
 					c.setCidade(result.getString("cidade"));
-					c.setEstado((Estado) result.getObject("estado"));
+					c.setEstado(Estado.valueOf(result.getString("estado")));	
 					c.setEmail(result.getString("email"));
-					c.setGenero((Genero) result.getObject("genero"));
+					c.setGenero(Genero.valueOf(result.getString("genero")));	
+					
 					
 					lista.add(c);
 
@@ -123,7 +127,6 @@ public class ClienteDaoImpl implements ClienteDao {
 
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return lista;
