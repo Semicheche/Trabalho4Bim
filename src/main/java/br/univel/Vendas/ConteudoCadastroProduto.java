@@ -7,6 +7,10 @@ import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
+import java.awt.FlowLayout;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class ConteudoCadastroProduto extends JPanel {
 	private JTextField txtid;
@@ -14,6 +18,8 @@ public class ConteudoCadastroProduto extends JPanel {
 	private JTextField txtcodigobarra;
 	private JTextField txtcusto;
 	private JTextField txtmargemlucro;
+	private JComboBox combocategoria;
+	private JComboBox combounidade;
 
 	/**
 	 * Create the panel.
@@ -22,9 +28,46 @@ public class ConteudoCadastroProduto extends JPanel {
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{0, 0, 0, 0, 0};
 		gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0};
-		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
+		gridBagLayout.columnWeights = new double[]{1.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
 		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
+		
+		JPanel panel = new JPanel();
+		GridBagConstraints gbc_panel = new GridBagConstraints();
+		gbc_panel.gridwidth = 4;
+		gbc_panel.insets = new Insets(0, 0, 5, 5);
+		gbc_panel.fill = GridBagConstraints.BOTH;
+		gbc_panel.gridx = 0;
+		gbc_panel.gridy = 0;
+		add(panel, gbc_panel);
+		panel.setLayout(new FlowLayout(FlowLayout.RIGHT, 5, 5));
+		
+		JButton btnNewButton_3 = new JButton("Novo");
+		btnNewButton_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Cadastrar();
+			}
+		});
+		panel.add(btnNewButton_3);
+		
+		JLabel label = new JLabel("             ");
+		panel.add(label);
+		
+		JButton btnExcluir = new JButton("Excluir");
+		btnExcluir.setEnabled(false);
+		panel.add(btnExcluir);
+		
+		JButton btncancelar = new JButton("Cancelar");
+		btncancelar.setEnabled(false);
+		panel.add(btncancelar);
+		
+		JButton btnEditar = new JButton("Editar");
+		btnEditar.setEnabled(false);
+		panel.add(btnEditar);
+		
+		JButton btnSalvar = new JButton("Salvar");
+		btnSalvar.setEnabled(false);
+		panel.add(btnSalvar);
 		
 		JLabel lblId = new JLabel("ID");
 		GridBagConstraints gbc_lblId = new GridBagConstraints();
@@ -85,7 +128,7 @@ public class ConteudoCadastroProduto extends JPanel {
 		gbc_lblCategoria.gridy = 2;
 		add(lblCategoria, gbc_lblCategoria);
 		
-		JComboBox combocategoria = new JComboBox();
+		combocategoria = new JComboBox();
 		GridBagConstraints gbc_combocategoria = new GridBagConstraints();
 		gbc_combocategoria.insets = new Insets(0, 0, 5, 0);
 		gbc_combocategoria.fill = GridBagConstraints.HORIZONTAL;
@@ -135,7 +178,7 @@ public class ConteudoCadastroProduto extends JPanel {
 		gbc_lblUnidade.gridy = 4;
 		add(lblUnidade, gbc_lblUnidade);
 		
-		JComboBox combounidade = new JComboBox();
+		combounidade = new JComboBox();
 		GridBagConstraints gbc_combounidade = new GridBagConstraints();
 		gbc_combounidade.insets = new Insets(0, 0, 5, 5);
 		gbc_combounidade.fill = GridBagConstraints.HORIZONTAL;
@@ -144,5 +187,22 @@ public class ConteudoCadastroProduto extends JPanel {
 		add(combounidade, gbc_combounidade);
 
 	}
+
+	protected void Cadastrar() {
+		Produto p = new Produto();
+		
+		p.setCategoria((Categoria) combocategoria.getSelectedItem());
+		p.setCodigodebarras(Integer.valueOf(txtcodigobarra.getText()));
+		
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 
 }

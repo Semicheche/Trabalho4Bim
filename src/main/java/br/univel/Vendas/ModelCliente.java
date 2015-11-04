@@ -1,6 +1,5 @@
 package br.univel.Vendas;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.table.AbstractTableModel;
@@ -12,19 +11,26 @@ import javax.swing.table.AbstractTableModel;
  */
 public abstract class ModelCliente extends AbstractTableModel {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	ClienteDaoImpl cdao = new ClienteDaoImpl();
 	
-	List<Cliente> clientes = cdao.listar();
+	List<Cliente> lista;
+	
+	public ModelCliente() {
+		lista = cdao.listar();
+	}
 	
 	@Override
 	public int getRowCount() {
-		
-		return clientes.size();
+		return lista.size();
 	}
 
 	@Override
 	public int getColumnCount() {
-		
 		return 7;
 	}
 	
@@ -47,19 +53,21 @@ public abstract class ModelCliente extends AbstractTableModel {
 			return"Estado";
 		case 6:
 			return "Genero";
-		default:
+		case 7:
 			return "email";
+		default:
+			return "Ouve algun erro";
 			
 		}
 		
 	}
 
 	@Override
-	public Object getValueAt(int rowIndex, int columnIndex) {
+	public Object getValueAt(int row, int col) {
 	
-		Cliente c = cdao.listar().get(rowIndex);
+		Cliente c = (Cliente) cdao.listar().get(row);
 		
-		switch (columnIndex) {
+		switch (col) {
 	
 		case 0:
 			return c.getId();
@@ -75,8 +83,10 @@ public abstract class ModelCliente extends AbstractTableModel {
 			return c.getEstado();
 		case 6:
 			return c.getGenero();
-		default:
+		case 7:
 			return c.getEmail();
+		default:
+			return "Ouve algun erro";
 			
 		}
 	}

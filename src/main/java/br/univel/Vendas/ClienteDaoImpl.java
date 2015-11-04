@@ -96,11 +96,10 @@ public class ClienteDaoImpl implements ClienteDao {
 		Statement st = null;
 		ResultSet result = null;
 
-		String sql = "SELECT * FROM CLIENTE";
+		String sql = "SELECT * FROM cliente";
 
 		ArrayList<Cliente> lista = new ArrayList<>();
-		
-		Cliente c = new Cliente();
+		Cliente c;
 		
 		try {
 			try {
@@ -108,6 +107,7 @@ public class ClienteDaoImpl implements ClienteDao {
 				result = st.executeQuery(sql);
 
 				while (result.next()) {
+					c = new Cliente();
 					
 					c.setId(result.getInt("idcliente"));
 					c.setNome(result.getString("nome"));
