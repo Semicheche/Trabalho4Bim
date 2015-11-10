@@ -224,7 +224,7 @@ public class ConteudoCadastroProduto extends JPanel {
 		gbc_lblCategoria.gridy = 4;
 		add(lblCategoria, gbc_lblCategoria);
 
-		combocategoria = new JComboBox(Categoria.values());
+		combocategoria = new JComboBox();
 		GridBagConstraints gbc_combocategoria = new GridBagConstraints();
 		gbc_combocategoria.insets = new Insets(0, 0, 5, 0);
 		gbc_combocategoria.fill = GridBagConstraints.HORIZONTAL;

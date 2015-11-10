@@ -102,7 +102,7 @@ public class ProdutoDaoImp implements ProdutoDAO {
 					p = new Produto();
 					
 					p.setId(result.getInt("idproduto"));
-					p.setCategoria(Categoria.valueOf(result.getString("categoriaproduto_idcategoriaproduto")));
+					p.setCategoria((Categoria) result.getObject("categoria"));
 					p.setNome(result.getString("nome"));
 					p.setCodigodebarras(result.getInt("codigobarra"));
 					p.setDescricao(result.getString("descricao"));

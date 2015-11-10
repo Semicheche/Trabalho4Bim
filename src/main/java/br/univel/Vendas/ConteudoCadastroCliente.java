@@ -403,6 +403,10 @@ public class ConteudoCadastroCliente extends JPanel {
 		c.setEmail(txtemail.getText());
 		c.setGenero((Genero) comboBoxgenero.getSelectedItem());
 		
+		if(chckbxClienteEUsuario.isSelected()){
+			u.setSenha(passUsuario.getPassword());
+			
+		}
 		
 		cdao.inserir(c);
 		

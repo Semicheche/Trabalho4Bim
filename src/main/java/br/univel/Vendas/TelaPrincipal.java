@@ -78,6 +78,14 @@ public class TelaPrincipal extends JFrame {
 				block();
 			}
 		});
+		
+		JMenuItem mntmCategoria = new JMenuItem("Categoria");
+		mntmCategoria.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				abrirTelacategoria();
+			}
+		});
+		mnNewMenu.add(mntmCategoria);
 		mnNewMenu.add(mntmBloquear);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -86,6 +94,12 @@ public class TelaPrincipal extends JFrame {
 
 		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		contentPane.add(tabbedPane, BorderLayout.CENTER);
+	}
+
+	protected void abrirTelacategoria() {
+		TelaCadastroCategoria telacadastrocategoria = new TelaCadastroCategoria();
+			telacadastrocategoria.setCloseAction(e -> tabbedPane.remove(telacadastrocategoria));
+			tabbedPane.addTab("Categoria", telacadastrocategoria);
 	}
 
 	private void blockParaLogin() {
