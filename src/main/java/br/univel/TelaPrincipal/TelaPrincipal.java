@@ -1,4 +1,4 @@
-package br.univel.Vendas;
+package br.univel.TelaPrincipal;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
@@ -9,9 +9,17 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+
 import javax.swing.JTabbedPane;
+
+import br.univel.Vendas.BlockPanel;
+import br.univel.Vendas.PainelLogin;
+import br.univel.Vendas.TelaCadastroCategoria;
+import br.univel.Vendas.TelaCadastroCliente;
+import br.univel.Vendas.TelaCadastroProduto;
 
 public class TelaPrincipal extends JFrame {
 
