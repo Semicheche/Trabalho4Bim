@@ -64,7 +64,7 @@ public class ClienteDaoImpl implements ClienteDao {
 
 	@Override
 	public void excluir(Cliente c) {
-		String sql = "DELETE * FROM CLIENTE WHRERE ID = ?";
+		String sql = "DELETE FROM CLIENTE WHRERE ID = ?";
 		try {
 			PreparedStatement ps = conexao.getConnection().prepareStatement(sql);
 			ps.setInt(1, c.getId());

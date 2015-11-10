@@ -18,6 +18,7 @@ public class Produto {
 	private BigDecimal custo;
 	private BigDecimal margemdelucro;
 	
+	
 	public String getNome() {
 		return nome;
 	}
