@@ -20,6 +20,7 @@ import br.univel.Vendas.PainelLogin;
 import br.univel.Vendas.TelaCadastroCategoria;
 import br.univel.Vendas.TelaCadastroCliente;
 import br.univel.Vendas.TelaCadastroProduto;
+import br.univel.Vendas.TelaCadastroVenda;
 
 public class TelaPrincipal extends JFrame {
 
@@ -95,6 +96,20 @@ public class TelaPrincipal extends JFrame {
 		});
 		mnNewMenu.add(mntmCategoria);
 		mnNewMenu.add(mntmBloquear);
+		
+		JMenu mnVenda = new JMenu("Venda");
+		menuBar.add(mnVenda);
+		
+		JMenuItem mntmVendaCliente = new JMenuItem("Venda Cliente");
+		mntmVendaCliente.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				abrirTelaVenda();
+				
+			}
+
+			
+		});
+		mnVenda.add(mntmVendaCliente);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
@@ -102,6 +117,12 @@ public class TelaPrincipal extends JFrame {
 
 		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		contentPane.add(tabbedPane, BorderLayout.CENTER);
+	}
+	
+	private void abrirTelaVenda() {
+		TelaCadastroVenda telacadastrovenda = new TelaCadastroVenda();
+		telacadastrovenda.setCloseAction(e -> tabbedPane.remove(telacadastrovenda));
+		tabbedPane.addTab("Vanda", telacadastrovenda);
 	}
 
 	protected void abrirTelacategoria() {

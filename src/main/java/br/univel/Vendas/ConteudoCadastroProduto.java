@@ -246,8 +246,7 @@ public class ConteudoCadastroProduto extends JPanel {
 		add(combocategoria, gbc_combocategoria);
 		for (int i = 0; i <lista.size(); i++) {			
 			combocategoria.addItem(lista.get(i).getCategoria());
-			if(combocategoria.equals(lista.get(i).getCategoria().toString()))
-				idCategoria = lista.get(i).getId();
+			idCategoria = lista.get(i).getId();
 		}
 
 		JScrollPane scrollPane = new JScrollPane();
