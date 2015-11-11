@@ -13,10 +13,10 @@ public class ProdutoDaoImp implements ProdutoDAO {
 
 	@Override
 	public void inserir(Produto p) {
-		String sql = "INSERT INTO PRODUTO ( CATEGORIAPRODUTO_IDCATEGORIAPRODUTO, NOME, CODIGOBARRA, DESCRICAO, UNIDADE, CUSTO, LUCRO) VALUES (?, ?, ?, ?, ?, ?, ?)";
+		String sql = "INSERT INTO produto (CATEGORIAPRODUTO_IDCATEGORIAPRODUTO, NOME, CODIGOBARRA, DESCRICAO, UNIDADE, CUSTO, LUCRO) VALUES (?, ?, ?, ?, ?, ?, ?)";
 		
 		try (PreparedStatement ps = conexao.getConnection().prepareStatement(sql)) {
-			ps.setString(1, p.getCategoria().toString());
+			ps.setInt(1, p.getCategoria());
 			ps.setString(2, p.getNome());
 			ps.setInt(3, p.getCodigodebarras());
 			ps.setString(4, p.getDescricao());
@@ -40,7 +40,7 @@ public class ProdutoDaoImp implements ProdutoDAO {
 		String sql = "UPDATE PRODUTO SET CATEGORIAPRODUTO_IDCATEGORIAPRODUTO = ?, NOME = ?, CODIGOBARRA = ?, DESCRICAO = ?, UNIDADE = ?, CUSTO = ?, LUCRO = ? WHERE ID = ?";
 		try {
 			PreparedStatement ps = conexao.getConnection().prepareStatement(sql);
-			ps.setString(1, p.getCategoria().toString());
+			ps.setInt(1, p.getCategoria());
 			ps.setString(2, p.getNome());
 			ps.setInt(3, p.getCodigodebarras());
 			ps.setString(4, p.getDescricao());
@@ -102,7 +102,7 @@ public class ProdutoDaoImp implements ProdutoDAO {
 					p = new Produto();
 					
 					p.setId(result.getInt("idproduto"));
-					p.setCategoria((Categoria) result.getObject("categoria"));
+					p.setCategoria(result.getInt("categoriaproduto_idcategoriaproduto"));
 					p.setNome(result.getString("nome"));
 					p.setCodigodebarras(result.getInt("codigobarra"));
 					p.setDescricao(result.getString("descricao"));

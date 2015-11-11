@@ -10,6 +10,7 @@ import javax.swing.JLabel;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 
+import javax.swing.ComboBoxModel;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 
@@ -20,11 +21,17 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.math.BigDecimal;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
 import org.w3c.dom.CDATASection;
+import org.w3c.dom.ls.LSInput;
 
 public class ConteudoCadastroProduto extends JPanel {
 	private JTextField txtid;
@@ -42,11 +49,15 @@ public class ConteudoCadastroProduto extends JPanel {
 	private JButton btncancelar;
 	private JButton btnEditar;
 	private JButton btnSalvar;
+	private int idCategoria;
 
 	/**
 	 * Create the panel.
 	 */
 	public ConteudoCadastroProduto() {
+		
+		
+		
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[] { 0, 0, 0, 0, 0 };
 		gridBagLayout.rowHeights = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
@@ -223,7 +234,9 @@ public class ConteudoCadastroProduto extends JPanel {
 		gbc_lblCategoria.gridx = 2;
 		gbc_lblCategoria.gridy = 4;
 		add(lblCategoria, gbc_lblCategoria);
-
+		
+		CategoriaDaoImp cdao = new CategoriaDaoImp();
+		ArrayList<Categoria> lista = (ArrayList<Categoria>) cdao.listar();
 		combocategoria = new JComboBox();
 		GridBagConstraints gbc_combocategoria = new GridBagConstraints();
 		gbc_combocategoria.insets = new Insets(0, 0, 5, 0);
@@ -231,6 +244,11 @@ public class ConteudoCadastroProduto extends JPanel {
 		gbc_combocategoria.gridx = 3;
 		gbc_combocategoria.gridy = 4;
 		add(combocategoria, gbc_combocategoria);
+		for (int i = 0; i <lista.size(); i++) {			
+			combocategoria.addItem(lista.get(i).getCategoria());
+			if(combocategoria.equals(lista.get(i).getCategoria().toString()))
+				idCategoria = lista.get(i).getId();
+		}
 
 		JScrollPane scrollPane = new JScrollPane();
 		GridBagConstraints gbc_scrollPane = new GridBagConstraints();
@@ -243,13 +261,15 @@ public class ConteudoCadastroProduto extends JPanel {
 
 		table = new JTable(model);
 		scrollPane.setViewportView(table);
-
+		
+	
 	}
+
 
 	protected void salvar() {
 		Produto p = new Produto();
 
-		p.setCategoria((Categoria) combocategoria.getSelectedItem());
+		p.setCategoria(idCategoria);
 		p.setNome(txtnome.getText());
 		p.setCodigodebarras(Integer.valueOf(txtcodigobarra.getText()));
 		p.setDescricao(txtdescricao.getText());

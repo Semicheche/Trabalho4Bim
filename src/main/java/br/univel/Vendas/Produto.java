@@ -12,7 +12,7 @@ public class Produto {
 	private int id;
 	private int codigodebarras;
 	private String nome;
-	private Categoria categoria;
+	private int categoria;
 	private String descricao;
 	private Unidade unidade;
 	private BigDecimal custo;
@@ -38,10 +38,10 @@ public class Produto {
 	public void setCodigodebarras(int codigodebarras) {
 		this.codigodebarras = codigodebarras;
 	}
-	public Categoria getCategoria() {
+	public int getCategoria() {
 		return categoria;
 	}
-	public void setCategoria(Categoria categoria) {
+	public void setCategoria(int categoria) {
 		this.categoria = categoria;
 	}
 	public String getDescricao() {
