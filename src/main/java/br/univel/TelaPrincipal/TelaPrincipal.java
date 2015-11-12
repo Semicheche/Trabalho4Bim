@@ -57,7 +57,7 @@ public class TelaPrincipal extends JFrame {
 
 		setTitle("Menu Principal\r\n");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 607, 342);
+		setBounds(100, 100, 792, 498);
 
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
