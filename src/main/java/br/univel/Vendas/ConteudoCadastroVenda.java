@@ -3,6 +3,7 @@ package br.univel.Vendas;
 import javax.swing.JPanel;
 
 import java.awt.BorderLayout;
+import java.awt.Container;
 
 import javax.swing.JButton;
 
@@ -13,6 +14,10 @@ import javax.swing.JLabel;
 import java.awt.GridBagConstraints;
 
 import javax.swing.JTextField;
+
+
+
+
 
 
 
@@ -33,21 +38,25 @@ import javax.swing.JTable;
 import java.awt.FlowLayout;
 
 import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableModel;
 
 import br.univel.itemsvendas.ItemsVendas;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.peer.RobotPeer;
+import java.math.BigDecimal;
 
 public class ConteudoCadastroVenda extends JPanel {
-	private JTextField textField;
-	private JTextField textField_1;
+	private JTextField txtid;
+	private JTextField txtnome;
 	private JTable tableClietne;
 	private JTable tableProduto;
 	private JTable tableVendaProduto;
 	private int idproduto;
 	private String descricao;
+	private BigDecimal valor;
+	private String quantidade;
 	
 	ModeItemsVendas modelitemsvendas = new ModeItemsVendas();
 
@@ -99,7 +108,7 @@ public class ConteudoCadastroVenda extends JPanel {
 				case 4:
 					return p.getCusto();
 				default:
-					return "ouve um Erro";
+					return "Erro";
 		}
 		}
 	};
@@ -114,7 +123,7 @@ public class ConteudoCadastroVenda extends JPanel {
 
 		@Override
 		public int getColumnCount() {
-			return 2;
+			return 3;
 		}
 		
 		@Override
@@ -127,7 +136,7 @@ public class ConteudoCadastroVenda extends JPanel {
 			case 1:
 				return "Nome";
 			default:
-				return "Ouve algun erro";
+				return "quantidade";
 				
 			}
 			
@@ -145,11 +154,14 @@ public class ConteudoCadastroVenda extends JPanel {
 			case 1:
 				return c.getNome();
 			default:
-				return "Ouve algun erro";
+				return quantidade;
 				
 			}
 		}
 	};
+	private JLabel lbltotal;
+	private JLabel lblvalorrecebido;
+	private JLabel lbltroco;
 	
 	
 	/**
@@ -188,16 +200,16 @@ public class ConteudoCadastroVenda extends JPanel {
 		gbc_lblId.gridy = 0;
 		panel_1.add(lblId, gbc_lblId);
 		
-		textField = new JTextField();
-		textField.setEditable(false);
-		textField.setEnabled(false);
-		GridBagConstraints gbc_textField = new GridBagConstraints();
-		gbc_textField.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textField.insets = new Insets(0, 0, 5, 5);
-		gbc_textField.gridx = 1;
-		gbc_textField.gridy = 0;
-		panel_1.add(textField, gbc_textField);
-		textField.setColumns(10);
+		txtid = new JTextField();
+		txtid.setEditable(false);
+		txtid.setEnabled(false);
+		GridBagConstraints gbc_txtid = new GridBagConstraints();
+		gbc_txtid.fill = GridBagConstraints.HORIZONTAL;
+		gbc_txtid.insets = new Insets(0, 0, 5, 5);
+		gbc_txtid.gridx = 1;
+		gbc_txtid.gridy = 0;
+		panel_1.add(txtid, gbc_txtid);
+		txtid.setColumns(10);
 		
 		JLabel lblNome = new JLabel("Nome");
 		GridBagConstraints gbc_lblNome = new GridBagConstraints();
@@ -207,17 +219,17 @@ public class ConteudoCadastroVenda extends JPanel {
 		gbc_lblNome.gridy = 0;
 		panel_1.add(lblNome, gbc_lblNome);
 		
-		textField_1 = new JTextField();
-		textField_1.setEnabled(false);
-		textField_1.setEditable(false);
-		GridBagConstraints gbc_textField_1 = new GridBagConstraints();
-		gbc_textField_1.gridwidth = 4;
-		gbc_textField_1.insets = new Insets(0, 0, 5, 5);
-		gbc_textField_1.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textField_1.gridx = 3;
-		gbc_textField_1.gridy = 0;
-		panel_1.add(textField_1, gbc_textField_1);
-		textField_1.setColumns(10);
+		txtnome = new JTextField();
+		txtnome.setEnabled(false);
+		txtnome.setEditable(false);
+		GridBagConstraints gbc_txtnome = new GridBagConstraints();
+		gbc_txtnome.gridwidth = 4;
+		gbc_txtnome.insets = new Insets(0, 0, 5, 5);
+		gbc_txtnome.fill = GridBagConstraints.HORIZONTAL;
+		gbc_txtnome.gridx = 3;
+		gbc_txtnome.gridy = 0;
+		panel_1.add(txtnome, gbc_txtnome);
+		txtnome.setColumns(10);
 		
 		JScrollPane scrollPane_2 = new JScrollPane();
 		GridBagConstraints gbc_scrollPane_2 = new GridBagConstraints();
@@ -230,16 +242,17 @@ public class ConteudoCadastroVenda extends JPanel {
 		panel_1.add(scrollPane_2, gbc_scrollPane_2);
 		
 		tableClietne = new JTable(modelcliente);
+		tableClietne.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				AdicionarCliente();
+			}
+		});
 		scrollPane_2.setViewportView(tableClietne);
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.addMouseListener(new MouseAdapter() {
 			
-			@Override
-			public void mousePressed(MouseEvent e) {
-				
-			}
-
 		});
 		GridBagConstraints gbc_scrollPane = new GridBagConstraints();
 		gbc_scrollPane.gridwidth = 6;
@@ -293,12 +306,12 @@ public class ConteudoCadastroVenda extends JPanel {
 		gbc_lblTotal.gridy = 8;
 		panel_1.add(lblTotal, gbc_lblTotal);
 		
-		JLabel label = new JLabel("0");
-		GridBagConstraints gbc_label = new GridBagConstraints();
-		gbc_label.insets = new Insets(0, 0, 5, 5);
-		gbc_label.gridx = 15;
-		gbc_label.gridy = 8;
-		panel_1.add(label, gbc_label);
+		lbltotal = new JLabel("0");
+		GridBagConstraints gbc_lbltotal = new GridBagConstraints();
+		gbc_lbltotal.insets = new Insets(0, 0, 5, 5);
+		gbc_lbltotal.gridx = 15;
+		gbc_lbltotal.gridy = 8;
+		panel_1.add(lbltotal, gbc_lbltotal);
 		
 		JLabel lblTroco = new JLabel("VALOR RECEBIDO");
 		GridBagConstraints gbc_lblTroco = new GridBagConstraints();
@@ -307,12 +320,12 @@ public class ConteudoCadastroVenda extends JPanel {
 		gbc_lblTroco.gridy = 9;
 		panel_1.add(lblTroco, gbc_lblTroco);
 		
-		JLabel label_1 = new JLabel("0");
-		GridBagConstraints gbc_label_1 = new GridBagConstraints();
-		gbc_label_1.insets = new Insets(0, 0, 5, 5);
-		gbc_label_1.gridx = 15;
-		gbc_label_1.gridy = 9;
-		panel_1.add(label_1, gbc_label_1);
+		lblvalorrecebido = new JLabel("0");
+		GridBagConstraints gbc_lblvalorrecebido = new GridBagConstraints();
+		gbc_lblvalorrecebido.insets = new Insets(0, 0, 5, 5);
+		gbc_lblvalorrecebido.gridx = 15;
+		gbc_lblvalorrecebido.gridy = 9;
+		panel_1.add(lblvalorrecebido, gbc_lblvalorrecebido);
 		
 		JLabel lblTroco_1 = new JLabel("TROCO");
 		GridBagConstraints gbc_lblTroco_1 = new GridBagConstraints();
@@ -322,32 +335,59 @@ public class ConteudoCadastroVenda extends JPanel {
 		gbc_lblTroco_1.gridy = 10;
 		panel_1.add(lblTroco_1, gbc_lblTroco_1);
 		
-		JLabel label_2 = new JLabel("0");
-		GridBagConstraints gbc_label_2 = new GridBagConstraints();
-		gbc_label_2.insets = new Insets(0, 0, 5, 5);
-		gbc_label_2.gridx = 15;
-		gbc_label_2.gridy = 10;
-		panel_1.add(label_2, gbc_label_2);
+		lbltroco = new JLabel("0");
+		GridBagConstraints gbc_lbltroco = new GridBagConstraints();
+		gbc_lbltroco.insets = new Insets(0, 0, 5, 5);
+		gbc_lbltroco.gridx = 15;
+		gbc_lbltroco.gridy = 10;
+		panel_1.add(lbltroco, gbc_lbltroco);
 
+	}
+
+	ClienteDaoImpl cdao = new ClienteDaoImpl();
+	
+	protected void AdicionarCliente() {
+		txtid.setText((String.valueOf(cdao.listar().get(tableClietne.getSelectedRow()).getId())));
+		txtnome.setText(cdao.listar().get(tableClietne.getSelectedRow()).getNome());
+		
+		
+		
 	}
 
 
 	protected void AdicionaItems() {
+//		if(tableProduto.getSelectedRow() != 0){
+//			DefaultTableModel produto = (DefaultTableModel) tableProduto.getModel(); 
+//			DefaultTableModel items =  (DefaultTableModel) tableVendaProduto.getModel();
+//			
+//			Object[] obj = {tableProduto.getValueAt(tableProduto.getSelectedRow(), 0), tableProduto.getValueAt(tableProduto.getSelectedRow(), 1)};
+//			
+//			tableVendaProduto.add(null, obj);		
+//		}
 		
-		
-		
-	}
-	private void BuscarIdProd() {
 		ItemsVendas items = new ItemsVendas();
 		
 		ProdutoDaoImp pdao = new ProdutoDaoImp();
 		idproduto = pdao.listar().get(tableProduto.getSelectedRow()).getId();
 		descricao = pdao.listar().get(tableProduto.getSelectedRow()).getDescricao();
+		valor = pdao.listar().get(tableProduto.getSelectedRow()).getCusto();
+		
+		 quantidade = JOptionPane.showInputDialog(null, "Informe a quntidade Desejada");
+		
 		
 		items.setNomeproduto(descricao);
+		items.setCustoproduto(valor);
 		
 		modelitemsvendas.lista.add(items);
 		modelitemsvendas.fireTableDataChanged();
+			
+		
+	}
+	
+
+
+	private void BuscarIdProd() {
+		
 	}
 
 }

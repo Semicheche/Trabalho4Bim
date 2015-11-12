@@ -32,7 +32,6 @@ public class ModeItemsVendas extends AbstractTableModel {
 			return "Descricao";
 		case 1:
 			return "Valor";
-
 		default:
 			return "Ouve algun Erro";
 		}
@@ -48,7 +47,6 @@ public class ModeItemsVendas extends AbstractTableModel {
 			return lista.get(rowIndex).getNomeproduto();
 		case 1:
 			return lista.get(rowIndex).getCustoproduto();
-
 		default:
 			return "Ouve algun Erro";
 		}
