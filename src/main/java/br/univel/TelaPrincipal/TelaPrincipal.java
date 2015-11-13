@@ -21,6 +21,7 @@ import br.univel.Vendas.TelaCadastroCategoria;
 import br.univel.Vendas.TelaCadastroCliente;
 import br.univel.Vendas.TelaCadastroProduto;
 import br.univel.Vendas.TelaCadastroVenda;
+import java.awt.Point;
 
 public class TelaPrincipal extends JFrame {
 
@@ -52,12 +53,15 @@ public class TelaPrincipal extends JFrame {
 	 * Create the frame.
 	 */
 	public TelaPrincipal() {
-
+		
+		
+		
 		blockParaLogin();
 
 		setTitle("Menu Principal\r\n");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 792, 498);
+		setBounds(100, 100, 800, 600);
+		setLocationRelativeTo(null);
 
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);

@@ -3,7 +3,6 @@ package br.univel.Vendas;
 import javax.swing.JPanel;
 
 import java.awt.BorderLayout;
-import java.awt.Container;
 
 import javax.swing.JButton;
 
@@ -15,52 +14,53 @@ import java.awt.GridBagConstraints;
 
 import javax.swing.JTextField;
 
-
-
-
-
-
-
-
-
-
-
 import java.awt.Insets;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 import javax.swing.JOptionPane;
-import javax.swing.JSplitPane;
 import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
 import javax.swing.JTable;
 
 import java.awt.FlowLayout;
 
 import javax.swing.SwingConstants;
-import javax.swing.table.DefaultTableModel;
 
+import br.univel.Venda.Venda;
 import br.univel.itemsvendas.ItemsVendas;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.peer.RobotPeer;
 import java.math.BigDecimal;
+import java.sql.Timestamp;
+import java.text.DecimalFormat;
+import java.text.Format;
+import java.text.NumberFormat;
+import java.util.Locale;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 
 public class ConteudoCadastroVenda extends JPanel {
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JTextField txtid;
 	private JTextField txtnome;
 	private JTable tableClietne;
 	private JTable tableProduto;
 	private JTable tableVendaProduto;
-	private int idproduto;
-	private String descricao;
-	private BigDecimal valor;
-	private String quantidade;
+	private BigDecimal total = new BigDecimal(0);
 	
 	ModeItemsVendas modelitemsvendas = new ModeItemsVendas();
 
 	ModelProduto modelproduto = new ModelProduto(){
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+
 		@Override
 		public int getRowCount() {
 			return lista.size();
@@ -117,13 +117,18 @@ public class ConteudoCadastroVenda extends JPanel {
 	
 	ModelCliente modelcliente = new ModelCliente(){
 		
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+
 		public int getRowCount() {
 			return lista.size();
 		}
 
 		@Override
 		public int getColumnCount() {
-			return 3;
+			return 2;
 		}
 		
 		@Override
@@ -136,7 +141,7 @@ public class ConteudoCadastroVenda extends JPanel {
 			case 1:
 				return "Nome";
 			default:
-				return "quantidade";
+				return "ouve algun Erro";
 				
 			}
 			
@@ -154,11 +159,13 @@ public class ConteudoCadastroVenda extends JPanel {
 			case 1:
 				return c.getNome();
 			default:
-				return quantidade;
+				return "ouve algun Erro!";
 				
 			}
 		}
 	};
+	
+	
 	private JLabel lbltotal;
 	private JLabel lblvalorrecebido;
 	private JLabel lbltroco;
@@ -174,21 +181,26 @@ public class ConteudoCadastroVenda extends JPanel {
 		add(panel, BorderLayout.NORTH);
 		panel.setLayout(new FlowLayout(FlowLayout.RIGHT, 5, 5));
 		
-		JButton btnNewButton_2 = new JButton("New button");
+		JButton btnNewButton_2 = new JButton("Novo");
 		panel.add(btnNewButton_2);
 		
-		JButton btnNewButton_1 = new JButton("New button");
+		JButton btnNewButton_1 = new JButton("Cnacelar");
 		panel.add(btnNewButton_1);
 		
-		JButton btnNewButton = new JButton("New button");
-		panel.add(btnNewButton);
+		JButton btnconfirmar = new JButton("Comfirmar");
+		btnconfirmar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				concluirVenda();
+			}
+		});
+		panel.add(btnconfirmar);
 		
 		JPanel panel_1 = new JPanel();
 		add(panel_1, BorderLayout.CENTER);
 		GridBagLayout gbl_panel_1 = new GridBagLayout();
-		gbl_panel_1.columnWidths = new int[]{25, 45, 34, 63, 46, 0, 89, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+		gbl_panel_1.columnWidths = new int[]{25, 45, 69, 37, 24, 0, 89, 0, 78, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 		gbl_panel_1.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-		gbl_panel_1.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, Double.MIN_VALUE};
+		gbl_panel_1.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, Double.MIN_VALUE};
 		gbl_panel_1.rowWeights = new double[]{0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		panel_1.setLayout(gbl_panel_1);
 		
@@ -202,7 +214,6 @@ public class ConteudoCadastroVenda extends JPanel {
 		
 		txtid = new JTextField();
 		txtid.setEditable(false);
-		txtid.setEnabled(false);
 		GridBagConstraints gbc_txtid = new GridBagConstraints();
 		gbc_txtid.fill = GridBagConstraints.HORIZONTAL;
 		gbc_txtid.insets = new Insets(0, 0, 5, 5);
@@ -220,7 +231,6 @@ public class ConteudoCadastroVenda extends JPanel {
 		panel_1.add(lblNome, gbc_lblNome);
 		
 		txtnome = new JTextField();
-		txtnome.setEnabled(false);
 		txtnome.setEditable(false);
 		GridBagConstraints gbc_txtnome = new GridBagConstraints();
 		gbc_txtnome.gridwidth = 4;
@@ -231,9 +241,40 @@ public class ConteudoCadastroVenda extends JPanel {
 		panel_1.add(txtnome, gbc_txtnome);
 		txtnome.setColumns(10);
 		
+		JLabel lblValorPago = new JLabel("Valor Pago: ");
+		GridBagConstraints gbc_lblValorPago = new GridBagConstraints();
+		gbc_lblValorPago.insets = new Insets(0, 0, 5, 5);
+		gbc_lblValorPago.anchor = GridBagConstraints.EAST;
+		gbc_lblValorPago.gridx = 8;
+		gbc_lblValorPago.gridy = 0;
+		panel_1.add(lblValorPago, gbc_lblValorPago);
+		
+		txtvalorpago = new JTextField();
+		txtvalorpago.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusLost(FocusEvent e) {
+				DecimalFormat df = new DecimalFormat("#,##0.00");
+				
+				lblvalorrecebido.setText(txtvalorpago.getText().toString());
+				BigDecimal valor = total;
+				BigDecimal valorrecebido =  BigDecimal.valueOf(Double.valueOf(lblvalorrecebido.getText()));
+				BigDecimal troco = valorrecebido.subtract(valor);
+				
+				lbltroco.setText(df.format(troco));
+			}
+		});
+		GridBagConstraints gbc_txtvalorpago = new GridBagConstraints();
+		gbc_txtvalorpago.gridwidth = 3;
+		gbc_txtvalorpago.insets = new Insets(0, 0, 5, 5);
+		gbc_txtvalorpago.fill = GridBagConstraints.HORIZONTAL;
+		gbc_txtvalorpago.gridx = 9;
+		gbc_txtvalorpago.gridy = 0;
+		panel_1.add(txtvalorpago, gbc_txtvalorpago);
+		txtvalorpago.setColumns(10);
+		
 		JScrollPane scrollPane_2 = new JScrollPane();
 		GridBagConstraints gbc_scrollPane_2 = new GridBagConstraints();
-		gbc_scrollPane_2.gridwidth = 4;
+		gbc_scrollPane_2.gridwidth = 3;
 		gbc_scrollPane_2.gridheight = 6;
 		gbc_scrollPane_2.insets = new Insets(0, 0, 5, 5);
 		gbc_scrollPane_2.fill = GridBagConstraints.BOTH;
@@ -267,7 +308,7 @@ public class ConteudoCadastroVenda extends JPanel {
 		tableProduto.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				BuscarIdProd();
+				
 			}
 		});
 		scrollPane.setViewportView(tableProduto);
@@ -275,7 +316,7 @@ public class ConteudoCadastroVenda extends JPanel {
 		JButton button = new JButton(">>");
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				AdicionaItems();
+				adicionaItems();
 			}
 		});
 		GridBagConstraints gbc_button = new GridBagConstraints();
@@ -344,7 +385,22 @@ public class ConteudoCadastroVenda extends JPanel {
 
 	}
 
+	protected void concluirVenda() {
+		
+		Timestamp Datahoje = new Timestamp(System.currentTimeMillis());
+		Venda v = new Venda();
+		
+		v.setNomecliente(txtnome.getText());
+		v.setHoravenda(Datahoje);
+		
+		
+		
+		
+		
+	}
+
 	ClienteDaoImpl cdao = new ClienteDaoImpl();
+	private JTextField txtvalorpago;
 	
 	protected void AdicionarCliente() {
 		txtid.setText((String.valueOf(cdao.listar().get(tableClietne.getSelectedRow()).getId())));
@@ -355,39 +411,23 @@ public class ConteudoCadastroVenda extends JPanel {
 	}
 
 
-	protected void AdicionaItems() {
-//		if(tableProduto.getSelectedRow() != 0){
-//			DefaultTableModel produto = (DefaultTableModel) tableProduto.getModel(); 
-//			DefaultTableModel items =  (DefaultTableModel) tableVendaProduto.getModel();
-//			
-//			Object[] obj = {tableProduto.getValueAt(tableProduto.getSelectedRow(), 0), tableProduto.getValueAt(tableProduto.getSelectedRow(), 1)};
-//			
-//			tableVendaProduto.add(null, obj);		
-//		}
+	protected void adicionaItems() {
 		
 		ItemsVendas items = new ItemsVendas();
 		
 		ProdutoDaoImp pdao = new ProdutoDaoImp();
-		idproduto = pdao.listar().get(tableProduto.getSelectedRow()).getId();
-		descricao = pdao.listar().get(tableProduto.getSelectedRow()).getDescricao();
-		valor = pdao.listar().get(tableProduto.getSelectedRow()).getCusto();
+	
+		items.setQuantidade(Integer.valueOf(JOptionPane.showInputDialog(null, "Informe a quntidade Desejada")));
+		items.setNomeproduto(pdao.listar().get(tableProduto.getSelectedRow()).getDescricao());
+		items.setCustoproduto(pdao.listar().get(tableProduto.getSelectedRow()).getCusto());
 		
-		 quantidade = JOptionPane.showInputDialog(null, "Informe a quntidade Desejada");
-		
-		
-		items.setNomeproduto(descricao);
-		items.setCustoproduto(valor);
+		total = total.add(items.getCustoproduto().multiply(BigDecimal.valueOf(Double.valueOf(items.getQuantidade()))));
 		
 		modelitemsvendas.lista.add(items);
-		modelitemsvendas.fireTableDataChanged();
-			
-		
+		DecimalFormat df = new DecimalFormat("#,##0.00");
+					
+		lbltotal.setText(df.format(total));
 	}
-	
-
-
-	private void BuscarIdProd() {
 		
-	}
-
 }
+

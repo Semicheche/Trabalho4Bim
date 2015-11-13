@@ -8,11 +8,10 @@ import br.univel.itemsvendas.ItemsVendas;
 
 public class ModeItemsVendas extends AbstractTableModel {
 
-	ArrayList<ItemsVendas> lista = new ArrayList<>();
-
+	ArrayList<ItemsVendas> lista;
 	
 	public ModeItemsVendas() {
-		
+		lista = new ArrayList<ItemsVendas>();
 	}
 	
 	@Override
@@ -22,31 +21,38 @@ public class ModeItemsVendas extends AbstractTableModel {
 
 	@Override
 	public int getColumnCount() {
-			return 2;
+			return 3;
 	}
 	
 	@Override
 	public String getColumnName(int column) {
+		
 		switch (column) {
+		
 		case 0:
 			return "Descricao";
 		case 1:
 			return "Valor";
+		case 2:
+			return "quantidade";
 		default:
-			return "Ouve algun Erro";
+			return "Ouve algum Erro!";
+			
 		}
 	}
 
 	@Override
 	public Object getValueAt(int rowIndex, int columnIndex) {
 		
-		fireTableStructureChanged();
+		ItemsVendas i = lista.get(rowIndex);
 		
 		switch (columnIndex) {
 		case 0:
-			return lista.get(rowIndex).getNomeproduto();
+			return i.getNomeproduto();
 		case 1:
-			return lista.get(rowIndex).getCustoproduto();
+			return i.getCustoproduto();
+		case 2:
+			return i.getQuantidade();
 		default:
 			return "Ouve algun Erro";
 		}
