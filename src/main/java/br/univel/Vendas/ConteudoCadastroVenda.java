@@ -27,6 +27,7 @@ import java.awt.FlowLayout;
 import javax.swing.SwingConstants;
 
 import br.univel.Venda.Venda;
+import br.univel.Venda.VendaDaoImp;
 import br.univel.itemsvendas.ItemsVendas;
 
 import java.awt.event.MouseAdapter;
@@ -199,9 +200,9 @@ public class ConteudoCadastroVenda extends JPanel {
 		add(panel_1, BorderLayout.CENTER);
 		GridBagLayout gbl_panel_1 = new GridBagLayout();
 		gbl_panel_1.columnWidths = new int[]{25, 45, 69, 37, 24, 0, 89, 0, 78, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-		gbl_panel_1.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+		gbl_panel_1.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 		gbl_panel_1.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, Double.MIN_VALUE};
-		gbl_panel_1.rowWeights = new double[]{0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_panel_1.rowWeights = new double[]{0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		panel_1.setLayout(gbl_panel_1);
 		
 		JLabel lblId = new JLabel("ID");
@@ -209,7 +210,7 @@ public class ConteudoCadastroVenda extends JPanel {
 		gbc_lblId.insets = new Insets(0, 0, 5, 5);
 		gbc_lblId.anchor = GridBagConstraints.EAST;
 		gbc_lblId.gridx = 0;
-		gbc_lblId.gridy = 0;
+		gbc_lblId.gridy = 1;
 		panel_1.add(lblId, gbc_lblId);
 		
 		txtid = new JTextField();
@@ -218,7 +219,7 @@ public class ConteudoCadastroVenda extends JPanel {
 		gbc_txtid.fill = GridBagConstraints.HORIZONTAL;
 		gbc_txtid.insets = new Insets(0, 0, 5, 5);
 		gbc_txtid.gridx = 1;
-		gbc_txtid.gridy = 0;
+		gbc_txtid.gridy = 1;
 		panel_1.add(txtid, gbc_txtid);
 		txtid.setColumns(10);
 		
@@ -227,7 +228,7 @@ public class ConteudoCadastroVenda extends JPanel {
 		gbc_lblNome.anchor = GridBagConstraints.EAST;
 		gbc_lblNome.insets = new Insets(0, 0, 5, 5);
 		gbc_lblNome.gridx = 2;
-		gbc_lblNome.gridy = 0;
+		gbc_lblNome.gridy = 1;
 		panel_1.add(lblNome, gbc_lblNome);
 		
 		txtnome = new JTextField();
@@ -237,7 +238,7 @@ public class ConteudoCadastroVenda extends JPanel {
 		gbc_txtnome.insets = new Insets(0, 0, 5, 5);
 		gbc_txtnome.fill = GridBagConstraints.HORIZONTAL;
 		gbc_txtnome.gridx = 3;
-		gbc_txtnome.gridy = 0;
+		gbc_txtnome.gridy = 1;
 		panel_1.add(txtnome, gbc_txtnome);
 		txtnome.setColumns(10);
 		
@@ -246,7 +247,7 @@ public class ConteudoCadastroVenda extends JPanel {
 		gbc_lblValorPago.insets = new Insets(0, 0, 5, 5);
 		gbc_lblValorPago.anchor = GridBagConstraints.EAST;
 		gbc_lblValorPago.gridx = 8;
-		gbc_lblValorPago.gridy = 0;
+		gbc_lblValorPago.gridy = 1;
 		panel_1.add(lblValorPago, gbc_lblValorPago);
 		
 		txtvalorpago = new JTextField();
@@ -268,7 +269,7 @@ public class ConteudoCadastroVenda extends JPanel {
 		gbc_txtvalorpago.insets = new Insets(0, 0, 5, 5);
 		gbc_txtvalorpago.fill = GridBagConstraints.HORIZONTAL;
 		gbc_txtvalorpago.gridx = 9;
-		gbc_txtvalorpago.gridy = 0;
+		gbc_txtvalorpago.gridy = 1;
 		panel_1.add(txtvalorpago, gbc_txtvalorpago);
 		txtvalorpago.setColumns(10);
 		
@@ -279,7 +280,7 @@ public class ConteudoCadastroVenda extends JPanel {
 		gbc_scrollPane_2.insets = new Insets(0, 0, 5, 5);
 		gbc_scrollPane_2.fill = GridBagConstraints.BOTH;
 		gbc_scrollPane_2.gridx = 0;
-		gbc_scrollPane_2.gridy = 2;
+		gbc_scrollPane_2.gridy = 3;
 		panel_1.add(scrollPane_2, gbc_scrollPane_2);
 		
 		tableClietne = new JTable(modelcliente);
@@ -301,7 +302,7 @@ public class ConteudoCadastroVenda extends JPanel {
 		gbc_scrollPane.insets = new Insets(0, 0, 5, 5);
 		gbc_scrollPane.fill = GridBagConstraints.BOTH;
 		gbc_scrollPane.gridx = 4;
-		gbc_scrollPane.gridy = 2;
+		gbc_scrollPane.gridy = 3;
 		panel_1.add(scrollPane, gbc_scrollPane);
 		
 		tableProduto = new JTable(modelproduto);
@@ -322,7 +323,7 @@ public class ConteudoCadastroVenda extends JPanel {
 		GridBagConstraints gbc_button = new GridBagConstraints();
 		gbc_button.insets = new Insets(0, 0, 5, 5);
 		gbc_button.gridx = 10;
-		gbc_button.gridy = 2;
+		gbc_button.gridy = 3;
 		panel_1.add(button, gbc_button);
 		
 		JScrollPane scrollPane_1 = new JScrollPane();
@@ -332,7 +333,7 @@ public class ConteudoCadastroVenda extends JPanel {
 		gbc_scrollPane_1.insets = new Insets(0, 0, 5, 5);
 		gbc_scrollPane_1.fill = GridBagConstraints.BOTH;
 		gbc_scrollPane_1.gridx = 11;
-		gbc_scrollPane_1.gridy = 2;
+		gbc_scrollPane_1.gridy = 3;
 		panel_1.add(scrollPane_1, gbc_scrollPane_1);
 		
 		tableVendaProduto = new JTable(modelitemsvendas);
@@ -344,28 +345,28 @@ public class ConteudoCadastroVenda extends JPanel {
 		gbc_lblTotal.anchor = GridBagConstraints.EAST;
 		gbc_lblTotal.insets = new Insets(0, 0, 5, 5);
 		gbc_lblTotal.gridx = 14;
-		gbc_lblTotal.gridy = 8;
+		gbc_lblTotal.gridy = 9;
 		panel_1.add(lblTotal, gbc_lblTotal);
 		
 		lbltotal = new JLabel("0");
 		GridBagConstraints gbc_lbltotal = new GridBagConstraints();
 		gbc_lbltotal.insets = new Insets(0, 0, 5, 5);
 		gbc_lbltotal.gridx = 15;
-		gbc_lbltotal.gridy = 8;
+		gbc_lbltotal.gridy = 9;
 		panel_1.add(lbltotal, gbc_lbltotal);
 		
 		JLabel lblTroco = new JLabel("VALOR RECEBIDO");
 		GridBagConstraints gbc_lblTroco = new GridBagConstraints();
 		gbc_lblTroco.insets = new Insets(0, 0, 5, 5);
 		gbc_lblTroco.gridx = 14;
-		gbc_lblTroco.gridy = 9;
+		gbc_lblTroco.gridy = 10;
 		panel_1.add(lblTroco, gbc_lblTroco);
 		
 		lblvalorrecebido = new JLabel("0");
 		GridBagConstraints gbc_lblvalorrecebido = new GridBagConstraints();
 		gbc_lblvalorrecebido.insets = new Insets(0, 0, 5, 5);
 		gbc_lblvalorrecebido.gridx = 15;
-		gbc_lblvalorrecebido.gridy = 9;
+		gbc_lblvalorrecebido.gridy = 10;
 		panel_1.add(lblvalorrecebido, gbc_lblvalorrecebido);
 		
 		JLabel lblTroco_1 = new JLabel("TROCO");
@@ -373,14 +374,14 @@ public class ConteudoCadastroVenda extends JPanel {
 		gbc_lblTroco_1.anchor = GridBagConstraints.EAST;
 		gbc_lblTroco_1.insets = new Insets(0, 0, 5, 5);
 		gbc_lblTroco_1.gridx = 14;
-		gbc_lblTroco_1.gridy = 10;
+		gbc_lblTroco_1.gridy = 11;
 		panel_1.add(lblTroco_1, gbc_lblTroco_1);
 		
 		lbltroco = new JLabel("0");
 		GridBagConstraints gbc_lbltroco = new GridBagConstraints();
 		gbc_lbltroco.insets = new Insets(0, 0, 5, 5);
 		gbc_lbltroco.gridx = 15;
-		gbc_lbltroco.gridy = 10;
+		gbc_lbltroco.gridy = 11;
 		panel_1.add(lbltroco, gbc_lbltroco);
 
 	}
@@ -388,10 +389,30 @@ public class ConteudoCadastroVenda extends JPanel {
 	protected void concluirVenda() {
 		
 		Timestamp Datahoje = new Timestamp(System.currentTimeMillis());
+		VendaDaoImp vdao = new VendaDaoImp();
 		Venda v = new Venda();
+		ItemsVendas iv = new ItemsVendas();
 		
 		v.setNomecliente(txtnome.getText());
 		v.setHoravenda(Datahoje);
+		v.setTotal(total);
+		
+		vdao.inserir(v);
+		
+		
+		
+		for (int i = 0; i < modelitemsvendas.lista.size(); i++) {
+			iv.setIdvenda(vdao.listar().get(i).getIdvenda());
+			iv.setNomeproduto(modelitemsvendas.lista.get(i).getNomeproduto());
+			iv.setCustoproduto(modelitemsvendas.lista.get(i).getCustoproduto().multiply(BigDecimal.valueOf(Double.valueOf(modelitemsvendas.lista.get(i).getQuantidade()))));
+			iv.setMargemlucro(modelproduto.lista.get(i).getMargemdelucro());
+			iv.setQuantidade(modelitemsvendas.lista.get(i).getQuantidade());
+		}
+		
+		
+		
+		
+		
 		
 		
 		

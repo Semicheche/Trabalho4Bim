@@ -1,10 +1,14 @@
 package br.univel.Venda;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 import br.univel.Vendas.Conexao;
+import br.univel.itemsvendas.ItemsVendas;
 
 public class VendaDaoImp implements VendaDAO {
 	
@@ -57,8 +61,44 @@ public class VendaDaoImp implements VendaDAO {
 
 	@Override
 	public List<Venda> listar() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+		Statement st = null;
+		ResultSet result = null;
+
+		String sql = "SELECT * FROM produto";
+
+		ArrayList<Venda> lista = new ArrayList<>();
+		Venda v;
+		
+		try {
+			try {
+				st = conexao.getConnection().createStatement();
+				result = st.executeQuery(sql);
+
+				while (result.next()) {
+					v = new Venda();
+					
+					v.setIdvenda(result.getInt("idvenda"));
+					v.setNomecliente(result.getString("nomecliente"));
+					v.setHoravenda(result.getTimestamp("hora"));
+					v.setTotal(result.getBigDecimal("total"));
+					
+					
+					lista.add(v);
+
+				}
+
+			} finally {
+				if (st != null)
+					st.close();
+					
+				if (result != null)
+					result.close();
+
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return lista;
+		}
 
 }

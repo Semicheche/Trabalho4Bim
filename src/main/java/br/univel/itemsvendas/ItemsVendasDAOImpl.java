@@ -1,10 +1,15 @@
 package br.univel.itemsvendas;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 import br.univel.Vendas.Conexao;
+import br.univel.Vendas.Produto;
+import br.univel.Vendas.Unidade;
 
 public class ItemsVendasDAOImpl implements ItemsVendasDAO {
 
@@ -58,8 +63,46 @@ public class ItemsVendasDAOImpl implements ItemsVendasDAO {
 
 	@Override
 	public List<ItemsVendas> listar() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+		Statement st = null;
+		ResultSet result = null;
+
+		String sql = "SELECT * FROM produto";
+
+		ArrayList<ItemsVendas> lista = new ArrayList<>();
+		ItemsVendas iv;
+		
+		try {
+			try {
+				st = conexao.getConnection().createStatement();
+				result = st.executeQuery(sql);
+
+				while (result.next()) {
+					iv = new ItemsVendas();
+					
+					iv.setIditemsvendas(result.getInt("iditemsvenda"));
+					iv.setIdvenda(result.getInt("venda_idvenda"));
+					iv.setNomeproduto(result.getString("nomeproduto"));
+					iv.setCustoproduto(result.getBigDecimal("custoproduto"));
+					iv.setMargemlucro(result.getBigDecimal("margemlucro"));
+					iv.setQuantidade(result.getInt("quantidade"));	
+					
+					
+					lista.add(iv);
+
+				}
+
+			} finally {
+				if (st != null)
+					st.close();
+					
+				if (result != null)
+					result.close();
+
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return lista;
+		}
 
 }
