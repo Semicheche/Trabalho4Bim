@@ -16,12 +16,12 @@ public class VendaDaoImp implements VendaDAO {
 
 	@Override
 	public void inserir(Venda v) {
-		String sql = "INSERT INTO VENDA ( nomecliente, horavenda, conclusaovenda, totoal) VALUES (?, ?, ?, ?)";
+		String sql = "INSERT INTO VENDA ( nomecliente, horavenda, alteracaovenda, total) VALUES (?, ?, ?, ?)";
 		
 		try (PreparedStatement ps = conexao.getConnection().prepareStatement(sql)) {
 			ps.setString(1, v.getNomecliente());
 			ps.setTimestamp(2, v.getHoravenda());
-			ps.setTimestamp(3, v.getConclusaovenda());
+			ps.setTimestamp(3, v.getAlteracaovenda());
 			ps.setBigDecimal(4, v.getTotal());	
 
 			ps.executeUpdate();
@@ -64,7 +64,7 @@ public class VendaDaoImp implements VendaDAO {
 		Statement st = null;
 		ResultSet result = null;
 
-		String sql = "SELECT * FROM produto";
+		String sql = "SELECT * FROM venda";
 
 		ArrayList<Venda> lista = new ArrayList<>();
 		Venda v;
@@ -79,7 +79,8 @@ public class VendaDaoImp implements VendaDAO {
 					
 					v.setIdvenda(result.getInt("idvenda"));
 					v.setNomecliente(result.getString("nomecliente"));
-					v.setHoravenda(result.getTimestamp("hora"));
+					v.setAlteracaovenda(result.getTimestamp("alteracaovenda"));
+					v.setHoravenda(result.getTimestamp("horavenda"));
 					v.setTotal(result.getBigDecimal("total"));
 					
 					

@@ -29,10 +29,12 @@ import javax.swing.SwingConstants;
 import br.univel.Venda.Venda;
 import br.univel.Venda.VendaDaoImp;
 import br.univel.itemsvendas.ItemsVendas;
+import br.univel.itemsvendas.ItemsVendasDAOImpl;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.math.BigDecimal;
+import java.security.acl.LastOwnerException;
 import java.sql.Timestamp;
 import java.text.DecimalFormat;
 import java.text.Format;
@@ -170,7 +172,9 @@ public class ConteudoCadastroVenda extends JPanel {
 	private JLabel lbltotal;
 	private JLabel lblvalorrecebido;
 	private JLabel lbltroco;
+	private int idvenda;
 	
+	VendaDaoImp vdao = new VendaDaoImp();
 	
 	/**
 	 * Create the panel.
@@ -182,12 +186,6 @@ public class ConteudoCadastroVenda extends JPanel {
 		add(panel, BorderLayout.NORTH);
 		panel.setLayout(new FlowLayout(FlowLayout.RIGHT, 5, 5));
 		
-		JButton btnNewButton_2 = new JButton("Novo");
-		panel.add(btnNewButton_2);
-		
-		JButton btnNewButton_1 = new JButton("Cnacelar");
-		panel.add(btnNewButton_1);
-		
 		JButton btnconfirmar = new JButton("Comfirmar");
 		btnconfirmar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -196,13 +194,22 @@ public class ConteudoCadastroVenda extends JPanel {
 		});
 		panel.add(btnconfirmar);
 		
+		btnConcluirVenda = new JButton("Concluir Venda");
+		btnConcluirVenda.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ComfirmarVenda();
+			}
+		});
+		btnConcluirVenda.setEnabled(false);
+		panel.add(btnConcluirVenda);
+		
 		JPanel panel_1 = new JPanel();
 		add(panel_1, BorderLayout.CENTER);
 		GridBagLayout gbl_panel_1 = new GridBagLayout();
-		gbl_panel_1.columnWidths = new int[]{25, 45, 69, 37, 24, 0, 89, 0, 78, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-		gbl_panel_1.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+		gbl_panel_1.columnWidths = new int[]{25, 45, 88, 37, 24, 0, 89, 0, 78, 59, 0, 12, 0, 0, 0, 0, 0, 0};
+		gbl_panel_1.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 		gbl_panel_1.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, Double.MIN_VALUE};
-		gbl_panel_1.rowWeights = new double[]{0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_panel_1.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		panel_1.setLayout(gbl_panel_1);
 		
 		JLabel lblId = new JLabel("ID");
@@ -234,7 +241,7 @@ public class ConteudoCadastroVenda extends JPanel {
 		txtnome = new JTextField();
 		txtnome.setEditable(false);
 		GridBagConstraints gbc_txtnome = new GridBagConstraints();
-		gbc_txtnome.gridwidth = 4;
+		gbc_txtnome.gridwidth = 5;
 		gbc_txtnome.insets = new Insets(0, 0, 5, 5);
 		gbc_txtnome.fill = GridBagConstraints.HORIZONTAL;
 		gbc_txtnome.gridx = 3;
@@ -254,14 +261,14 @@ public class ConteudoCadastroVenda extends JPanel {
 		txtvalorpago.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusLost(FocusEvent e) {
-				DecimalFormat df = new DecimalFormat("#,##0.00");
+				NumberFormat nfBR = NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));
 				
-				lblvalorrecebido.setText(txtvalorpago.getText().toString());
+				lblvalorrecebido.setText(txtvalorpago.getText());
 				BigDecimal valor = total;
-				BigDecimal valorrecebido =  BigDecimal.valueOf(Double.valueOf(lblvalorrecebido.getText()));
+				BigDecimal valorrecebido = BigDecimal.valueOf(Double.valueOf(lblvalorrecebido.getText()));
 				BigDecimal troco = valorrecebido.subtract(valor);
 				
-				lbltroco.setText(df.format(troco));
+				lbltroco.setText(nfBR.format(troco));
 			}
 		});
 		GridBagConstraints gbc_txtvalorpago = new GridBagConstraints();
@@ -273,14 +280,35 @@ public class ConteudoCadastroVenda extends JPanel {
 		panel_1.add(txtvalorpago, gbc_txtvalorpago);
 		txtvalorpago.setColumns(10);
 		
+		JLabel lblCliente = new JLabel("Cliente");
+		GridBagConstraints gbc_lblCliente = new GridBagConstraints();
+		gbc_lblCliente.insets = new Insets(0, 0, 5, 5);
+		gbc_lblCliente.gridx = 2;
+		gbc_lblCliente.gridy = 3;
+		panel_1.add(lblCliente, gbc_lblCliente);
+		
+		JLabel lblProdutos = new JLabel("Produtos");
+		GridBagConstraints gbc_lblProdutos = new GridBagConstraints();
+		gbc_lblProdutos.insets = new Insets(0, 0, 5, 5);
+		gbc_lblProdutos.gridx = 7;
+		gbc_lblProdutos.gridy = 3;
+		panel_1.add(lblProdutos, gbc_lblProdutos);
+		
+		JLabel lblNewLabel = new JLabel("Items da Nota");
+		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
+		gbc_lblNewLabel.insets = new Insets(0, 0, 5, 5);
+		gbc_lblNewLabel.gridx = 14;
+		gbc_lblNewLabel.gridy = 3;
+		panel_1.add(lblNewLabel, gbc_lblNewLabel);
+		
 		JScrollPane scrollPane_2 = new JScrollPane();
 		GridBagConstraints gbc_scrollPane_2 = new GridBagConstraints();
-		gbc_scrollPane_2.gridwidth = 3;
-		gbc_scrollPane_2.gridheight = 6;
+		gbc_scrollPane_2.gridwidth = 4;
+		gbc_scrollPane_2.gridheight = 7;
 		gbc_scrollPane_2.insets = new Insets(0, 0, 5, 5);
 		gbc_scrollPane_2.fill = GridBagConstraints.BOTH;
 		gbc_scrollPane_2.gridx = 0;
-		gbc_scrollPane_2.gridy = 3;
+		gbc_scrollPane_2.gridy = 4;
 		panel_1.add(scrollPane_2, gbc_scrollPane_2);
 		
 		tableClietne = new JTable(modelcliente);
@@ -288,31 +316,51 @@ public class ConteudoCadastroVenda extends JPanel {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				AdicionarCliente();
+				tableProduto.setEnabled(true);
+				tableVendaProduto.setEnabled(true);
 			}
 		});
 		scrollPane_2.setViewportView(tableClietne);
 		
 		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setEnabled(false);
 		scrollPane.addMouseListener(new MouseAdapter() {
 			
 		});
 		GridBagConstraints gbc_scrollPane = new GridBagConstraints();
-		gbc_scrollPane.gridwidth = 6;
-		gbc_scrollPane.gridheight = 6;
+		gbc_scrollPane.gridwidth = 7;
+		gbc_scrollPane.gridheight = 7;
 		gbc_scrollPane.insets = new Insets(0, 0, 5, 5);
 		gbc_scrollPane.fill = GridBagConstraints.BOTH;
 		gbc_scrollPane.gridx = 4;
-		gbc_scrollPane.gridy = 3;
+		gbc_scrollPane.gridy = 4;
 		panel_1.add(scrollPane, gbc_scrollPane);
 		
 		tableProduto = new JTable(modelproduto);
 		tableProduto.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				
+				if (txtid.getText().equals("") && txtnome.getText().equals("")){
+					JOptionPane.showMessageDialog(null, "Selecione um cliente!!!");
+				}
+					
 			}
 		});
 		scrollPane.setViewportView(tableProduto);
+		
+		JScrollPane scrollPane_1 = new JScrollPane();
+		scrollPane_1.setEnabled(false);
+		GridBagConstraints gbc_scrollPane_1 = new GridBagConstraints();
+		gbc_scrollPane_1.gridwidth = 5;
+		gbc_scrollPane_1.gridheight = 7;
+		gbc_scrollPane_1.insets = new Insets(0, 0, 5, 0);
+		gbc_scrollPane_1.fill = GridBagConstraints.BOTH;
+		gbc_scrollPane_1.gridx = 12;
+		gbc_scrollPane_1.gridy = 4;
+		panel_1.add(scrollPane_1, gbc_scrollPane_1);
+		
+		tableVendaProduto = new JTable(modelitemsvendas);
+		scrollPane_1.setViewportView(tableVendaProduto);
 		
 		JButton button = new JButton(">>");
 		button.addActionListener(new ActionListener() {
@@ -321,23 +369,23 @@ public class ConteudoCadastroVenda extends JPanel {
 			}
 		});
 		GridBagConstraints gbc_button = new GridBagConstraints();
+		gbc_button.anchor = GridBagConstraints.NORTH;
 		gbc_button.insets = new Insets(0, 0, 5, 5);
-		gbc_button.gridx = 10;
-		gbc_button.gridy = 3;
+		gbc_button.gridx = 11;
+		gbc_button.gridy = 5;
 		panel_1.add(button, gbc_button);
 		
-		JScrollPane scrollPane_1 = new JScrollPane();
-		GridBagConstraints gbc_scrollPane_1 = new GridBagConstraints();
-		gbc_scrollPane_1.gridwidth = 5;
-		gbc_scrollPane_1.gridheight = 6;
-		gbc_scrollPane_1.insets = new Insets(0, 0, 5, 5);
-		gbc_scrollPane_1.fill = GridBagConstraints.BOTH;
-		gbc_scrollPane_1.gridx = 11;
-		gbc_scrollPane_1.gridy = 3;
-		panel_1.add(scrollPane_1, gbc_scrollPane_1);
-		
-		tableVendaProduto = new JTable(modelitemsvendas);
-		scrollPane_1.setViewportView(tableVendaProduto);
+		JButton button_1 = new JButton("<<");
+		button_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				removerItens();	
+			}
+		});
+		GridBagConstraints gbc_button_1 = new GridBagConstraints();
+		gbc_button_1.insets = new Insets(0, 0, 5, 5);
+		gbc_button_1.gridx = 11;
+		gbc_button_1.gridy = 6;
+		panel_1.add(button_1, gbc_button_1);
 		
 		JLabel lblTotal = new JLabel("TOTAL");
 		lblTotal.setVerticalAlignment(SwingConstants.BOTTOM);
@@ -345,28 +393,28 @@ public class ConteudoCadastroVenda extends JPanel {
 		gbc_lblTotal.anchor = GridBagConstraints.EAST;
 		gbc_lblTotal.insets = new Insets(0, 0, 5, 5);
 		gbc_lblTotal.gridx = 14;
-		gbc_lblTotal.gridy = 9;
+		gbc_lblTotal.gridy = 11;
 		panel_1.add(lblTotal, gbc_lblTotal);
 		
 		lbltotal = new JLabel("0");
 		GridBagConstraints gbc_lbltotal = new GridBagConstraints();
 		gbc_lbltotal.insets = new Insets(0, 0, 5, 5);
 		gbc_lbltotal.gridx = 15;
-		gbc_lbltotal.gridy = 9;
+		gbc_lbltotal.gridy = 11;
 		panel_1.add(lbltotal, gbc_lbltotal);
 		
 		JLabel lblTroco = new JLabel("VALOR RECEBIDO");
 		GridBagConstraints gbc_lblTroco = new GridBagConstraints();
 		gbc_lblTroco.insets = new Insets(0, 0, 5, 5);
 		gbc_lblTroco.gridx = 14;
-		gbc_lblTroco.gridy = 10;
+		gbc_lblTroco.gridy = 12;
 		panel_1.add(lblTroco, gbc_lblTroco);
 		
 		lblvalorrecebido = new JLabel("0");
 		GridBagConstraints gbc_lblvalorrecebido = new GridBagConstraints();
 		gbc_lblvalorrecebido.insets = new Insets(0, 0, 5, 5);
 		gbc_lblvalorrecebido.gridx = 15;
-		gbc_lblvalorrecebido.gridy = 10;
+		gbc_lblvalorrecebido.gridy = 12;
 		panel_1.add(lblvalorrecebido, gbc_lblvalorrecebido);
 		
 		JLabel lblTroco_1 = new JLabel("TROCO");
@@ -374,54 +422,57 @@ public class ConteudoCadastroVenda extends JPanel {
 		gbc_lblTroco_1.anchor = GridBagConstraints.EAST;
 		gbc_lblTroco_1.insets = new Insets(0, 0, 5, 5);
 		gbc_lblTroco_1.gridx = 14;
-		gbc_lblTroco_1.gridy = 11;
+		gbc_lblTroco_1.gridy = 13;
 		panel_1.add(lblTroco_1, gbc_lblTroco_1);
 		
 		lbltroco = new JLabel("0");
 		GridBagConstraints gbc_lbltroco = new GridBagConstraints();
 		gbc_lbltroco.insets = new Insets(0, 0, 5, 5);
 		gbc_lbltroco.gridx = 15;
-		gbc_lbltroco.gridy = 11;
+		gbc_lbltroco.gridy = 13;
 		panel_1.add(lbltroco, gbc_lbltroco);
 
 	}
 
-	protected void concluirVenda() {
-		
-		Timestamp Datahoje = new Timestamp(System.currentTimeMillis());
-		VendaDaoImp vdao = new VendaDaoImp();
-		Venda v = new Venda();
+	protected void ComfirmarVenda() {
 		ItemsVendas iv = new ItemsVendas();
-		
-		v.setNomecliente(txtnome.getText());
-		v.setHoravenda(Datahoje);
-		v.setTotal(total);
-		
-		vdao.inserir(v);
-		
-		
-		
+		ItemsVendasDAOImpl ivdao = new ItemsVendasDAOImpl();
+
 		for (int i = 0; i < modelitemsvendas.lista.size(); i++) {
-			iv.setIdvenda(vdao.listar().get(i).getIdvenda());
+			iv.setIdvenda(idvenda);
 			iv.setNomeproduto(modelitemsvendas.lista.get(i).getNomeproduto());
-			iv.setCustoproduto(modelitemsvendas.lista.get(i).getCustoproduto().multiply(BigDecimal.valueOf(Double.valueOf(modelitemsvendas.lista.get(i).getQuantidade()))));
+			iv.setCustoproduto(modelitemsvendas.lista.get(i).getCustoproduto());
 			iv.setMargemlucro(modelproduto.lista.get(i).getMargemdelucro());
 			iv.setQuantidade(modelitemsvendas.lista.get(i).getQuantidade());
+			
+			ivdao.inserir(iv);
+			
 		}
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+		idvenda = 0;
+		modelitemsvendas.lista.remove(modelitemsvendas.lista.size()-1);
+		modelitemsvendas.fireTableDataChanged();
+	}
+
+	protected void concluirVenda() {
+		if(txtvalorpago.getText().equals("")){
+			JOptionPane.showMessageDialog(null, "Informe o Valor a ser Pago!!!");
+		}else{
+			Timestamp Datahoje = new Timestamp(System.currentTimeMillis());
+			Venda v = new Venda();
+			
+			v.setNomecliente(txtnome.getText());
+			v.setHoravenda(Datahoje);
+			v.setTotal(total);
+			
+			vdao.inserir(v);
+			btnConcluirVenda.setEnabled(true);
+			idvenda = vdao.listar().get(vdao.listar().size()-1).getIdvenda();
+		}
 	}
 
 	ClienteDaoImpl cdao = new ClienteDaoImpl();
 	private JTextField txtvalorpago;
+	private JButton btnConcluirVenda;
 	
 	protected void AdicionarCliente() {
 		txtid.setText((String.valueOf(cdao.listar().get(tableClietne.getSelectedRow()).getId())));
@@ -431,18 +482,37 @@ public class ConteudoCadastroVenda extends JPanel {
 		
 	}
 
-
-	protected void adicionaItems() {
-		
-		ItemsVendas items = new ItemsVendas();
+	
+	protected void removerItens() {
+		NumberFormat nfBR = NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));
 		
 		ProdutoDaoImp pdao = new ProdutoDaoImp();
+		ItemsVendas items = new ItemsVendas();
+		
+		if(tableVendaProduto.getSelectedRow() != -1){
+			BigDecimal itemretirado = modelitemsvendas.lista.get(tableVendaProduto.getSelectedRow()).getCustoproduto().multiply(modelitemsvendas.lista.get(tableVendaProduto.getSelectedRow()).getQuantidade());
+			modelitemsvendas.lista.remove(tableVendaProduto.getSelectedRow());
+			
+			
+			
+			total = total.subtract(itemretirado);
+			lbltotal.setText(nfBR.format(total));
+			modelitemsvendas.fireTableDataChanged();
+		}else
+			JOptionPane.showMessageDialog(null, "Selecione o item que deseja Remover!!");
+	}
+
+	protected void adicionaItems() {
+		NumberFormat nfBR = NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));
+		
+		ItemsVendas items = new ItemsVendas();
+		ProdutoDaoImp pdao = new ProdutoDaoImp();
 	
-		items.setQuantidade(Integer.valueOf(JOptionPane.showInputDialog(null, "Informe a quntidade Desejada")));
+		items.setQuantidade(BigDecimal.valueOf(Double.valueOf(JOptionPane.showInputDialog(null, "Informe a quntidade Desejada"))));
 		items.setNomeproduto(pdao.listar().get(tableProduto.getSelectedRow()).getDescricao());
 		items.setCustoproduto(pdao.listar().get(tableProduto.getSelectedRow()).getCusto());
 		
-		total = total.add(items.getCustoproduto().multiply(BigDecimal.valueOf(Double.valueOf(items.getQuantidade()))));
+		total = total.add(items.getCustoproduto().multiply(items.getQuantidade()));
 		
 		modelitemsvendas.lista.add(items);
 		DecimalFormat df = new DecimalFormat("#,##0.00");

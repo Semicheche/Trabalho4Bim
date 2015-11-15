@@ -8,7 +8,7 @@ public class Venda {
 	private int idvenda;
 	private String nomecliente;
 	private Timestamp horavenda;
-	private Timestamp conclusaovenda;
+	private Timestamp alteracaovenda;
 	private BigDecimal total;
 	
 	
@@ -30,11 +30,11 @@ public class Venda {
 	public void setHoravenda(Timestamp horavenda) {
 		this.horavenda = horavenda;
 	}
-	public Timestamp getConclusaovenda() {
-		return conclusaovenda;
+	public Timestamp getAlteracaovenda() {
+		return alteracaovenda;
 	}
-	public void setConclusaovenda(Timestamp conclusaovenda) {
-		this.conclusaovenda = conclusaovenda;
+	public void setAlteracaovenda(Timestamp alteracaovenda) {
+		this.alteracaovenda = alteracaovenda;
 	}
 	public BigDecimal getTotal() {
 		return total;

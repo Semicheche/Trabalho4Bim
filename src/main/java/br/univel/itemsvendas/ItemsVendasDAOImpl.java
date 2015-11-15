@@ -18,13 +18,14 @@ public class ItemsVendasDAOImpl implements ItemsVendasDAO {
 	@Override
 	public void inserir(ItemsVendas itemv) {
 		
-		String sql = "INSERT INTO CLIENTE ( venda_idvenda, nomeproduto, custoproduto, margemlucro) VALUES (?, ?, ?)";
+		String sql = "INSERT INTO itemsvenda (venda_idvenda, nomeproduto, custoproduto, margemlucro, quantidade) VALUES (?, ?, ?, ?, ?)";
 		
 		try (PreparedStatement ps = conexao.getConnection().prepareStatement(sql)) {
 			ps.setInt(1, itemv.getIdvenda());
 			ps.setString(2, itemv.getNomeproduto());
 			ps.setBigDecimal(3, itemv.getCustoproduto());
 			ps.setBigDecimal(4, itemv.getMargemlucro());
+			ps.setBigDecimal(5,itemv.getQuantidade());
 
 			ps.executeUpdate();
 
@@ -66,7 +67,7 @@ public class ItemsVendasDAOImpl implements ItemsVendasDAO {
 		Statement st = null;
 		ResultSet result = null;
 
-		String sql = "SELECT * FROM produto";
+		String sql = "SELECT * FROM itemsvenda";
 
 		ArrayList<ItemsVendas> lista = new ArrayList<>();
 		ItemsVendas iv;
@@ -84,7 +85,7 @@ public class ItemsVendasDAOImpl implements ItemsVendasDAO {
 					iv.setNomeproduto(result.getString("nomeproduto"));
 					iv.setCustoproduto(result.getBigDecimal("custoproduto"));
 					iv.setMargemlucro(result.getBigDecimal("margemlucro"));
-					iv.setQuantidade(result.getInt("quantidade"));	
+					iv.setQuantidade(result.getBigDecimal("quantidade"));	
 					
 					
 					lista.add(iv);

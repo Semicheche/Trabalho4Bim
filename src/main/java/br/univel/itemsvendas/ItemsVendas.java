@@ -6,17 +6,17 @@ public class ItemsVendas {
 	
 	private int iditemsvendas;
 	private int idvenda;
-	private int quantidade;
+	private BigDecimal quantidade;
 	private String nomeproduto;
 	private BigDecimal custoproduto;
 	private BigDecimal margemlucro;
 	
 	
-	public int getQuantidade() {
+	public BigDecimal getQuantidade() {
 		return quantidade;
 	}
 	
-	public void setQuantidade(int quantidade) {
+	public void setQuantidade(BigDecimal quantidade) {
 		this.quantidade = quantidade;
 	}
 	
