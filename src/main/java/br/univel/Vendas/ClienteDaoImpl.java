@@ -36,6 +36,7 @@ public class ClienteDaoImpl implements ClienteDao {
 			ps.executeUpdate();
 
 			ps.close();
+			new ModelCliente().fireTableDataChanged();
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -59,12 +60,13 @@ public class ClienteDaoImpl implements ClienteDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		new ModelCliente().fireTableDataChanged();
 
 	}
 
 	@Override
 	public void excluir(Cliente c) {
-		String sql = "DELETE FROM CLIENTE WHRERE ID = ?";
+		String sql = "DELETE FROM CLIENTE WHERE IDCLIENTE = ?";
 		try {
 			PreparedStatement ps = conexao.getConnection().prepareStatement(sql);
 			ps.setInt(1, c.getId());
@@ -73,6 +75,8 @@ public class ClienteDaoImpl implements ClienteDao {
 
 			ps.close();
 
+		new ModelCliente().fireTableDataChanged();
+		
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

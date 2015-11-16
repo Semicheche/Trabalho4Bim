@@ -24,6 +24,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JSeparator;
 import javax.swing.JButton;
 import javax.swing.JPasswordField;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 /**
  * 
@@ -36,7 +38,7 @@ public class PainelLogin extends JPanel {
 	private JButton btnentrar;
 	private JPasswordField passwordField;
 	UsuarioDaoImpl u = new UsuarioDaoImpl();
-	
+
 	ArrayList<Usuario> usuario = (ArrayList<Usuario>) u.listar();
 
 	/**
@@ -44,15 +46,15 @@ public class PainelLogin extends JPanel {
 	 */
 	public PainelLogin() {
 
-		
-		
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[]{0, 0, 0, 0, 0, 0};
-		gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0};
-		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 0.0, 1.0, 1.0, Double.MIN_VALUE};
-		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
+		gridBagLayout.columnWidths = new int[] { 0, 0, 0, 0, 0, 0 };
+		gridBagLayout.rowHeights = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+		gridBagLayout.columnWeights = new double[] { 0.0, 0.0, 0.0, 1.0, 1.0,
+				Double.MIN_VALUE };
+		gridBagLayout.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
+				0.0, 1.0, Double.MIN_VALUE };
 		setLayout(gridBagLayout);
-		
+
 		JLabel lblNewLabel = new JLabel("Entre com seu usuario");
 		lblNewLabel.setFont(new Font("Arial", Font.BOLD, 14));
 		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
@@ -61,14 +63,14 @@ public class PainelLogin extends JPanel {
 		gbc_lblNewLabel.gridx = 0;
 		gbc_lblNewLabel.gridy = 1;
 		add(lblNewLabel, gbc_lblNewLabel);
-		
+
 		JSeparator separator = new JSeparator();
 		GridBagConstraints gbc_separator = new GridBagConstraints();
 		gbc_separator.insets = new Insets(0, 0, 5, 5);
 		gbc_separator.gridx = 3;
 		gbc_separator.gridy = 2;
 		add(separator, gbc_separator);
-		
+
 		JLabel lblLogin = new JLabel("Login");
 		lblLogin.setFont(new Font("Arial", Font.BOLD, 13));
 		GridBagConstraints gbc_lblLogin = new GridBagConstraints();
@@ -77,7 +79,7 @@ public class PainelLogin extends JPanel {
 		gbc_lblLogin.gridx = 2;
 		gbc_lblLogin.gridy = 3;
 		add(lblLogin, gbc_lblLogin);
-		
+
 		txtlogin = new JTextField();
 		GridBagConstraints gbc_txtlogin = new GridBagConstraints();
 		gbc_txtlogin.anchor = GridBagConstraints.WEST;
@@ -86,7 +88,7 @@ public class PainelLogin extends JPanel {
 		gbc_txtlogin.gridy = 3;
 		add(txtlogin, gbc_txtlogin);
 		txtlogin.setColumns(10);
-		
+
 		JLabel lblSenha = new JLabel("Senha");
 		lblSenha.setFont(new Font("Arial", Font.BOLD, 13));
 		GridBagConstraints gbc_lblSenha = new GridBagConstraints();
@@ -95,7 +97,7 @@ public class PainelLogin extends JPanel {
 		gbc_lblSenha.gridx = 2;
 		gbc_lblSenha.gridy = 4;
 		add(lblSenha, gbc_lblSenha);
-		
+
 		passwordField = new JPasswordField();
 		GridBagConstraints gbc_passwordField = new GridBagConstraints();
 		gbc_passwordField.fill = GridBagConstraints.HORIZONTAL;
@@ -103,8 +105,12 @@ public class PainelLogin extends JPanel {
 		gbc_passwordField.gridx = 3;
 		gbc_passwordField.gridy = 4;
 		add(passwordField, gbc_passwordField);
-		
+
 		btnentrar = new JButton("Entrar");
+		btnentrar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		GridBagConstraints gbc_btnentrar = new GridBagConstraints();
 		gbc_btnentrar.anchor = GridBagConstraints.WEST;
 		gbc_btnentrar.insets = new Insets(0, 0, 5, 5);
@@ -114,16 +120,32 @@ public class PainelLogin extends JPanel {
 		add(btnentrar, gbc_btnentrar);
 
 	}
-	
+
 	public PainelLogin(Runnable acaoOk) {
 		this();
-		
+		ClienteDaoImpl cdao = new ClienteDaoImpl();
+		UsuarioDaoImpl udao = new UsuarioDaoImpl();
+
 		btnentrar.addActionListener(e -> {
-			if (txtlogin.getText().trim().equals("1")&& new String(passwordField.getPassword()).equals("1")) {
-				acaoOk.run();
-			} else {
-				JOptionPane.showMessageDialog(PainelLogin.this,
-						"Usuário e/ou senha inválidos!");
+			synchronized (cdao) {
+				boolean login = false;
+				for (int i = 0; i < cdao.listar().size(); i++) {
+					if (txtlogin.getText().trim()
+							.equals(cdao.listar().get(i).getNome())
+							&& new String(passwordField.getPassword())
+									.equals("1992")) {
+						acaoOk.run();
+						login = false;
+					} else {
+						login = true;
+					}
+
+				}
+
+				if (login)
+					JOptionPane.showMessageDialog(PainelLogin.this,
+							"Usuário e/ou senha inválidos!");
+
 			}
 		});
 

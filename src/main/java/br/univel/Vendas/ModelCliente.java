@@ -9,7 +9,7 @@ import javax.swing.table.AbstractTableModel;
  * @author Luciano Semicheche - 02/11/2015 21:27:12
  *
  */
-public abstract class ModelCliente extends AbstractTableModel {
+public class ModelCliente extends AbstractTableModel {
 	
 	/**
 	 * 

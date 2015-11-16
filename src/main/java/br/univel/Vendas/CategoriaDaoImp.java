@@ -21,7 +21,8 @@ public class CategoriaDaoImp implements CategoriaDAO {
 			ps.executeUpdate();
 
 			ps.close();
-
+			
+			new ModelCategoria().fireTableDataChanged();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -36,7 +37,21 @@ public class CategoriaDaoImp implements CategoriaDAO {
 
 	@Override
 	public void excluir(Categoria c) {
-		// TODO Auto-generated method stub
+		
+		String sql = "DELETE FROM categoriaproduto WHERE idusuario = ?";
+		try {
+			PreparedStatement ps = conexao.getConnection().prepareStatement(sql);
+			ps.setInt(1, c.getId());
+
+			ps.executeUpdate();
+
+			ps.close();
+			
+			new ModelCategoria().fireTableDataChanged();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		
 	}
 

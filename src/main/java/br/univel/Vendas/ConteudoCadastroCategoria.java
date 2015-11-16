@@ -13,6 +13,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class ConteudoCadastroCategoria extends JPanel {
 	private JTextField txtcategoria;
@@ -30,14 +32,21 @@ public class ConteudoCadastroCategoria extends JPanel {
 		add(panel, BorderLayout.NORTH);
 		panel.setLayout(new FlowLayout(FlowLayout.RIGHT, 5, 5));
 		
-		JButton btnNewButton_2 = new JButton("Editar");
-		panel.add(btnNewButton_2);
-		
 		JButton btnNewButton = new JButton("Excluir");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				excluirCategoria();
+			}
+		});
 		panel.add(btnNewButton);
 		
-		JButton btnNewButton_1 = new JButton("Cancelar");
-		panel.add(btnNewButton_1);
+		JButton btncancelar = new JButton("Cancelar");
+		btncancelar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				txtcategoria.setText("");
+			}
+		});
+		panel.add(btncancelar);
 		
 		JButton btnSalvar = new JButton("Salvar");
 		panel.add(btnSalvar);
@@ -82,10 +91,30 @@ public class ConteudoCadastroCategoria extends JPanel {
 		panel_1.add(scrollPane, gbc_scrollPane);
 		
 		table = new JTable();
+		table.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				editar();
+			}
+		});
 		scrollPane.setViewportView(table);
 		table.setModel(model);
 		model.fireTableDataChanged();
 
+	}
+
+	protected void excluirCategoria() {
+		CategoriaDaoImp cdao = new CategoriaDaoImp();
+		Categoria c = new Categoria();
+		c.setId(cdao.listar().get(table.getSelectedRow()).getId());
+		model.fireTableDataChanged();
+		txtcategoria.setText("");
+	}
+
+	protected void editar() {
+		
+		txtcategoria.setText(model.lista.get(table.getSelectedRow()).getCategoria());
+		
 	}
 
 	protected void cadastrar() {
@@ -96,7 +125,7 @@ public class ConteudoCadastroCategoria extends JPanel {
 		c.setCategoria(txtcategoria.getText());
 		
 		cdao.inserir(c);
-		
+		txtcategoria.setText("");
 	}
 
 }
