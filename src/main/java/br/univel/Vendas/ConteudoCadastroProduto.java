@@ -97,6 +97,10 @@ public class ConteudoCadastroProduto extends JPanel {
 		panel.add(btncancelar);
 
 		btnEditar = new JButton("Editar");
+		btnEditar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btnEditar.setEnabled(false);
 		panel.add(btnEditar);
 

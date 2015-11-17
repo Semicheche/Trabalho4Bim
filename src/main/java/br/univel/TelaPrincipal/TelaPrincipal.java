@@ -15,6 +15,7 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.JTabbedPane;
 
+import net.sf.jasperreports.view.JasperViewer;
 import br.univel.Jasper.JasperReportCliente;
 import br.univel.Jasper.JasperReportProduto;
 import br.univel.Jasper.JasperReportVendas;
@@ -60,7 +61,7 @@ public class TelaPrincipal extends JFrame {
 		
 		
 		
-		blockParaLogin();
+	//	blockParaLogin();
 
 		setTitle("Menu Principal\r\n");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -126,6 +127,7 @@ public class TelaPrincipal extends JFrame {
 		mntmCliente_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 						new JasperReportCliente();
+					
 			}
 		});
 		mnRelatorios.add(mntmCliente_1);
