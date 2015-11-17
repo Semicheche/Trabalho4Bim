@@ -15,12 +15,14 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.JTabbedPane;
 
+import br.univel.Jasper.JasperReportCliente;
 import br.univel.Vendas.BlockPanel;
 import br.univel.Vendas.PainelLogin;
 import br.univel.Vendas.TelaCadastroCategoria;
 import br.univel.Vendas.TelaCadastroCliente;
 import br.univel.Vendas.TelaCadastroProduto;
 import br.univel.Vendas.TelaCadastroVenda;
+
 import java.awt.Point;
 
 public class TelaPrincipal extends JFrame {
@@ -114,6 +116,17 @@ public class TelaPrincipal extends JFrame {
 			
 		});
 		mnVenda.add(mntmVendaCliente);
+		
+		JMenu mnRelatorios = new JMenu("Relatorios");
+		menuBar.add(mnRelatorios);
+		
+		JMenuItem mntmCliente_1 = new JMenuItem("Cliente");
+		mntmCliente_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new JasperReportCliente();
+			}
+		});
+		mnRelatorios.add(mntmCliente_1);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
