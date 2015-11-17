@@ -17,6 +17,7 @@ import javax.swing.JTabbedPane;
 
 import br.univel.Jasper.JasperReportCliente;
 import br.univel.Jasper.JasperReportProduto;
+import br.univel.Jasper.JasperReportVendas;
 import br.univel.Vendas.BlockPanel;
 import br.univel.Vendas.PainelLogin;
 import br.univel.Vendas.TelaCadastroCategoria;
@@ -136,6 +137,14 @@ public class TelaPrincipal extends JFrame {
 			}
 		});
 		mnRelatorios.add(mntmProdutos);
+		
+		JMenuItem mntmVendas = new JMenuItem("Vendas");
+		mntmVendas.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+					new JasperReportVendas();
+			}
+		});
+		mnRelatorios.add(mntmVendas);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
