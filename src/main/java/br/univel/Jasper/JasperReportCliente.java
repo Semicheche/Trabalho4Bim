@@ -35,6 +35,7 @@ public class JasperReportCliente {
 			JasperViewer jasperViewer = new JasperViewer(jasperPrint,false);
 			jasperViewer.setVisible(true);
 			jasperViewer.setDefaultCloseOperation(jasperViewer.DISPOSE_ON_CLOSE);
+			
 		} catch (JRException ex) {
 			ex.printStackTrace();
 		}

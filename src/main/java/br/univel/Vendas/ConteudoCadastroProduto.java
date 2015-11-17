@@ -30,8 +30,12 @@ import java.util.HashMap;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
+import org.omg.PortableServer.ForwardRequestHelper;
 import org.w3c.dom.CDATASection;
 import org.w3c.dom.ls.LSInput;
+
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class ConteudoCadastroProduto extends JPanel {
 	private JTextField txtid;
@@ -48,8 +52,9 @@ public class ConteudoCadastroProduto extends JPanel {
 	private JButton btnExcluir;
 	private JButton btncancelar;
 	private JButton btnEditar;
-	private JButton btnSalvar;
+	private JButton btnCadastrar;
 	private int idCategoria;
+	private JButton btnSalvar;
 
 	/**
 	 * Create the panel.
@@ -77,41 +82,49 @@ public class ConteudoCadastroProduto extends JPanel {
 		add(panel, gbc_panel);
 		panel.setLayout(new FlowLayout(FlowLayout.RIGHT, 5, 5));
 
-		JButton btnNewButton_3 = new JButton("Novo");
-		btnNewButton_3.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Cadastrar();
-			}
-		});
-		panel.add(btnNewButton_3);
-
 		JLabel label = new JLabel("             ");
 		panel.add(label);
 
 		btnExcluir = new JButton("Excluir");
 		btnExcluir.setEnabled(false);
 		panel.add(btnExcluir);
+		
+		btnSalvar = new JButton("Salvar");
+		btnSalvar.setEnabled(false);
+		panel.add(btnSalvar);
 
 		btncancelar = new JButton("Cancelar");
+		btncancelar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				txtid.setText("");
+				txtcodigobarra.setText("");
+				txtcusto.setText("");
+				txtdescricao.setText("");
+				txtmargemlucro.setText("");
+				txtnome.setText("");
+				combocategoria.setSelectedIndex(-1);
+				combounidade.setSelectedIndex(-1);
+			}
+		});
 		btncancelar.setEnabled(false);
 		panel.add(btncancelar);
 
 		btnEditar = new JButton("Editar");
 		btnEditar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
 			}
 		});
 		btnEditar.setEnabled(false);
 		panel.add(btnEditar);
 
-		btnSalvar = new JButton("Salvar");
-		btnSalvar.addActionListener(new ActionListener() {
+		btnCadastrar = new JButton("Cadastrar");
+		btnCadastrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				salvar();
 			}
 		});
-		btnSalvar.setEnabled(false);
-		panel.add(btnSalvar);
+		panel.add(btnCadastrar);
 
 		JLabel lblId = new JLabel("ID");
 		GridBagConstraints gbc_lblId = new GridBagConstraints();
@@ -122,6 +135,7 @@ public class ConteudoCadastroProduto extends JPanel {
 		add(lblId, gbc_lblId);
 
 		txtid = new JTextField();
+		txtid.setEditable(false);
 		GridBagConstraints gbc_txtid = new GridBagConstraints();
 		gbc_txtid.insets = new Insets(0, 0, 5, 5);
 		gbc_txtid.fill = GridBagConstraints.HORIZONTAL;
@@ -263,9 +277,48 @@ public class ConteudoCadastroProduto extends JPanel {
 		add(scrollPane, gbc_scrollPane);
 
 		table = new JTable(model);
+		table.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+			}
+			@Override
+			public void mousePressed(MouseEvent e) {
+				btnSalvar.setEnabled(true);
+				btncancelar.setEnabled(true);
+				btnEditar.setEnabled(true);
+				btnExcluir.setEnabled(true);
+				
+				editar();
+			}
+		});
 		scrollPane.setViewportView(table);
 		
 	
+	}
+
+
+	protected void editar() {
+		ProdutoDaoImp pdao = new ProdutoDaoImp();
+		int linha = table.getSelectedRow();
+		CategoriaDaoImp cdao = new CategoriaDaoImp();
+		ArrayList<Categoria> c = (ArrayList<Categoria>) cdao.listar();
+		ArrayList<Produto> p = (ArrayList<Produto>) pdao.listar();
+		
+		txtid.setText(String.valueOf(p.get(linha).getId()));
+		txtnome.setText(p.get(linha).getNome());
+		txtcodigobarra.setText(String.valueOf(p.get(linha).getCodigodebarras()));
+		txtdescricao.setText(p.get(linha).getDescricao());
+		txtcusto.setText(String.valueOf(p.get(linha).getCusto()));
+		txtmargemlucro.setText(String.valueOf(p.get(linha).getMargemdelucro()));
+		
+		for (Categoria categoria : cdao.listar()) {
+			if(p.get(linha).getCategoria() == categoria.getId())
+			combocategoria.setSelectedItem(categoria.getCategoria());	
+		}		
+		combounidade.setSelectedItem(p.get(linha).getUnidade());
+		
+		
 	}
 
 
@@ -284,12 +337,6 @@ public class ConteudoCadastroProduto extends JPanel {
 		pdao.inserir(p);
 		model.fireTableDataChanged();
 		cancelar();
-
-	}
-
-	protected void Cadastrar() {
-		btnSalvar.setEnabled(true);
-		btncancelar.setEnabled(true);
 
 	}
 
