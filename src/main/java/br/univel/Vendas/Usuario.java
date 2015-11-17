@@ -4,7 +4,7 @@ public class Usuario {
 	
 	private int id;
 	private int id_cliente;
-	private char[] senha;
+	private String senha;
 	
 	
 	public int getId() {
@@ -19,10 +19,10 @@ public class Usuario {
 	public void setId_cliente(int id_cliente) {
 		this.id_cliente = id_cliente;
 	}
-	public char[] getSenha() {
+	public String getSenha() {
 		return senha;
 	}
-	public void setSenha(char[] cs) {
+	public void setSenha(String cs) {
 		this.senha = cs;
 	}
 	

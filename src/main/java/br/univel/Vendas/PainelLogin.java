@@ -37,6 +37,7 @@ public class PainelLogin extends JPanel {
 	private JTextField txtlogin;
 	private JButton btnentrar;
 	private JPasswordField passwordField;
+	private String senhaBD;
 	UsuarioDaoImpl u = new UsuarioDaoImpl();
 
 	ArrayList<Usuario> usuario = (ArrayList<Usuario>) u.listar();
@@ -129,11 +130,9 @@ public class PainelLogin extends JPanel {
 		btnentrar.addActionListener(e -> {
 			synchronized (cdao) {
 				boolean login = false;
-				for (int i = 0; i < cdao.listar().size(); i++) {
-					if (txtlogin.getText().trim()
-							.equals(cdao.listar().get(i).getNome())
-							&& new String(passwordField.getPassword())
-									.equals("1992")) {
+				for (int i = 0; i < cdao.listar().size()-1; i++) {
+					senhaBD = udao.listar().get(i).getSenha().toString();
+					if (txtlogin.getText().trim().equals(cdao.listar().get(i).getNome()) && new String(passwordField.getPassword()).equals(senhaBD)){				
 						acaoOk.run();
 						login = false;
 					} else {

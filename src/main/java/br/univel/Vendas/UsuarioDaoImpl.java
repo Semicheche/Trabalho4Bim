@@ -86,7 +86,7 @@ String sql = "INSERT INTO USUARIO (cliente_idcliente, senha) VALUES (?, ?)";
 					
 					u.setId(result.getInt("idusuario"));
 					u.setId_cliente(result.getInt("cliente_idcliente"));
-					u.setSenha(result.getString("senha").toCharArray());
+					u.setSenha(result.getString("senha"));
 					
 					lista.add(u);
 

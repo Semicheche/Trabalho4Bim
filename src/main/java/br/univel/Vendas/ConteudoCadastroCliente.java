@@ -401,7 +401,7 @@ public class ConteudoCadastroCliente extends JPanel {
 
 		if (chckbxClienteEUsuario.isSelected()) {
 
-			u.setSenha(passUsuario.getPassword());
+			u.setSenha(passUsuario.getPassword().toString());
 			u.setId_cliente(Integer.valueOf(txtid.getText()));
 			udao.inserir(u);
 
@@ -433,7 +433,7 @@ public class ConteudoCadastroCliente extends JPanel {
 		
 		model.fireTableDataChanged();
 		if (chckbxClienteEUsuario.isSelected()) {
-			u.setSenha(passUsuario.getPassword());
+			u.setSenha(passUsuario.getPassword().toString());
 
 		}
 
