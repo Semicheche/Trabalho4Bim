@@ -16,6 +16,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.JTabbedPane;
 
 import br.univel.Jasper.JasperReportCliente;
+import br.univel.Jasper.JasperReportProduto;
 import br.univel.Vendas.BlockPanel;
 import br.univel.Vendas.PainelLogin;
 import br.univel.Vendas.TelaCadastroCategoria;
@@ -120,13 +121,21 @@ public class TelaPrincipal extends JFrame {
 		JMenu mnRelatorios = new JMenu("Relatorios");
 		menuBar.add(mnRelatorios);
 		
-		JMenuItem mntmCliente_1 = new JMenuItem("Cliente");
+		JMenuItem mntmCliente_1 = new JMenuItem("Clientes");
 		mntmCliente_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new JasperReportCliente();
+						new JasperReportCliente();
 			}
 		});
 		mnRelatorios.add(mntmCliente_1);
+		
+		JMenuItem mntmProdutos = new JMenuItem("Produtos");
+		mntmProdutos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+					new JasperReportProduto();
+			}
+		});
+		mnRelatorios.add(mntmProdutos);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));

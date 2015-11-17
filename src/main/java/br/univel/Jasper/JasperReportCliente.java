@@ -23,10 +23,6 @@ public class JasperReportCliente {
 		try {
 			
 
-			Map<String, Object> map = new HashMap<String, Object>();
-			map.put("Relatorio: ", Cliente.class.getName());
-			
-
 			jasperPrint = JasperFillManager.fillReport(arq, null,
 					con.getConnection());
 			JasperViewer jasperViewer = new JasperViewer(jasperPrint);
