@@ -62,7 +62,6 @@ public class ConteudoCadastroCliente extends JPanel {
 	private JLabel lblEmail;
 	private JTextField txtemail;
 	private char[] senha;
-	private JButton btnsalvar;
 	private JButton btnExcluir;
 
 	/**
@@ -91,14 +90,6 @@ public class ConteudoCadastroCliente extends JPanel {
 		add(panel, gbc_panel);
 		panel.setLayout(new FlowLayout(FlowLayout.RIGHT, 5, 5));
 
-		btnsalvar = new JButton("Salvar");
-		btnsalvar.setEnabled(false);
-		btnsalvar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				atualizar();
-			}
-		});
-
 		btnExcluir = new JButton("Excluir");
 		btnExcluir.setEnabled(false);
 		btnExcluir.addActionListener(new ActionListener() {
@@ -107,7 +98,6 @@ public class ConteudoCadastroCliente extends JPanel {
 			}
 		});
 		panel.add(btnExcluir);
-		panel.add(btnsalvar);
 
 		btncancelar = new JButton("Cancelar");
 		btncancelar.setEnabled(false);
@@ -118,7 +108,7 @@ public class ConteudoCadastroCliente extends JPanel {
 		});
 		panel.add(btncancelar);
 
-		btncadastrar = new JButton("Cadastrar");
+		btncadastrar = new JButton("Salvar");
 		btncadastrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				salvar();
@@ -333,10 +323,8 @@ public class ConteudoCadastroCliente extends JPanel {
 	}
 
 	protected void ativabotao() {
-		btncadastrar.setEnabled(false);
 		btncancelar.setEnabled(true);
 		btnExcluir.setEnabled(true);
-		btnsalvar.setEnabled(true);
 		Editar();
 	}
 
@@ -383,46 +371,14 @@ public class ConteudoCadastroCliente extends JPanel {
 		desabilitaBotao();
 	}
 
-	protected void atualizar() {
-		
-		Cliente c = new Cliente();
-		ClienteDaoImpl cdao = new ClienteDaoImpl();
-
-		Usuario u = new Usuario();
-		UsuarioDaoImpl udao = new UsuarioDaoImpl();
-
-		c.setNome(txtnome.getText());
-		c.setEndereco(txtendereco.getText());
-		c.setCidade(txtcidade.getText());
-		c.setTelefone(txttelefone.getText());
-		c.setEmail(txtemail.getText());
-		c.setEstado((Estado) comboBoxuf.getSelectedItem());
-		c.setGenero((Genero) comboBoxgenero.getSelectedItem());
-
-		if (chckbxClienteEUsuario.isSelected()) {
-
-			u.setSenha(passUsuario.getPassword().toString());
-			u.setId_cliente(Integer.valueOf(txtid.getText()));
-			udao.inserir(u);
-
-		}
-
-		cdao.atualizar(c);
-		cancelar();
-
-		model.fireTableDataChanged();
-		btncadastrar.setEnabled(true);
-		desabilitaBotao();
-	}
-
 	protected void salvar() {
-		Usuario u = new Usuario();
 		Cliente c = new Cliente();
 		ClienteDaoImpl cdao = new ClienteDaoImpl();
 
 		if (!cdao.listar().isEmpty())
 			txtid.setText(String.valueOf(cdao.listar().get(0).getId()));
-
+		
+		c.setId(Integer.valueOf(txtid.getText()));
 		c.setNome(txtnome.getText());
 		c.setTelefone(txttelefone.getText());
 		c.setEndereco(txtendereco.getText());
@@ -432,15 +388,27 @@ public class ConteudoCadastroCliente extends JPanel {
 		c.setGenero((Genero) comboBoxgenero.getSelectedItem());
 		
 		model.fireTableDataChanged();
-		if (chckbxClienteEUsuario.isSelected()) {
-			u.setSenha(passUsuario.getPassword().toString());
+		
+		
+		if(c.getId() == 0){
+			cdao.inserir(c);
+		}else{
+			cdao.atualizar(c);
 
+			desabilitaBotao();
+
+			if (chckbxClienteEUsuario.isSelected()) {
+				Usuario usuario = new Usuario();
+				UsuarioDaoImpl udao = new UsuarioDaoImpl();
+				
+
+				usuario.setSenha(new String(passUsuario.getPassword()));
+				usuario.setId_cliente(Integer.valueOf(txtid.getText()));
+				udao.inserir(usuario);
+			}
+			
 		}
-
-		cdao.inserir(c);
-
 		cancelar();
-		model.fireTableDataChanged();
 
 	}
 
@@ -462,7 +430,6 @@ public class ConteudoCadastroCliente extends JPanel {
 	private void desabilitaBotao() {
 		btncancelar.setEnabled(false);
 		btnExcluir.setEnabled(false);
-		btnsalvar.setEnabled(false);
 		
 	}
 

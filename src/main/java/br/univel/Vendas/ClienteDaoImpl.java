@@ -41,7 +41,6 @@ public class ClienteDaoImpl implements ClienteDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
 	}
 
 	@Override
@@ -60,7 +59,6 @@ public class ClienteDaoImpl implements ClienteDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		new ModelCliente().fireTableDataChanged();
 
 	}
 
@@ -80,7 +78,7 @@ public class ClienteDaoImpl implements ClienteDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
+		
 	}
 
 	@Override

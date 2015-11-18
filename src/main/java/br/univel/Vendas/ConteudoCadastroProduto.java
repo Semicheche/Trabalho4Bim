@@ -334,7 +334,10 @@ public class ConteudoCadastroProduto extends JPanel {
 		p.setMargemdelucro(BigDecimal.valueOf(Double.valueOf(txtmargemlucro
 				.getText())));
 
-		pdao.inserir(p);
+		if(p.getId() == 0)
+			pdao.inserir(p);
+		else
+			pdao.atualizar(p);
 		model.fireTableDataChanged();
 		cancelar();
 

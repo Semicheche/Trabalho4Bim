@@ -9,6 +9,8 @@ import java.util.List;
 
 public class ProdutoDaoImp implements ProdutoDAO {
 	
+	
+	
 	Conexao conexao = new Conexao();
 
 	@Override
@@ -32,7 +34,6 @@ public class ProdutoDaoImp implements ProdutoDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
 	}
 
 	@Override
@@ -68,7 +69,6 @@ public class ProdutoDaoImp implements ProdutoDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
 	}
 
 	@Override

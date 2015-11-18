@@ -21,6 +21,7 @@ public class ModelCliente extends AbstractTableModel {
 	List<Cliente> lista;
 	
 	public ModelCliente() {
+		fireTableDataChanged();
 		lista = cdao.listar();
 	}
 	
