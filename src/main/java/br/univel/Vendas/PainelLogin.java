@@ -132,37 +132,38 @@ public class PainelLogin extends JPanel {
 		UsuarioDaoImpl udao = new UsuarioDaoImpl();
 		Cliente c = new Cliente();
 		Usuario u = new Usuario();
-		
+
 		btnentrar.addActionListener(e -> {
-			synchronized (cdao) {			
+			synchronized (cdao) {
+			}
+			for (int i = 0; i < cdao.listar().size(); i++) {
+				if (txtlogin.getText().trim()
+						.equals(cdao.listar().get(i).getNome()))
+					c.setNome(cdao.listar().get(i).getNome());
+			}
+
+			for (int i = 0; i < udao.listar().size(); i++) {
+				if (new String(passwordField.getPassword()).equals(udao
+						.listar().get(i).getSenha())) {
+					u.setSenha(udao.listar().get(i).getSenha());
 				}
-				for (int i = 0; i < cdao.listar().size(); i++) {
-					if(txtlogin.getText().trim().equals(cdao.listar().get(i).getNome()))
-						c.setNome(cdao.listar().get(i).getNome());
-				}
+			}
 
-				
-				for (int i = 0; i < udao.listar().size(); i++) {
-					if(new String (passwordField.getPassword()).equals(udao.listar().get(i).getSenha())){
-						u.setSenha(udao.listar().get(i).getSenha());
-					}
-				}
-				
-				boolean login = false;
+			boolean login = false;
 
-					if (txtlogin.getText().trim().equals(c.getNome()) && new String(passwordField.getPassword()).equals(u.getSenha())){				
-						acaoOk.run();
-						login = false;
-					} else {
-						login = true;
-					}
-				
+			if (txtlogin.getText().trim().equals(c.getNome())
+					&& new String(passwordField.getPassword()).equals(u
+							.getSenha())) {
+				acaoOk.run();
+				login = false;
+			} else {
+				login = true;
+			}
 
-				if (login)
-					JOptionPane.showMessageDialog(PainelLogin.this,
-							"Usuário e/ou senha inválidos!");
+			if (login)
+				JOptionPane.showMessageDialog(PainelLogin.this,
+						"Usuário e/ou senha inválidos!");
 
-			
 		});
 
 	}
