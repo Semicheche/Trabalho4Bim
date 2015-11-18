@@ -7,9 +7,9 @@ import java.util.Set;
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
 
-import br.univel.Vendas.Cliente;
-import br.univel.Vendas.Conexao;
-import br.univel.Vendas.ModelCliente;
+import br.univel.Cliente.Cliente;
+import br.univel.Conexao.Conexao;
+import br.univel.Models.ModelCliente;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;

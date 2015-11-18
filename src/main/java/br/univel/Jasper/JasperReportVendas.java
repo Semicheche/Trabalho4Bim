@@ -4,8 +4,8 @@ import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.view.JasperViewer;
-import br.univel.Vendas.Conexao;
-import br.univel.Vendas.ModelCliente;
+import br.univel.Conexao.Conexao;
+import br.univel.Models.ModelCliente;
 
 public class JasperReportVendas {
 	

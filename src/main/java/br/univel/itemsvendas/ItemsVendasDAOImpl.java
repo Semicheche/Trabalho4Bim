@@ -7,9 +7,9 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.univel.Vendas.Conexao;
-import br.univel.Vendas.Produto;
-import br.univel.Vendas.Unidade;
+import br.univel.Conexao.Conexao;
+import br.univel.Enum.Unidade;
+import br.univel.Produto.Produto;
 
 public class ItemsVendasDAOImpl implements ItemsVendasDAO {
 

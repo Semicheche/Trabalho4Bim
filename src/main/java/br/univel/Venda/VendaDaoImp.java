@@ -7,7 +7,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.univel.Vendas.Conexao;
+import br.univel.Conexao.Conexao;
 import br.univel.itemsvendas.ItemsVendas;
 
 public class VendaDaoImp implements VendaDAO {

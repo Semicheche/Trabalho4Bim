@@ -19,12 +19,10 @@ import net.sf.jasperreports.view.JasperViewer;
 import br.univel.Jasper.JasperReportCliente;
 import br.univel.Jasper.JasperReportProduto;
 import br.univel.Jasper.JasperReportVendas;
-import br.univel.Vendas.BlockPanel;
-import br.univel.Vendas.PainelLogin;
-import br.univel.Vendas.TelaCadastroCategoria;
-import br.univel.Vendas.TelaCadastroCliente;
-import br.univel.Vendas.TelaCadastroProduto;
-import br.univel.Vendas.TelaCadastroVenda;
+import br.univel.Views.TelaCadastroCategoria;
+import br.univel.Views.TelaCadastroCliente;
+import br.univel.Views.TelaCadastroProduto;
+import br.univel.Views.TelaCadastroVenda;
 
 import java.awt.Point;
 
