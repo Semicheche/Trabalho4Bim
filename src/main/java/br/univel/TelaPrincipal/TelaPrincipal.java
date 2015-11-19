@@ -156,6 +156,7 @@ public class TelaPrincipal extends JFrame {
 		telacadastrovenda.setCloseAction(e -> tabbedPane
 				.remove(telacadastrovenda));
 		tabbedPane.addTab("Vanda", telacadastrovenda);
+		mostraUltima();
 	}
 
 	protected void abrirTelacategoria() {
@@ -163,6 +164,7 @@ public class TelaPrincipal extends JFrame {
 		telacadastrocategoria.setCloseAction(e -> tabbedPane
 				.remove(telacadastrocategoria));
 		tabbedPane.addTab("Categoria", telacadastrocategoria);
+		mostraUltima();
 	}
 
 	private void blockParaLogin() {
@@ -214,6 +216,7 @@ public class TelaPrincipal extends JFrame {
 		telacadastrocliente.setCloseAction(e -> tabbedPane
 				.remove(telacadastrocliente));
 		tabbedPane.addTab("Cliente", telacadastrocliente);
+		mostraUltima();
 
 	}
 
@@ -224,6 +227,11 @@ public class TelaPrincipal extends JFrame {
 		telacadastroproduto.setCloseAction(e -> tabbedPane
 				.remove(telacadastroproduto));
 		tabbedPane.addTab("Produto", telacadastroproduto);
+		mostraUltima();
+	}
+	
+	private void mostraUltima() {
+		tabbedPane.setSelectedIndex(tabbedPane.getTabCount()-1);
 	}
 
 }
