@@ -71,9 +71,9 @@ public class ConteudoCadastroProduto extends JPanel {
 		
 		
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[] { 0, 0, 0, 0, 0 };
+		gridBagLayout.columnWidths = new int[] { 85, 43, 20, 91, 0, 0 };
 		gridBagLayout.rowHeights = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-		gridBagLayout.columnWeights = new double[] { 0.0, 0.0, 0.0, 1.0,
+		gridBagLayout.columnWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 1.0,
 				Double.MIN_VALUE };
 		gridBagLayout.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
 				1.0, 0.0, 0.0, Double.MIN_VALUE };
@@ -81,7 +81,7 @@ public class ConteudoCadastroProduto extends JPanel {
 
 		JPanel panel = new JPanel();
 		GridBagConstraints gbc_panel = new GridBagConstraints();
-		gbc_panel.gridwidth = 4;
+		gbc_panel.gridwidth = 5;
 		gbc_panel.insets = new Insets(0, 0, 5, 0);
 		gbc_panel.fill = GridBagConstraints.BOTH;
 		gbc_panel.gridx = 0;
@@ -140,22 +140,22 @@ public class ConteudoCadastroProduto extends JPanel {
 		gbc_lblId.gridx = 0;
 		gbc_lblId.gridy = 1;
 		add(lblId, gbc_lblId);
-
-		txtid = new JTextField();
-		txtid.setEditable(false);
-		GridBagConstraints gbc_txtid = new GridBagConstraints();
-		gbc_txtid.insets = new Insets(0, 0, 5, 5);
-		gbc_txtid.fill = GridBagConstraints.HORIZONTAL;
-		gbc_txtid.gridx = 1;
-		gbc_txtid.gridy = 1;
-		add(txtid, gbc_txtid);
-		txtid.setColumns(10);
+		
+				txtid = new JTextField();
+				txtid.setEditable(false);
+				GridBagConstraints gbc_txtid = new GridBagConstraints();
+				gbc_txtid.insets = new Insets(0, 0, 5, 5);
+				gbc_txtid.fill = GridBagConstraints.HORIZONTAL;
+				gbc_txtid.gridx = 1;
+				gbc_txtid.gridy = 1;
+				add(txtid, gbc_txtid);
+				txtid.setColumns(10);
 
 		JLabel lblDescrio = new JLabel("Descri\u00E7\u00E3o");
 		GridBagConstraints gbc_lblDescrio = new GridBagConstraints();
 		gbc_lblDescrio.anchor = GridBagConstraints.EAST;
 		gbc_lblDescrio.insets = new Insets(0, 0, 5, 5);
-		gbc_lblDescrio.gridx = 2;
+		gbc_lblDescrio.gridx = 3;
 		gbc_lblDescrio.gridy = 1;
 		add(lblDescrio, gbc_lblDescrio);
 
@@ -163,7 +163,7 @@ public class ConteudoCadastroProduto extends JPanel {
 		GridBagConstraints gbc_txtdescricao = new GridBagConstraints();
 		gbc_txtdescricao.insets = new Insets(0, 0, 5, 0);
 		gbc_txtdescricao.fill = GridBagConstraints.HORIZONTAL;
-		gbc_txtdescricao.gridx = 3;
+		gbc_txtdescricao.gridx = 4;
 		gbc_txtdescricao.gridy = 1;
 		add(txtdescricao, gbc_txtdescricao);
 		txtdescricao.setColumns(10);
@@ -178,6 +178,7 @@ public class ConteudoCadastroProduto extends JPanel {
 
 		txtcodigobarra = new JTextField();
 		GridBagConstraints gbc_txtcodigobarra = new GridBagConstraints();
+		gbc_txtcodigobarra.gridwidth = 2;
 		gbc_txtcodigobarra.insets = new Insets(0, 0, 5, 5);
 		gbc_txtcodigobarra.fill = GridBagConstraints.HORIZONTAL;
 		gbc_txtcodigobarra.gridx = 1;
@@ -189,7 +190,7 @@ public class ConteudoCadastroProduto extends JPanel {
 		GridBagConstraints gbc_lblNome = new GridBagConstraints();
 		gbc_lblNome.anchor = GridBagConstraints.EAST;
 		gbc_lblNome.insets = new Insets(0, 0, 5, 5);
-		gbc_lblNome.gridx = 2;
+		gbc_lblNome.gridx = 3;
 		gbc_lblNome.gridy = 2;
 		add(lblNome, gbc_lblNome);
 
@@ -197,7 +198,7 @@ public class ConteudoCadastroProduto extends JPanel {
 		GridBagConstraints gbc_txtnome = new GridBagConstraints();
 		gbc_txtnome.insets = new Insets(0, 0, 5, 0);
 		gbc_txtnome.fill = GridBagConstraints.HORIZONTAL;
-		gbc_txtnome.gridx = 3;
+		gbc_txtnome.gridx = 4;
 		gbc_txtnome.gridy = 2;
 		add(txtnome, gbc_txtnome);
 		txtnome.setColumns(10);
@@ -212,6 +213,7 @@ public class ConteudoCadastroProduto extends JPanel {
 
 		txtcusto = new JTextField();
 		GridBagConstraints gbc_txtcusto = new GridBagConstraints();
+		gbc_txtcusto.gridwidth = 2;
 		gbc_txtcusto.insets = new Insets(0, 0, 5, 5);
 		gbc_txtcusto.fill = GridBagConstraints.HORIZONTAL;
 		gbc_txtcusto.gridx = 1;
@@ -223,7 +225,7 @@ public class ConteudoCadastroProduto extends JPanel {
 		GridBagConstraints gbc_lblMagemLucro = new GridBagConstraints();
 		gbc_lblMagemLucro.anchor = GridBagConstraints.EAST;
 		gbc_lblMagemLucro.insets = new Insets(0, 0, 5, 5);
-		gbc_lblMagemLucro.gridx = 2;
+		gbc_lblMagemLucro.gridx = 3;
 		gbc_lblMagemLucro.gridy = 3;
 		add(lblMagemLucro, gbc_lblMagemLucro);
 
@@ -231,7 +233,7 @@ public class ConteudoCadastroProduto extends JPanel {
 		GridBagConstraints gbc_txtmargemlucro = new GridBagConstraints();
 		gbc_txtmargemlucro.insets = new Insets(0, 0, 5, 0);
 		gbc_txtmargemlucro.fill = GridBagConstraints.HORIZONTAL;
-		gbc_txtmargemlucro.gridx = 3;
+		gbc_txtmargemlucro.gridx = 4;
 		gbc_txtmargemlucro.gridy = 3;
 		add(txtmargemlucro, gbc_txtmargemlucro);
 		txtmargemlucro.setColumns(10);
@@ -256,7 +258,7 @@ public class ConteudoCadastroProduto extends JPanel {
 		GridBagConstraints gbc_lblCategoria = new GridBagConstraints();
 		gbc_lblCategoria.anchor = GridBagConstraints.EAST;
 		gbc_lblCategoria.insets = new Insets(0, 0, 5, 5);
-		gbc_lblCategoria.gridx = 2;
+		gbc_lblCategoria.gridx = 3;
 		gbc_lblCategoria.gridy = 4;
 		add(lblCategoria, gbc_lblCategoria);
 		
@@ -266,7 +268,7 @@ public class ConteudoCadastroProduto extends JPanel {
 		GridBagConstraints gbc_combocategoria = new GridBagConstraints();
 		gbc_combocategoria.insets = new Insets(0, 0, 5, 0);
 		gbc_combocategoria.fill = GridBagConstraints.HORIZONTAL;
-		gbc_combocategoria.gridx = 3;
+		gbc_combocategoria.gridx = 4;
 		gbc_combocategoria.gridy = 4;
 		add(combocategoria, gbc_combocategoria);
 		for (int i = 0; i <lista.size(); i++) {			
@@ -277,7 +279,7 @@ public class ConteudoCadastroProduto extends JPanel {
 		JScrollPane scrollPane = new JScrollPane();
 		GridBagConstraints gbc_scrollPane = new GridBagConstraints();
 		gbc_scrollPane.gridheight = 3;
-		gbc_scrollPane.gridwidth = 4;
+		gbc_scrollPane.gridwidth = 5;
 		gbc_scrollPane.fill = GridBagConstraints.BOTH;
 		gbc_scrollPane.gridx = 0;
 		gbc_scrollPane.gridy = 6;

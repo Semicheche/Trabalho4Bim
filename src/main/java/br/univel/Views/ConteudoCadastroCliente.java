@@ -40,6 +40,7 @@ import br.univel.Enum.Genero;
 import br.univel.Models.ModelCliente;
 import br.univel.Usuario.Usuario;
 import br.univel.Usuario.UsuarioDaoImpl;
+import javax.swing.JSeparator;
 
 public class ConteudoCadastroCliente extends JPanel {
 
@@ -79,18 +80,18 @@ public class ConteudoCadastroCliente extends JPanel {
 	public ConteudoCadastroCliente() {
 
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[] { 0, 0, 0, 0, 0, 0, 0 };
-		gridBagLayout.rowHeights = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+		gridBagLayout.columnWidths = new int[] { 0, 59, 0, 31, 18, 30, 56, 0, 0, 47, 0, 0, 0, 0 };
+		gridBagLayout.rowHeights = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 				0, 0, 0, 0 };
-		gridBagLayout.columnWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0,
-				1.0, Double.MIN_VALUE };
+		gridBagLayout.columnWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
+				1.0, 0.0, Double.MIN_VALUE };
 		gridBagLayout.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
-				0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, Double.MIN_VALUE };
+				0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, Double.MIN_VALUE };
 		setLayout(gridBagLayout);
 
 		panel = new JPanel();
 		GridBagConstraints gbc_panel = new GridBagConstraints();
-		gbc_panel.gridwidth = 6;
+		gbc_panel.gridwidth = 14;
 		gbc_panel.insets = new Insets(0, 0, 5, 0);
 		gbc_panel.fill = GridBagConstraints.BOTH;
 		gbc_panel.gridx = 0;
@@ -126,7 +127,7 @@ public class ConteudoCadastroCliente extends JPanel {
 
 		lblId = new JLabel("ID");
 		GridBagConstraints gbc_lblId = new GridBagConstraints();
-		gbc_lblId.anchor = GridBagConstraints.WEST;
+		gbc_lblId.anchor = GridBagConstraints.EAST;
 		gbc_lblId.insets = new Insets(0, 0, 5, 5);
 		gbc_lblId.gridx = 0;
 		gbc_lblId.gridy = 1;
@@ -136,7 +137,6 @@ public class ConteudoCadastroCliente extends JPanel {
 		txtid.setEnabled(false);
 		txtid.setEditable(false);
 		GridBagConstraints gbc_txtid = new GridBagConstraints();
-		gbc_txtid.gridwidth = 2;
 		gbc_txtid.fill = GridBagConstraints.HORIZONTAL;
 		gbc_txtid.insets = new Insets(0, 0, 5, 5);
 		gbc_txtid.gridx = 1;
@@ -154,9 +154,9 @@ public class ConteudoCadastroCliente extends JPanel {
 
 		txtnome = new JTextField();
 		GridBagConstraints gbc_txtnome = new GridBagConstraints();
-		gbc_txtnome.gridwidth = 5;
+		gbc_txtnome.gridwidth = 11;
 		gbc_txtnome.fill = GridBagConstraints.HORIZONTAL;
-		gbc_txtnome.insets = new Insets(0, 0, 5, 0);
+		gbc_txtnome.insets = new Insets(0, 0, 5, 5);
 		gbc_txtnome.gridx = 1;
 		gbc_txtnome.gridy = 2;
 		add(txtnome, gbc_txtnome);
@@ -172,7 +172,7 @@ public class ConteudoCadastroCliente extends JPanel {
 
 		txtendereco = new JTextField();
 		GridBagConstraints gbc_txtendereco = new GridBagConstraints();
-		gbc_txtendereco.gridwidth = 5;
+		gbc_txtendereco.gridwidth = 13;
 		gbc_txtendereco.anchor = GridBagConstraints.NORTH;
 		gbc_txtendereco.insets = new Insets(0, 0, 5, 0);
 		gbc_txtendereco.fill = GridBagConstraints.HORIZONTAL;
@@ -191,7 +191,7 @@ public class ConteudoCadastroCliente extends JPanel {
 
 		txttelefone = new JTextField();
 		GridBagConstraints gbc_txttelefone = new GridBagConstraints();
-		gbc_txttelefone.gridwidth = 5;
+		gbc_txttelefone.gridwidth = 13;
 		gbc_txttelefone.insets = new Insets(0, 0, 5, 0);
 		gbc_txttelefone.fill = GridBagConstraints.HORIZONTAL;
 		gbc_txttelefone.gridx = 1;
@@ -207,52 +207,6 @@ public class ConteudoCadastroCliente extends JPanel {
 		gbc_lblCidade.gridy = 5;
 		add(lblCidade, gbc_lblCidade);
 
-		txtcidade = new JTextField();
-		GridBagConstraints gbc_txtcidade = new GridBagConstraints();
-		gbc_txtcidade.gridwidth = 5;
-		gbc_txtcidade.insets = new Insets(0, 0, 5, 0);
-		gbc_txtcidade.fill = GridBagConstraints.HORIZONTAL;
-		gbc_txtcidade.gridx = 1;
-		gbc_txtcidade.gridy = 5;
-		add(txtcidade, gbc_txtcidade);
-		txtcidade.setColumns(10);
-
-		lblGenero = new JLabel("Genero");
-		GridBagConstraints gbc_lblGenero = new GridBagConstraints();
-		gbc_lblGenero.anchor = GridBagConstraints.EAST;
-		gbc_lblGenero.insets = new Insets(0, 0, 5, 5);
-		gbc_lblGenero.gridx = 0;
-		gbc_lblGenero.gridy = 6;
-		add(lblGenero, gbc_lblGenero);
-
-		comboBoxgenero = new JComboBox(Genero.values());
-		comboBoxgenero.setSelectedIndex(-1);
-		GridBagConstraints gbc_comboBoxgenero = new GridBagConstraints();
-		gbc_comboBoxgenero.gridwidth = 2;
-		gbc_comboBoxgenero.insets = new Insets(0, 0, 5, 5);
-		gbc_comboBoxgenero.fill = GridBagConstraints.HORIZONTAL;
-		gbc_comboBoxgenero.gridx = 1;
-		gbc_comboBoxgenero.gridy = 6;
-		add(comboBoxgenero, gbc_comboBoxgenero);
-
-		lblUf = new JLabel("UF");
-		GridBagConstraints gbc_lblUf = new GridBagConstraints();
-		gbc_lblUf.anchor = GridBagConstraints.EAST;
-		gbc_lblUf.insets = new Insets(0, 0, 5, 5);
-		gbc_lblUf.gridx = 0;
-		gbc_lblUf.gridy = 7;
-		add(lblUf, gbc_lblUf);
-
-		comboBoxuf = new JComboBox(Estado.values());
-		comboBoxuf.setSelectedIndex(-1);
-		GridBagConstraints gbc_comboBoxuf = new GridBagConstraints();
-		gbc_comboBoxuf.gridwidth = 2;
-		gbc_comboBoxuf.insets = new Insets(0, 0, 5, 5);
-		gbc_comboBoxuf.fill = GridBagConstraints.HORIZONTAL;
-		gbc_comboBoxuf.gridx = 1;
-		gbc_comboBoxuf.gridy = 7;
-		add(comboBoxuf, gbc_comboBoxuf);
-
 		scrollPane = new JScrollPane();
 		scrollPane.addMouseListener(new MouseAdapter() {
 			@Override
@@ -260,62 +214,106 @@ public class ConteudoCadastroCliente extends JPanel {
 
 			}
 		});
-
-		lblEmail = new JLabel("Email");
-		GridBagConstraints gbc_lblEmail = new GridBagConstraints();
-		gbc_lblEmail.anchor = GridBagConstraints.EAST;
-		gbc_lblEmail.insets = new Insets(0, 0, 5, 5);
-		gbc_lblEmail.gridx = 0;
-		gbc_lblEmail.gridy = 8;
-		add(lblEmail, gbc_lblEmail);
-
-		txtemail = new JTextField();
-		GridBagConstraints gbc_txtemail = new GridBagConstraints();
-		gbc_txtemail.gridwidth = 5;
-		gbc_txtemail.insets = new Insets(0, 0, 5, 0);
-		gbc_txtemail.fill = GridBagConstraints.HORIZONTAL;
-		gbc_txtemail.gridx = 1;
-		gbc_txtemail.gridy = 8;
-		add(txtemail, gbc_txtemail);
-		txtemail.setColumns(10);
-
-		lblSenha = new JLabel("Senha");
-		GridBagConstraints gbc_lblSenha = new GridBagConstraints();
-		gbc_lblSenha.insets = new Insets(0, 0, 5, 5);
-		gbc_lblSenha.anchor = GridBagConstraints.EAST;
-		gbc_lblSenha.gridx = 0;
-		gbc_lblSenha.gridy = 9;
-		add(lblSenha, gbc_lblSenha);
-
-		chckbxClienteEUsuario = new JCheckBox("Usuario");
-		chckbxClienteEUsuario.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				ativaUsuario();
-			}
-		});
-
-		passUsuario = new JPasswordField();
-		passUsuario.setEnabled(false);
-		passUsuario.setEditable(false);
-		GridBagConstraints gbc_passUsuario = new GridBagConstraints();
-		gbc_passUsuario.gridwidth = 4;
-		gbc_passUsuario.insets = new Insets(0, 0, 5, 5);
-		gbc_passUsuario.fill = GridBagConstraints.HORIZONTAL;
-		gbc_passUsuario.gridx = 1;
-		gbc_passUsuario.gridy = 9;
-		add(passUsuario, gbc_passUsuario);
-		GridBagConstraints gbc_chckbxClienteEUsuario = new GridBagConstraints();
-		gbc_chckbxClienteEUsuario.anchor = GridBagConstraints.WEST;
-		gbc_chckbxClienteEUsuario.insets = new Insets(0, 0, 5, 0);
-		gbc_chckbxClienteEUsuario.gridx = 5;
-		gbc_chckbxClienteEUsuario.gridy = 9;
-		add(chckbxClienteEUsuario, gbc_chckbxClienteEUsuario);
+										
+												txtcidade = new JTextField();
+												GridBagConstraints gbc_txtcidade = new GridBagConstraints();
+												gbc_txtcidade.gridwidth = 3;
+												gbc_txtcidade.insets = new Insets(0, 0, 5, 5);
+												gbc_txtcidade.fill = GridBagConstraints.HORIZONTAL;
+												gbc_txtcidade.gridx = 1;
+												gbc_txtcidade.gridy = 5;
+												add(txtcidade, gbc_txtcidade);
+												txtcidade.setColumns(10);
+								
+										lblUf = new JLabel("UF");
+										GridBagConstraints gbc_lblUf = new GridBagConstraints();
+										gbc_lblUf.anchor = GridBagConstraints.EAST;
+										gbc_lblUf.insets = new Insets(0, 0, 5, 5);
+										gbc_lblUf.gridx = 5;
+										gbc_lblUf.gridy = 5;
+										add(lblUf, gbc_lblUf);
+						
+								comboBoxuf = new JComboBox(Estado.values());
+								comboBoxuf.setSelectedIndex(-1);
+								GridBagConstraints gbc_comboBoxuf = new GridBagConstraints();
+								gbc_comboBoxuf.insets = new Insets(0, 0, 5, 5);
+								gbc_comboBoxuf.fill = GridBagConstraints.HORIZONTAL;
+								gbc_comboBoxuf.gridx = 6;
+								gbc_comboBoxuf.gridy = 5;
+								add(comboBoxuf, gbc_comboBoxuf);
+						
+								lblGenero = new JLabel("Genero");
+								GridBagConstraints gbc_lblGenero = new GridBagConstraints();
+								gbc_lblGenero.anchor = GridBagConstraints.EAST;
+								gbc_lblGenero.insets = new Insets(0, 0, 5, 5);
+								gbc_lblGenero.gridx = 9;
+								gbc_lblGenero.gridy = 5;
+								add(lblGenero, gbc_lblGenero);
+				
+						comboBoxgenero = new JComboBox(Genero.values());
+						comboBoxgenero.setSelectedIndex(-1);
+						GridBagConstraints gbc_comboBoxgenero = new GridBagConstraints();
+						gbc_comboBoxgenero.insets = new Insets(0, 0, 5, 5);
+						gbc_comboBoxgenero.fill = GridBagConstraints.HORIZONTAL;
+						gbc_comboBoxgenero.gridx = 10;
+						gbc_comboBoxgenero.gridy = 5;
+						add(comboBoxgenero, gbc_comboBoxgenero);
+		
+				lblEmail = new JLabel("Email");
+				GridBagConstraints gbc_lblEmail = new GridBagConstraints();
+				gbc_lblEmail.anchor = GridBagConstraints.EAST;
+				gbc_lblEmail.insets = new Insets(0, 0, 5, 5);
+				gbc_lblEmail.gridx = 0;
+				gbc_lblEmail.gridy = 6;
+				add(lblEmail, gbc_lblEmail);
+		
+				txtemail = new JTextField();
+				GridBagConstraints gbc_txtemail = new GridBagConstraints();
+				gbc_txtemail.gridwidth = 13;
+				gbc_txtemail.insets = new Insets(0, 0, 5, 0);
+				gbc_txtemail.fill = GridBagConstraints.HORIZONTAL;
+				gbc_txtemail.gridx = 1;
+				gbc_txtemail.gridy = 6;
+				add(txtemail, gbc_txtemail);
+				txtemail.setColumns(10);
+				
+						lblSenha = new JLabel("Senha");
+						GridBagConstraints gbc_lblSenha = new GridBagConstraints();
+						gbc_lblSenha.insets = new Insets(0, 0, 5, 5);
+						gbc_lblSenha.anchor = GridBagConstraints.EAST;
+						gbc_lblSenha.gridx = 0;
+						gbc_lblSenha.gridy = 7;
+						add(lblSenha, gbc_lblSenha);
+				
+						passUsuario = new JPasswordField();
+						passUsuario.setEnabled(false);
+						passUsuario.setEditable(false);
+						GridBagConstraints gbc_passUsuario = new GridBagConstraints();
+						gbc_passUsuario.insets = new Insets(0, 0, 5, 5);
+						gbc_passUsuario.fill = GridBagConstraints.HORIZONTAL;
+						gbc_passUsuario.gridx = 1;
+						gbc_passUsuario.gridy = 7;
+						add(passUsuario, gbc_passUsuario);
+		
+				chckbxClienteEUsuario = new JCheckBox("Usuario");
+				chckbxClienteEUsuario.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						ativaUsuario();
+					}
+				});
+				GridBagConstraints gbc_chckbxClienteEUsuario = new GridBagConstraints();
+				gbc_chckbxClienteEUsuario.anchor = GridBagConstraints.WEST;
+				gbc_chckbxClienteEUsuario.insets = new Insets(0, 0, 5, 5);
+				gbc_chckbxClienteEUsuario.gridx = 2;
+				gbc_chckbxClienteEUsuario.gridy = 7;
+				add(chckbxClienteEUsuario, gbc_chckbxClienteEUsuario);
 		GridBagConstraints gbc_scrollPane = new GridBagConstraints();
-		gbc_scrollPane.gridwidth = 6;
-		gbc_scrollPane.insets = new Insets(0, 0, 5, 0);
+		gbc_scrollPane.gridheight = 6;
+		gbc_scrollPane.gridwidth = 14;
+		gbc_scrollPane.insets = new Insets(0, 0, 5, 5);
 		gbc_scrollPane.fill = GridBagConstraints.BOTH;
 		gbc_scrollPane.gridx = 0;
-		gbc_scrollPane.gridy = 12;
+		gbc_scrollPane.gridy = 8;
 		add(scrollPane, gbc_scrollPane);
 
 		tablecliente = new JTable(model);

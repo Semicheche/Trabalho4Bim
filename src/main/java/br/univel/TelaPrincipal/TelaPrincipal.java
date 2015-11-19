@@ -6,6 +6,7 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.JComponent;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
@@ -15,7 +16,6 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.JTabbedPane;
 
-import net.sf.jasperreports.view.JasperViewer;
 import br.univel.Jasper.JasperReportCliente;
 import br.univel.Jasper.JasperReportProduto;
 import br.univel.Jasper.JasperReportVendas;
@@ -24,7 +24,8 @@ import br.univel.Views.TelaCadastroCliente;
 import br.univel.Views.TelaCadastroProduto;
 import br.univel.Views.TelaCadastroVenda;
 
-import java.awt.Point;
+import java.util.HashMap;
+import java.util.Map;
 
 public class TelaPrincipal extends JFrame {
 
@@ -35,6 +36,8 @@ public class TelaPrincipal extends JFrame {
 	private JPanel contentPane;
 	private JTabbedPane tabbedPane;
 	private BlockPanel glass;
+	
+	private Map<Integer, JComponent> mapa = new HashMap<Integer, JComponent>();
 
 	/**
 	 * Launch the application.
@@ -221,17 +224,19 @@ public class TelaPrincipal extends JFrame {
 	}
 
 	protected void abrirTelaProduto() {
-
+		
 		TelaCadastroProduto telacadastroproduto = new TelaCadastroProduto();
-
+		
 		telacadastroproduto.setCloseAction(e -> tabbedPane
 				.remove(telacadastroproduto));
 		tabbedPane.addTab("Produto", telacadastroproduto);
+		
 		mostraUltima();
 	}
-	
+
 	private void mostraUltima() {
 		tabbedPane.setSelectedIndex(tabbedPane.getTabCount()-1);
 	}
-
+		
+	
 }
