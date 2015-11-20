@@ -4,34 +4,45 @@ import javax.swing.JPanel;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.LineBorder;
 
+
 import java.awt.Color;
+
 
 import javax.swing.border.CompoundBorder;
 
+
 import java.awt.GridBagLayout;
+
 
 import javax.swing.JLabel;
 
+
 import java.awt.GridBagConstraints;
 
+
 import javax.swing.JTextField;
+
 
 import java.awt.Insets;
 import java.awt.Font;
 import java.net.PasswordAuthentication;
 import java.util.ArrayList;
 
+
 import javax.swing.JOptionPane;
 import javax.swing.JSeparator;
 import javax.swing.JButton;
 import javax.swing.JPasswordField;
 
+
 import org.jfree.chart.renderer.xy.ClusteredXYBarRenderer;
+
 
 import br.univel.Cliente.Cliente;
 import br.univel.Cliente.ClienteDaoImpl;
 import br.univel.Usuario.Usuario;
 import br.univel.Usuario.UsuarioDaoImpl;
+
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -140,13 +151,21 @@ public class PainelLogin extends JPanel {
 
 		btnentrar.addActionListener(e -> {
 			synchronized (cdao) {
-			}
+				boolean login = false;
+		
+			
+			//////////////////////////////////
+			//busca no banco tabela Cliente
+			//////////////////////////////////
 			for (int i = 0; i < cdao.listar().size(); i++) {
 				if (txtlogin.getText().trim()
 						.equals(cdao.listar().get(i).getNome()))
 					c.setNome(cdao.listar().get(i).getNome());
 			}
-
+			
+			////////////////////////////////////////
+			//busca no banco as senhas dos usuarios
+			/////////////////////////////////////////
 			for (int i = 0; i < udao.listar().size(); i++) {
 				if (new String(passwordField.getPassword()).equals(udao
 						.listar().get(i).getSenha())) {
@@ -154,8 +173,9 @@ public class PainelLogin extends JPanel {
 				}
 			}
 
-			boolean login = false;
-
+			/////////////////////////////////////
+			// faz a verificação do usuario
+			////////////////////////////////////
 			if (txtlogin.getText().trim().equals(c.getNome())
 					&& new String(passwordField.getPassword()).equals(u
 							.getSenha())) {
@@ -164,10 +184,19 @@ public class PainelLogin extends JPanel {
 			} else {
 				login = true;
 			}
-
+			
+			/////////////////////////
+			//	login administrador
+			//////////////////////////
+			if(txtlogin.getText().trim().equals("admin") && new String(passwordField.getPassword()).equals("admin")){
+				acaoOk.run();
+				login = false;
+			}else{
 			if (login)
 				JOptionPane.showMessageDialog(PainelLogin.this,
-						"Usuário e/ou senha inválidos!");
+						"Usuário e/ou senha inválidos!\n Verifique e tente novamente");
+			}
+			}
 
 		});
 
