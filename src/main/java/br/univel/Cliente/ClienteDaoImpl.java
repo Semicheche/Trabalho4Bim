@@ -29,14 +29,14 @@ public class ClienteDaoImpl implements ClienteDao {
 		String sql = "INSERT INTO CLIENTE ( NOME, FONE, ENDERECO, CIDADE, ESTADO, EMAIL, GENERO) VALUES (?, ?, ?, ?, ?, ?, ?)";
 		
 		try (PreparedStatement ps = conexao.getConnection().prepareStatement(sql)) {
+			
 			ps.setString(1, c.getNome());
 			ps.setString(2, c.getTelefone());
 			ps.setString(3, c.getEndereco());
 			ps.setString(4, c.getCidade());
 			ps.setString(5, c.getEstado().toString());
 			ps.setString(6, c.getEmail());
-			ps.setString(7, c.getGenero().toString());
-			
+			ps.setString(7, c.getGenero().toString());		
 
 			ps.executeUpdate();
 
@@ -50,7 +50,9 @@ public class ClienteDaoImpl implements ClienteDao {
 
 	@Override
 	public void atualizar(Cliente c) {
+		
 		String sql = "UPDATE CLIENTE SET NOME = ?, TELEFONE = ?, ENDERECO = ?, CIDADE = ?, ESTADO = ?, EMAIL = ?, GENERO = ? WHERE ID = ? ";
+		
 		try {
 			PreparedStatement ps = conexao.getConnection().prepareStatement(sql);
 			ps.setString(1, c.getNome());
@@ -61,6 +63,9 @@ public class ClienteDaoImpl implements ClienteDao {
 			ps.setString(6, c.getEmail());
 			ps.setString(7, c.getGenero().toString());
 			ps.setInt(8, c.getId());
+			
+			ps.close();
+						
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -124,8 +129,7 @@ public class ClienteDaoImpl implements ClienteDao {
 					c.setEstado(Estado.valueOf(result.getString("estado")));	
 					c.setEmail(result.getString("email"));
 					c.setGenero(Genero.valueOf(result.getString("genero")));	
-					
-					
+										
 					lista.add(c);
 
 				}
