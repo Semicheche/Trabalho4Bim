@@ -2,8 +2,6 @@ package br.univel.Produto;
 
 import java.util.List;
 
-import br.univel.Cliente.Cliente;
-
 public interface ProdutoDAO {
 	
 
@@ -13,9 +11,9 @@ public interface ProdutoDAO {
 	
 	public void excluir(Produto p);
 	
-	public Cliente buscar(int id);
+	public Produto buscar(int id);
 	
-	public Cliente buscarPorExemplo(Produto p);
+	public Produto buscarPorExemplo(Produto p);
 	
 	public List<Produto> listar();
 

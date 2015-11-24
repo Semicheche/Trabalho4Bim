@@ -76,13 +76,43 @@ public class ProdutoDaoImp implements ProdutoDAO {
 	}
 
 	@Override
-	public Cliente buscar(int id) {
-		// TODO Auto-generated method stub
-		return null;
+	public Produto buscar(int id) {
+		Statement st = null;
+		ResultSet result = null;
+
+		String sql = "SELECT idproduto FROM produto";
+
+		Produto p = null;
+		
+		
+		try {
+			try {
+				st = conexao.getConnection().createStatement();
+				result = st.executeQuery(sql);
+
+				while (result.next()) {
+					p = new Produto();
+					
+					p.setId(result.getInt("idproduto"));
+									
+				}
+
+			} finally {
+				if (st != null)
+					st.close();
+					
+				if (result != null)
+					result.close();
+
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return p;
 	}
 
 	@Override
-	public Cliente buscarPorExemplo(Produto p) {
+	public Produto buscarPorExemplo(Produto p) {
 		// TODO Auto-generated method stub
 		return null;
 	}

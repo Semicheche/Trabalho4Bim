@@ -19,13 +19,13 @@ import br.univel.Cliente.ClienteDaoImpl;
 import br.univel.Conexao.Conexao;
 
 public class TesteDaoCliente extends Cliente {
-	private Conexao con;
-	private ClienteDaoImpl cdao;
+	private static Conexao con;
+	private static ClienteDaoImpl cdao;
 	PreparedStatement ps;
 
 
 	@BeforeClass
-	public void setUpBeforeClass() throws Exception {
+	public static void setUpBeforeClass() throws Exception {
 		con = new Conexao();
 		cdao = new ClienteDaoImpl();
 

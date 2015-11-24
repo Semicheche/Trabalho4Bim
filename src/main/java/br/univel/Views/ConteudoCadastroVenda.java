@@ -131,6 +131,8 @@ public class ConteudoCadastroVenda extends JPanel {
 		 * 
 		 */
 		private static final long serialVersionUID = 1L;
+		
+		
 
 		public int getRowCount() {
 			return lista.size();
@@ -204,7 +206,7 @@ public class ConteudoCadastroVenda extends JPanel {
 		btnConcluirVenda = new JButton("Concluir Venda");
 		btnConcluirVenda.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ComfirmarVenda();
+				//ComfirmarVenda();
 			}
 		});
 		btnConcluirVenda.setEnabled(false);
@@ -268,14 +270,22 @@ public class ConteudoCadastroVenda extends JPanel {
 		txtvalorpago.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusLost(FocusEvent e) {
+				BigDecimal valorpago = new BigDecimal(Double.valueOf(txtvalorpago.getText().replaceAll(",", ".")));
+				BigDecimal valortotal = new BigDecimal(Double.valueOf(lbltotal.getText().replaceAll(",", ".")));
+				
+				if(valorpago.doubleValue() >= valortotal.doubleValue() ){
+					
 				NumberFormat nfBR = NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));
 				
 				lblvalorrecebido.setText(txtvalorpago.getText());
 				BigDecimal valor = total;
-				BigDecimal valorrecebido = BigDecimal.valueOf(Double.valueOf(lblvalorrecebido.getText()));
+				BigDecimal valorrecebido = BigDecimal.valueOf(Double.valueOf(lblvalorrecebido.getText().replaceAll(",", ".")));
 				BigDecimal troco = valorrecebido.subtract(valor);
 				
 				lbltroco.setText(nfBR.format(troco));
+				}else{
+					JOptionPane.showMessageDialog(null,"Valor pago e menor que total da Compra");
+				}
 			}
 		});
 		GridBagConstraints gbc_txtvalorpago = new GridBagConstraints();
@@ -441,7 +451,7 @@ public class ConteudoCadastroVenda extends JPanel {
 
 	}
 
-	protected void ComfirmarVenda() {
+	protected void confirmarVenda() {
 		ItemsVendas iv = new ItemsVendas();
 		ItemsVendasDAOImpl ivdao = new ItemsVendasDAOImpl();
 
@@ -472,8 +482,9 @@ public class ConteudoCadastroVenda extends JPanel {
 			v.setTotal(total);
 			
 			vdao.inserir(v);
-			btnConcluirVenda.setEnabled(true);
+			//btnConcluirVenda.setEnabled(true);
 			idvenda = vdao.listar().get(vdao.listar().size()-1).getIdvenda();
+			confirmarVenda();
 		}
 	}
 
