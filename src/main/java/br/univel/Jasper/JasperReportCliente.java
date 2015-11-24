@@ -1,5 +1,7 @@
 package br.univel.Jasper;
 
+import java.awt.Desktop;
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -11,6 +13,7 @@ import br.univel.Cliente.Cliente;
 import br.univel.Conexao.Conexao;
 import br.univel.Models.ModelCliente;
 import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.design.JasperDesign;
@@ -35,11 +38,13 @@ public class JasperReportCliente {
 			JasperViewer jasperViewer = new JasperViewer(jasperPrint,false);
 			jasperViewer.setVisible(true);
 			jasperViewer.setDefaultCloseOperation(jasperViewer.DISPOSE_ON_CLOSE);
+			jasperViewer.setExtendedState(jasperViewer.MAXIMIZED_BOTH);
 			
 		} catch (JRException ex) {
 			ex.printStackTrace();
 		}
 		
+	
 		new ModelCliente();
 	}
 	

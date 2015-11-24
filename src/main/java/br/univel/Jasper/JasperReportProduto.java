@@ -31,6 +31,7 @@ public class JasperReportProduto {
 					con.getConnection());
 			JasperViewer jasperViewer = new JasperViewer(jasperPrint, false);
 			jasperViewer.setDefaultCloseOperation(jasperViewer.DISPOSE_ON_CLOSE);
+			jasperViewer.setExtendedState(jasperViewer.MAXIMIZED_BOTH);
 			jasperViewer.setVisible(true);
 		} catch (JRException ex) {
 			ex.printStackTrace();
