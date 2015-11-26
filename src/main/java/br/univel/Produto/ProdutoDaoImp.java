@@ -10,6 +10,7 @@ import java.util.List;
 import br.univel.Cliente.Cliente;
 import br.univel.Conexao.Conexao;
 import br.univel.Enum.Unidade;
+import br.univel.Models.ModelProduto;
 
 public class ProdutoDaoImp implements ProdutoDAO {
 	
@@ -61,14 +62,16 @@ public class ProdutoDaoImp implements ProdutoDAO {
 
 	@Override
 	public void excluir(Produto p) {
-		String sql = "DELETE FROM PRODUTO WHRERE ID = ?";
+		
+		String sql = "DELETE FROM PRODUTO WHERE idproduto = ? ";
 		try {
 			PreparedStatement ps = conexao.getConnection().prepareStatement(sql);
 			ps.setInt(1, p.getId());
 
 			ps.executeUpdate();
-
+			
 			ps.close();
+			new ModelProduto();
 
 		} catch (SQLException e) {
 			e.printStackTrace();

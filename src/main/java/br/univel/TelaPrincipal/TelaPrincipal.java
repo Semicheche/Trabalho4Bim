@@ -60,7 +60,7 @@ public class TelaPrincipal extends JFrame {
 	 */
 	public TelaPrincipal() {
 
-		blockParaLogin();
+		//blockParaLogin();
 
 		setTitle("Menu Principal\r\n");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

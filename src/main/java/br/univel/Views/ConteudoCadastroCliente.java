@@ -393,13 +393,14 @@ public class ConteudoCadastroCliente extends JPanel {
 		c.setEmail(txtemail.getText());
 		c.setGenero((Genero) comboBoxgenero.getSelectedItem());
 		
-		model.fireTableDataChanged();
 		
 		
-		if(c.getId() == 0){
+		if(txtid.getText().equals("")){
 			cdao.inserir(c);
+			model.fireTableDataChanged();
 		}else{
 			cdao.atualizar(c);
+			model.fireTableDataChanged();
 
 			desabilitaBotao();
 

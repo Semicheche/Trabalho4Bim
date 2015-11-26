@@ -18,6 +18,7 @@ public class ModelProduto extends AbstractTableModel {
 	
 	public ModelProduto() {
 		lista = (ArrayList<Produto>) pdao.listar();
+		fireTableDataChanged();
 	}
 
 	@Override

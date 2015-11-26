@@ -11,6 +11,7 @@ import java.awt.GridBagConstraints;
 import java.awt.Insets;
 
 import javax.swing.ComboBoxModel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 
@@ -34,6 +35,8 @@ import org.omg.PortableServer.ForwardRequestHelper;
 import org.w3c.dom.CDATASection;
 import org.w3c.dom.ls.LSInput;
 
+import com.lowagie.text.Table;
+
 import br.univel.Categoria.Categoria;
 import br.univel.Categoria.CategoriaDaoImp;
 import br.univel.Enum.Unidade;
@@ -54,14 +57,13 @@ public class ConteudoCadastroProduto extends JPanel {
 	private JComboBox combounidade;
 	private JTable table;
 	ProdutoDaoImp pdao = new ProdutoDaoImp();
-	ModelProduto model = new ModelProduto();
 	private JTextField txtnome;
 	private JButton btnExcluir;
 	private JButton btncancelar;
-	private JButton btnEditar;
 	private JButton btnCadastrar;
 	private int idCategoria;
 	private JButton btnSalvar;
+	ModelProduto model;
 
 	/**
 	 * Create the panel.
@@ -69,6 +71,7 @@ public class ConteudoCadastroProduto extends JPanel {
 	public ConteudoCadastroProduto() {
 		
 		
+		model  = new ModelProduto();
 		
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[] { 85, 43, 20, 91, 0, 0 };
@@ -93,6 +96,11 @@ public class ConteudoCadastroProduto extends JPanel {
 		panel.add(label);
 
 		btnExcluir = new JButton("Excluir");
+		btnExcluir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				excluirProduto();
+			}
+		});
 		btnExcluir.setEnabled(false);
 		panel.add(btnExcluir);
 		
@@ -115,15 +123,6 @@ public class ConteudoCadastroProduto extends JPanel {
 		});
 		btncancelar.setEnabled(false);
 		panel.add(btncancelar);
-
-		btnEditar = new JButton("Editar");
-		btnEditar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-			}
-		});
-		btnEditar.setEnabled(false);
-		panel.add(btnEditar);
 
 		btnCadastrar = new JButton("Cadastrar");
 		btnCadastrar.addActionListener(new ActionListener() {
@@ -285,7 +284,7 @@ public class ConteudoCadastroProduto extends JPanel {
 		gbc_scrollPane.gridy = 6;
 		add(scrollPane, gbc_scrollPane);
 
-		table = new JTable(model);
+		table = new JTable();
 		table.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -295,15 +294,28 @@ public class ConteudoCadastroProduto extends JPanel {
 			public void mousePressed(MouseEvent e) {
 				btnSalvar.setEnabled(true);
 				btncancelar.setEnabled(true);
-				btnEditar.setEnabled(true);
 				btnExcluir.setEnabled(true);
 				
 				editar();
 			}
 		});
 		scrollPane.setViewportView(table);
+		table.setModel(model);
+		
 		
 	
+	}
+
+
+	protected void excluirProduto() {
+		Produto p = new Produto();
+		ProdutoDaoImp pdao = new ProdutoDaoImp();
+		
+		p.setId(Integer.valueOf(txtid.getText()));
+		pdao.excluir(p);
+		model.fireTableDataChanged();
+		JOptionPane.showMessageDialog(null, "Item Excluido com Sucesso!");
+		cancelar();
 	}
 
 
@@ -326,7 +338,7 @@ public class ConteudoCadastroProduto extends JPanel {
 			combocategoria.setSelectedItem(categoria.getCategoria());	
 		}		
 		combounidade.setSelectedItem(p.get(linha).getUnidade());
-		
+		model.fireTableDataChanged();
 		
 	}
 
@@ -343,12 +355,19 @@ public class ConteudoCadastroProduto extends JPanel {
 		p.setMargemdelucro(BigDecimal.valueOf(Double.valueOf(txtmargemlucro
 				.getText())));
 
-		if(p.getId() == 0)
+		if(txtid.getText().equals("")){
 			pdao.inserir(p);
-		else
+			JOptionPane.showMessageDialog(null, "Item Cadastrado com Sucesso!");
+			table.setModel(new ModelProduto());
+		}else{
 			pdao.atualizar(p);
-		model.fireTableDataChanged();
+			JOptionPane.showMessageDialog(null, "Item Editado com Sucesso!");
+			table.setModel(new ModelProduto());
+		}
+			
+		this.repaint();	
 		cancelar();
+		
 
 	}
 
