@@ -41,7 +41,6 @@ public class ClienteDaoImpl implements ClienteDao {
 			ps.executeUpdate();
 
 			ps.close();
-			new ModelCliente().fireTableDataChanged();
 
 		} catch (SQLException e) {
 			e.printStackTrace();

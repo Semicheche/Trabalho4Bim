@@ -380,8 +380,11 @@ public class ConteudoCadastroCliente extends JPanel {
 	protected void salvar() {
 		Cliente c = new Cliente();
 		ClienteDaoImpl cdao = new ClienteDaoImpl();
+		int idx = cdao.listar().get(cdao.listar().size()).getId()+1;
 
-		if (!cdao.listar().isEmpty())
+		if (idx > cdao.listar().size())
+			txtid.setText(String.valueOf(idx));
+		else
 			txtid.setText(String.valueOf(cdao.listar().get(0).getId()));
 		
 		c.setId(Integer.valueOf(txtid.getText()));
@@ -394,13 +397,15 @@ public class ConteudoCadastroCliente extends JPanel {
 		c.setGenero((Genero) comboBoxgenero.getSelectedItem());
 		
 		
-		
-		if(txtid.getText().equals("")){
+		System.out.println("Id: "+c.getId());
+		if(idx == Integer.valueOf(txtid.getText())){
 			cdao.inserir(c);
-			model.fireTableDataChanged();
+			JOptionPane.showMessageDialog(null, "Cliente Salvo com Sucesso!");
+			tablecliente.setModel(new ModelCliente());
 		}else{
 			cdao.atualizar(c);
-			model.fireTableDataChanged();
+			JOptionPane.showMessageDialog(null, "Cliente atualizado com Sucesso!");
+			tablecliente.setModel(new ModelCliente());
 
 			desabilitaBotao();
 
