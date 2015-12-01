@@ -12,6 +12,7 @@ public class ModeItemsVendas extends AbstractTableModel {
 	
 	public ModeItemsVendas() {
 		lista = new ArrayList<ItemsVendas>();
+		fireTableStructureChanged();
 	}
 	
 	@Override

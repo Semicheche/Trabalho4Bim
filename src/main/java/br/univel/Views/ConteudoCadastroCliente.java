@@ -40,6 +40,7 @@ import br.univel.Enum.Genero;
 import br.univel.Models.ModelCliente;
 import br.univel.Usuario.Usuario;
 import br.univel.Usuario.UsuarioDaoImpl;
+
 import javax.swing.JSeparator;
 
 public class ConteudoCadastroCliente extends JPanel {
@@ -80,11 +81,12 @@ public class ConteudoCadastroCliente extends JPanel {
 	public ConteudoCadastroCliente() {
 
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[] { 0, 59, 0, 31, 18, 30, 56, 0, 0, 47, 0, 0, 0, 0 };
-		gridBagLayout.rowHeights = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-				0, 0, 0, 0 };
-		gridBagLayout.columnWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
-				1.0, 0.0, Double.MIN_VALUE };
+		gridBagLayout.columnWidths = new int[] { 0, 59, 0, 31, 18, 30, 56, 0,
+				0, 47, 0, 0, 0, 0 };
+		gridBagLayout.rowHeights = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+				0, 0, 0, 0, 0 };
+		gridBagLayout.columnWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0,
+				0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, Double.MIN_VALUE };
 		gridBagLayout.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
 				0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, Double.MIN_VALUE };
 		setLayout(gridBagLayout);
@@ -214,99 +216,99 @@ public class ConteudoCadastroCliente extends JPanel {
 
 			}
 		});
-										
-												txtcidade = new JTextField();
-												GridBagConstraints gbc_txtcidade = new GridBagConstraints();
-												gbc_txtcidade.gridwidth = 3;
-												gbc_txtcidade.insets = new Insets(0, 0, 5, 5);
-												gbc_txtcidade.fill = GridBagConstraints.HORIZONTAL;
-												gbc_txtcidade.gridx = 1;
-												gbc_txtcidade.gridy = 5;
-												add(txtcidade, gbc_txtcidade);
-												txtcidade.setColumns(10);
-								
-										lblUf = new JLabel("UF");
-										GridBagConstraints gbc_lblUf = new GridBagConstraints();
-										gbc_lblUf.anchor = GridBagConstraints.EAST;
-										gbc_lblUf.insets = new Insets(0, 0, 5, 5);
-										gbc_lblUf.gridx = 5;
-										gbc_lblUf.gridy = 5;
-										add(lblUf, gbc_lblUf);
-						
-								comboBoxuf = new JComboBox(Estado.values());
-								comboBoxuf.setSelectedIndex(-1);
-								GridBagConstraints gbc_comboBoxuf = new GridBagConstraints();
-								gbc_comboBoxuf.insets = new Insets(0, 0, 5, 5);
-								gbc_comboBoxuf.fill = GridBagConstraints.HORIZONTAL;
-								gbc_comboBoxuf.gridx = 6;
-								gbc_comboBoxuf.gridy = 5;
-								add(comboBoxuf, gbc_comboBoxuf);
-						
-								lblGenero = new JLabel("Genero");
-								GridBagConstraints gbc_lblGenero = new GridBagConstraints();
-								gbc_lblGenero.anchor = GridBagConstraints.EAST;
-								gbc_lblGenero.insets = new Insets(0, 0, 5, 5);
-								gbc_lblGenero.gridx = 9;
-								gbc_lblGenero.gridy = 5;
-								add(lblGenero, gbc_lblGenero);
-				
-						comboBoxgenero = new JComboBox(Genero.values());
-						comboBoxgenero.setSelectedIndex(-1);
-						GridBagConstraints gbc_comboBoxgenero = new GridBagConstraints();
-						gbc_comboBoxgenero.insets = new Insets(0, 0, 5, 5);
-						gbc_comboBoxgenero.fill = GridBagConstraints.HORIZONTAL;
-						gbc_comboBoxgenero.gridx = 10;
-						gbc_comboBoxgenero.gridy = 5;
-						add(comboBoxgenero, gbc_comboBoxgenero);
-		
-				lblEmail = new JLabel("Email");
-				GridBagConstraints gbc_lblEmail = new GridBagConstraints();
-				gbc_lblEmail.anchor = GridBagConstraints.EAST;
-				gbc_lblEmail.insets = new Insets(0, 0, 5, 5);
-				gbc_lblEmail.gridx = 0;
-				gbc_lblEmail.gridy = 6;
-				add(lblEmail, gbc_lblEmail);
-		
-				txtemail = new JTextField();
-				GridBagConstraints gbc_txtemail = new GridBagConstraints();
-				gbc_txtemail.gridwidth = 13;
-				gbc_txtemail.insets = new Insets(0, 0, 5, 0);
-				gbc_txtemail.fill = GridBagConstraints.HORIZONTAL;
-				gbc_txtemail.gridx = 1;
-				gbc_txtemail.gridy = 6;
-				add(txtemail, gbc_txtemail);
-				txtemail.setColumns(10);
-				
-						lblSenha = new JLabel("Senha");
-						GridBagConstraints gbc_lblSenha = new GridBagConstraints();
-						gbc_lblSenha.insets = new Insets(0, 0, 5, 5);
-						gbc_lblSenha.anchor = GridBagConstraints.EAST;
-						gbc_lblSenha.gridx = 0;
-						gbc_lblSenha.gridy = 7;
-						add(lblSenha, gbc_lblSenha);
-				
-						passUsuario = new JPasswordField();
-						passUsuario.setEnabled(false);
-						passUsuario.setEditable(false);
-						GridBagConstraints gbc_passUsuario = new GridBagConstraints();
-						gbc_passUsuario.insets = new Insets(0, 0, 5, 5);
-						gbc_passUsuario.fill = GridBagConstraints.HORIZONTAL;
-						gbc_passUsuario.gridx = 1;
-						gbc_passUsuario.gridy = 7;
-						add(passUsuario, gbc_passUsuario);
-		
-				chckbxClienteEUsuario = new JCheckBox("Usuario");
-				chckbxClienteEUsuario.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						ativaUsuario();
-					}
-				});
-				GridBagConstraints gbc_chckbxClienteEUsuario = new GridBagConstraints();
-				gbc_chckbxClienteEUsuario.anchor = GridBagConstraints.WEST;
-				gbc_chckbxClienteEUsuario.insets = new Insets(0, 0, 5, 5);
-				gbc_chckbxClienteEUsuario.gridx = 2;
-				gbc_chckbxClienteEUsuario.gridy = 7;
-				add(chckbxClienteEUsuario, gbc_chckbxClienteEUsuario);
+
+		txtcidade = new JTextField();
+		GridBagConstraints gbc_txtcidade = new GridBagConstraints();
+		gbc_txtcidade.gridwidth = 3;
+		gbc_txtcidade.insets = new Insets(0, 0, 5, 5);
+		gbc_txtcidade.fill = GridBagConstraints.HORIZONTAL;
+		gbc_txtcidade.gridx = 1;
+		gbc_txtcidade.gridy = 5;
+		add(txtcidade, gbc_txtcidade);
+		txtcidade.setColumns(10);
+
+		lblUf = new JLabel("UF");
+		GridBagConstraints gbc_lblUf = new GridBagConstraints();
+		gbc_lblUf.anchor = GridBagConstraints.EAST;
+		gbc_lblUf.insets = new Insets(0, 0, 5, 5);
+		gbc_lblUf.gridx = 5;
+		gbc_lblUf.gridy = 5;
+		add(lblUf, gbc_lblUf);
+
+		comboBoxuf = new JComboBox(Estado.values());
+		comboBoxuf.setSelectedIndex(-1);
+		GridBagConstraints gbc_comboBoxuf = new GridBagConstraints();
+		gbc_comboBoxuf.insets = new Insets(0, 0, 5, 5);
+		gbc_comboBoxuf.fill = GridBagConstraints.HORIZONTAL;
+		gbc_comboBoxuf.gridx = 6;
+		gbc_comboBoxuf.gridy = 5;
+		add(comboBoxuf, gbc_comboBoxuf);
+
+		lblGenero = new JLabel("Genero");
+		GridBagConstraints gbc_lblGenero = new GridBagConstraints();
+		gbc_lblGenero.anchor = GridBagConstraints.EAST;
+		gbc_lblGenero.insets = new Insets(0, 0, 5, 5);
+		gbc_lblGenero.gridx = 9;
+		gbc_lblGenero.gridy = 5;
+		add(lblGenero, gbc_lblGenero);
+
+		comboBoxgenero = new JComboBox(Genero.values());
+		comboBoxgenero.setSelectedIndex(-1);
+		GridBagConstraints gbc_comboBoxgenero = new GridBagConstraints();
+		gbc_comboBoxgenero.insets = new Insets(0, 0, 5, 5);
+		gbc_comboBoxgenero.fill = GridBagConstraints.HORIZONTAL;
+		gbc_comboBoxgenero.gridx = 10;
+		gbc_comboBoxgenero.gridy = 5;
+		add(comboBoxgenero, gbc_comboBoxgenero);
+
+		lblEmail = new JLabel("Email");
+		GridBagConstraints gbc_lblEmail = new GridBagConstraints();
+		gbc_lblEmail.anchor = GridBagConstraints.EAST;
+		gbc_lblEmail.insets = new Insets(0, 0, 5, 5);
+		gbc_lblEmail.gridx = 0;
+		gbc_lblEmail.gridy = 6;
+		add(lblEmail, gbc_lblEmail);
+
+		txtemail = new JTextField();
+		GridBagConstraints gbc_txtemail = new GridBagConstraints();
+		gbc_txtemail.gridwidth = 13;
+		gbc_txtemail.insets = new Insets(0, 0, 5, 0);
+		gbc_txtemail.fill = GridBagConstraints.HORIZONTAL;
+		gbc_txtemail.gridx = 1;
+		gbc_txtemail.gridy = 6;
+		add(txtemail, gbc_txtemail);
+		txtemail.setColumns(10);
+
+		lblSenha = new JLabel("Senha");
+		GridBagConstraints gbc_lblSenha = new GridBagConstraints();
+		gbc_lblSenha.insets = new Insets(0, 0, 5, 5);
+		gbc_lblSenha.anchor = GridBagConstraints.EAST;
+		gbc_lblSenha.gridx = 0;
+		gbc_lblSenha.gridy = 7;
+		add(lblSenha, gbc_lblSenha);
+
+		passUsuario = new JPasswordField();
+		passUsuario.setEnabled(false);
+		passUsuario.setEditable(false);
+		GridBagConstraints gbc_passUsuario = new GridBagConstraints();
+		gbc_passUsuario.insets = new Insets(0, 0, 5, 5);
+		gbc_passUsuario.fill = GridBagConstraints.HORIZONTAL;
+		gbc_passUsuario.gridx = 1;
+		gbc_passUsuario.gridy = 7;
+		add(passUsuario, gbc_passUsuario);
+
+		chckbxClienteEUsuario = new JCheckBox("Usuario");
+		chckbxClienteEUsuario.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ativaUsuario();
+			}
+		});
+		GridBagConstraints gbc_chckbxClienteEUsuario = new GridBagConstraints();
+		gbc_chckbxClienteEUsuario.anchor = GridBagConstraints.WEST;
+		gbc_chckbxClienteEUsuario.insets = new Insets(0, 0, 5, 5);
+		gbc_chckbxClienteEUsuario.gridx = 2;
+		gbc_chckbxClienteEUsuario.gridy = 7;
+		add(chckbxClienteEUsuario, gbc_chckbxClienteEUsuario);
 		GridBagConstraints gbc_scrollPane = new GridBagConstraints();
 		gbc_scrollPane.gridheight = 6;
 		gbc_scrollPane.gridwidth = 14;
@@ -335,7 +337,7 @@ public class ConteudoCadastroCliente extends JPanel {
 	}
 
 	protected void excluir() {
-		
+
 		UsuarioDaoImpl udao = new UsuarioDaoImpl();
 		for (int i = 0; i < udao.listar().size(); i++) {
 			int id_cliente = udao.listar().get(i).getId_cliente();
@@ -348,17 +350,20 @@ public class ConteudoCadastroCliente extends JPanel {
 				cdao.excluir(c);
 
 				model.fireTableDataChanged();
-			
-			}else{
-				int opcao = JOptionPane.showConfirmDialog(null, "O Cliente nao pode ser excluido por que ele e um Usuario \n DESEJA REALMENTE EXLCUIR CLIENTE E USUARIO? ", "ATENÇÂO", JOptionPane.YES_NO_CANCEL_OPTION);
-				
+
+			} else {
+				int opcao = JOptionPane
+						.showConfirmDialog(
+								null,
+								"O Cliente nao pode ser excluido por que ele e um Usuario \n DESEJA REALMENTE EXLCUIR CLIENTE E USUARIO? ",
+								"ATENÇÂO", JOptionPane.YES_NO_CANCEL_OPTION);
+
 				if (opcao == JOptionPane.YES_OPTION) {
-					
+
 					Usuario u = new Usuario();
 					u.setId(id_cliente);
 					udao.excluir(u);
-					
-					
+
 					Cliente c = new Cliente();
 					ClienteDaoImpl cdao = new ClienteDaoImpl();
 
@@ -366,11 +371,10 @@ public class ConteudoCadastroCliente extends JPanel {
 					cdao.excluir(c);
 
 					model.fireTableDataChanged();
-				}else{
-					
+				} else {
+
 				}
-				
-				
+
 			}
 
 		}
@@ -380,14 +384,7 @@ public class ConteudoCadastroCliente extends JPanel {
 	protected void salvar() {
 		Cliente c = new Cliente();
 		ClienteDaoImpl cdao = new ClienteDaoImpl();
-		int idx = cdao.listar().get(cdao.listar().size()).getId()+1;
-
-		if (idx > cdao.listar().size())
-			txtid.setText(String.valueOf(idx));
-		else
-			txtid.setText(String.valueOf(cdao.listar().get(0).getId()));
 		
-		c.setId(Integer.valueOf(txtid.getText()));
 		c.setNome(txtnome.getText());
 		c.setTelefone(txttelefone.getText());
 		c.setEndereco(txtendereco.getText());
@@ -395,16 +392,16 @@ public class ConteudoCadastroCliente extends JPanel {
 		c.setEstado((Estado) comboBoxuf.getSelectedItem());
 		c.setEmail(txtemail.getText());
 		c.setGenero((Genero) comboBoxgenero.getSelectedItem());
+
 		
-		
-		System.out.println("Id: "+c.getId());
-		if(idx == Integer.valueOf(txtid.getText())){
+		if (txtid.getText().equals("")) {
 			cdao.inserir(c);
 			JOptionPane.showMessageDialog(null, "Cliente Salvo com Sucesso!");
 			tablecliente.setModel(new ModelCliente());
-		}else{
+		} else {
 			cdao.atualizar(c);
-			JOptionPane.showMessageDialog(null, "Cliente atualizado com Sucesso!");
+			JOptionPane.showMessageDialog(null,
+					"Cliente atualizado com Sucesso!");
 			tablecliente.setModel(new ModelCliente());
 
 			desabilitaBotao();
@@ -412,13 +409,12 @@ public class ConteudoCadastroCliente extends JPanel {
 			if (chckbxClienteEUsuario.isSelected()) {
 				Usuario usuario = new Usuario();
 				UsuarioDaoImpl udao = new UsuarioDaoImpl();
-				
 
 				usuario.setSenha(new String(passUsuario.getPassword()));
 				usuario.setId_cliente(Integer.valueOf(txtid.getText()));
 				udao.inserir(usuario);
-			}
-			
+		}
+
 		}
 		cancelar();
 
@@ -435,14 +431,13 @@ public class ConteudoCadastroCliente extends JPanel {
 		comboBoxuf.setSelectedIndex(-1);
 		btncadastrar.setEnabled(true);
 		desabilitaBotao();
-		
 
 	}
 
 	private void desabilitaBotao() {
 		btncancelar.setEnabled(false);
 		btnExcluir.setEnabled(false);
-		
+
 	}
 
 	protected void ativaUsuario() {

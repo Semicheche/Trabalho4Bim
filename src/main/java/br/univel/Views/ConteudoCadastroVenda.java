@@ -70,7 +70,8 @@ public class ConteudoCadastroVenda extends JPanel {
 		 * 
 		 */
 		private static final long serialVersionUID = 1L;
-
+		
+		
 		@Override
 		public int getRowCount() {
 			return lista.size();
