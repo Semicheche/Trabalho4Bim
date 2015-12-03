@@ -15,6 +15,7 @@ import javax.swing.JComboBox;
 
 import java.awt.BorderLayout;
 
+import javax.swing.Icon;
 import javax.swing.JCheckBox;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
@@ -43,8 +44,13 @@ import br.univel.Usuario.UsuarioDaoImpl;
 
 import javax.swing.JSeparator;
 import javax.swing.ImageIcon;
+
 import java.awt.Dimension;
 import java.awt.Component;
+
+import javax.swing.JToggleButton;
+
+import java.awt.Button;
 
 public class ConteudoCadastroCliente extends JPanel {
 
@@ -86,7 +92,7 @@ public class ConteudoCadastroCliente extends JPanel {
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[] { 0, 59, 0, 31, 18, 30, 56, 0,
 				0, 47, 0, 0, 0, 0 };
-		gridBagLayout.rowHeights = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+		gridBagLayout.rowHeights = new int[] { 76, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 				0, 0, 0, 0, 0 };
 		gridBagLayout.columnWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0,
 				0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, Double.MIN_VALUE };
@@ -123,6 +129,8 @@ public class ConteudoCadastroCliente extends JPanel {
 		panel.add(btncancelar);
 
 		btncadastrar = new JButton("Salvar");
+		btncadastrar.setSize(new Dimension(100, 100));
+		btncadastrar.setSelectedIcon(new ImageIcon(ConteudoCadastroCliente.class.getResource("/icon/1449203324_save.ico")));
 		btncadastrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				salvar();

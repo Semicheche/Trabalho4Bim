@@ -10,6 +10,7 @@ import javax.swing.JComponent;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import javax.swing.SwingConstants;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -26,6 +27,8 @@ import br.univel.Views.TelaCadastroVenda;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import javax.swing.ImageIcon;
 
 public class TelaPrincipal extends JFrame {
 
@@ -70,10 +73,14 @@ public class TelaPrincipal extends JFrame {
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
 
-		JMenu mnNewMenu = new JMenu("Cadastro");
+		JMenu mnNewMenu = new JMenu("");
+		mnNewMenu.setSelectedIcon(new ImageIcon(TelaPrincipal.class.getResource("/icon/add.ico")));
+		mnNewMenu.setIcon(new ImageIcon(TelaPrincipal.class.getResource("/icon/add.png")));
 		menuBar.add(mnNewMenu);
 
 		JMenuItem mntmProduto = new JMenuItem("Produto");
+		mntmProduto.setIcon(new ImageIcon(TelaPrincipal.class.getResource("/icon/1449205752_product.png")));
+		mntmProduto.setHorizontalAlignment(SwingConstants.LEFT);
 		mntmProduto.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				abrirTelaProduto();
@@ -82,6 +89,7 @@ public class TelaPrincipal extends JFrame {
 		mnNewMenu.add(mntmProduto);
 
 		JMenuItem mntmCliente = new JMenuItem("Cliente");
+		mntmCliente.setIcon(new ImageIcon(TelaPrincipal.class.getResource("/icon/1449205797_Add-Male-User.png")));
 		mntmCliente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				abrirTelaCliente();
@@ -90,6 +98,8 @@ public class TelaPrincipal extends JFrame {
 		mnNewMenu.add(mntmCliente);
 
 		JMenuItem mntmBloquear = new JMenuItem("Bloquear");
+		mntmBloquear.setHorizontalAlignment(SwingConstants.LEFT);
+		mntmBloquear.setIcon(new ImageIcon(TelaPrincipal.class.getResource("/icon/padlock.png")));
 		mntmBloquear.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				block();
@@ -97,6 +107,7 @@ public class TelaPrincipal extends JFrame {
 		});
 
 		JMenuItem mntmCategoria = new JMenuItem("Categoria");
+		mntmCategoria.setIcon(new ImageIcon(TelaPrincipal.class.getResource("/icon/1449206103_category.png")));
 		mntmCategoria.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				abrirTelacategoria();
@@ -105,7 +116,8 @@ public class TelaPrincipal extends JFrame {
 		mnNewMenu.add(mntmCategoria);
 		mnNewMenu.add(mntmBloquear);
 
-		JMenu mnVenda = new JMenu("Venda");
+		JMenu mnVenda = new JMenu("");
+		mnVenda.setIcon(new ImageIcon(TelaPrincipal.class.getResource("/icon/1449206519_Money.png")));
 		menuBar.add(mnVenda);
 
 		JMenuItem mntmVendaCliente = new JMenuItem("Venda Cliente");
@@ -118,7 +130,8 @@ public class TelaPrincipal extends JFrame {
 		});
 		mnVenda.add(mntmVendaCliente);
 
-		JMenu mnRelatorios = new JMenu("Relatorios");
+		JMenu mnRelatorios = new JMenu("");
+		mnRelatorios.setIcon(new ImageIcon(TelaPrincipal.class.getResource("/icon/1449206648_product-sales-report.png")));
 		menuBar.add(mnRelatorios);
 
 		JMenuItem mntmCliente_1 = new JMenuItem("Clientes");
