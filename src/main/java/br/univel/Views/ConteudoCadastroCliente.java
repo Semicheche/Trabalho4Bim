@@ -42,6 +42,9 @@ import br.univel.Usuario.Usuario;
 import br.univel.Usuario.UsuarioDaoImpl;
 
 import javax.swing.JSeparator;
+import javax.swing.ImageIcon;
+import java.awt.Dimension;
+import java.awt.Component;
 
 public class ConteudoCadastroCliente extends JPanel {
 
