@@ -111,6 +111,7 @@ public class ConteudoCadastroCliente extends JPanel {
 		panel.setLayout(new FlowLayout(FlowLayout.RIGHT, 5, 5));
 
 		btnExcluir = new JButton("Excluir");
+		btnExcluir.setIcon(new ImageIcon(ConteudoCadastroCliente.class.getResource("/icon/Delete.png")));
 		btnExcluir.setEnabled(false);
 		btnExcluir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -120,6 +121,7 @@ public class ConteudoCadastroCliente extends JPanel {
 		panel.add(btnExcluir);
 
 		btncancelar = new JButton("Cancelar");
+		btncancelar.setIcon(new ImageIcon(ConteudoCadastroCliente.class.getResource("/icon/close.png")));
 		btncancelar.setEnabled(false);
 		btncancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -129,8 +131,8 @@ public class ConteudoCadastroCliente extends JPanel {
 		panel.add(btncancelar);
 
 		btncadastrar = new JButton("Salvar");
+		btncadastrar.setIcon(new ImageIcon(ConteudoCadastroCliente.class.getResource("/icon/1449205797_Add-Male-User.png")));
 		btncadastrar.setSize(new Dimension(100, 100));
-		btncadastrar.setSelectedIcon(new ImageIcon(ConteudoCadastroCliente.class.getResource("/icon/1449203324_save.ico")));
 		btncadastrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				salvar();

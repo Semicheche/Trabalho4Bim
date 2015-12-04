@@ -17,6 +17,7 @@ import javax.swing.JTextField;
 import javax.xml.ws.Action;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
 
 public abstract class MolduraAbstract extends JPanel {
 	private JPanel panel;
@@ -39,15 +40,20 @@ public abstract class MolduraAbstract extends JPanel {
 		
 		panel = new JPanel();
 		panel.setName("");
-		panel.setMinimumSize(new Dimension(10, 100));
+		panel.setMinimumSize(new Dimension(100, 200));
 		panel.setBackground(SystemColor.inactiveCaption);
 		FlowLayout flowLayout = (FlowLayout) panel.getLayout();
 		flowLayout.setAlignment(FlowLayout.RIGHT);
 		add(panel, BorderLayout.NORTH);
 		
-		btnfechar = new JButton("X");
+		btnfechar = new JButton("");
+		btnfechar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnfechar.setIcon(new ImageIcon(MolduraAbstract.class.getResource("/icon/close.png")));
 		btnfechar.setFont(new Font("Square721 BT", Font.BOLD, 11));
-		btnfechar.setBackground(Color.WHITE);
+		btnfechar.setBackground(new Color(255, 255, 255));
 		panel.add(btnfechar);
 		
 		JPanel panel_1 = new JPanel();

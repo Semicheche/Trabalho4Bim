@@ -26,6 +26,7 @@ import br.univel.Models.ModelCategoria;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.ImageIcon;
 
 public class ConteudoCadastroCategoria extends JPanel {
 	private JTextField txtcategoria;
@@ -44,6 +45,7 @@ public class ConteudoCadastroCategoria extends JPanel {
 		panel.setLayout(new FlowLayout(FlowLayout.RIGHT, 5, 5));
 		
 		JButton btnNewButton = new JButton("Excluir");
+		btnNewButton.setIcon(new ImageIcon(ConteudoCadastroCategoria.class.getResource("/icon/Delete.png")));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				excluirCategoria();
@@ -52,6 +54,7 @@ public class ConteudoCadastroCategoria extends JPanel {
 		panel.add(btnNewButton);
 		
 		JButton btncancelar = new JButton("Cancelar");
+		btncancelar.setIcon(new ImageIcon(ConteudoCadastroCategoria.class.getResource("/icon/close.png")));
 		btncancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				txtcategoria.setText("");
@@ -60,6 +63,7 @@ public class ConteudoCadastroCategoria extends JPanel {
 		panel.add(btncancelar);
 		
 		JButton btnSalvar = new JButton("Salvar");
+		btnSalvar.setIcon(new ImageIcon(ConteudoCadastroCategoria.class.getResource("/icon/Save.png")));
 		panel.add(btnSalvar);
 		btnSalvar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

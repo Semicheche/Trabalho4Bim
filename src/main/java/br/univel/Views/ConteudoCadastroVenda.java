@@ -49,6 +49,7 @@ import java.text.NumberFormat;
 import java.util.Locale;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
+import javax.swing.ImageIcon;
 
 public class ConteudoCadastroVenda extends JPanel {
 	
@@ -197,6 +198,7 @@ public class ConteudoCadastroVenda extends JPanel {
 		panel.setLayout(new FlowLayout(FlowLayout.RIGHT, 5, 5));
 		
 		JButton btnconfirmar = new JButton("Comfirmar");
+		btnconfirmar.setIcon(new ImageIcon(ConteudoCadastroVenda.class.getResource("/icon/Shopping-basket-accept.png")));
 		btnconfirmar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				concluirVenda();
@@ -205,6 +207,7 @@ public class ConteudoCadastroVenda extends JPanel {
 		panel.add(btnconfirmar);
 		
 		btnConcluirVenda = new JButton("Concluir Venda");
+		btnConcluirVenda.setIcon(new ImageIcon(ConteudoCadastroVenda.class.getResource("/icon/Actions.png")));
 		btnConcluirVenda.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//ComfirmarVenda();
@@ -380,7 +383,8 @@ public class ConteudoCadastroVenda extends JPanel {
 		tableVendaProduto = new JTable(modelitemsvendas);
 		scrollPane_1.setViewportView(tableVendaProduto);
 		
-		JButton button = new JButton(">>");
+		JButton button = new JButton("");
+		button.setIcon(new ImageIcon(ConteudoCadastroVenda.class.getResource("/icon/Next-.png")));
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				adicionaItems();
@@ -393,7 +397,8 @@ public class ConteudoCadastroVenda extends JPanel {
 		gbc_button.gridy = 5;
 		panel_1.add(button, gbc_button);
 		
-		JButton button_1 = new JButton("<<");
+		JButton button_1 = new JButton("");
+		button_1.setIcon(new ImageIcon(ConteudoCadastroVenda.class.getResource("/icon/Previous-icon.png")));
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				removerItens();	

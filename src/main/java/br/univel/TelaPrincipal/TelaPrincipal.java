@@ -63,7 +63,7 @@ public class TelaPrincipal extends JFrame {
 	 */
 	public TelaPrincipal() {
 
-		//blockParaLogin();
+		blockParaLogin();
 
 		setTitle("Menu Principal\r\n");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -74,7 +74,6 @@ public class TelaPrincipal extends JFrame {
 		setJMenuBar(menuBar);
 
 		JMenu mnNewMenu = new JMenu("");
-		mnNewMenu.setSelectedIcon(new ImageIcon(TelaPrincipal.class.getResource("/icon/add.ico")));
 		mnNewMenu.setIcon(new ImageIcon(TelaPrincipal.class.getResource("/icon/add.png")));
 		menuBar.add(mnNewMenu);
 
@@ -120,7 +119,8 @@ public class TelaPrincipal extends JFrame {
 		mnVenda.setIcon(new ImageIcon(TelaPrincipal.class.getResource("/icon/1449206519_Money.png")));
 		menuBar.add(mnVenda);
 
-		JMenuItem mntmVendaCliente = new JMenuItem("Venda Cliente");
+		JMenuItem mntmVendaCliente = new JMenuItem("Venda Produto");
+		mntmVendaCliente.setIcon(new ImageIcon(TelaPrincipal.class.getResource("/icon/cash-register.png")));
 		mntmVendaCliente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				abrirTelaVenda();
@@ -135,6 +135,7 @@ public class TelaPrincipal extends JFrame {
 		menuBar.add(mnRelatorios);
 
 		JMenuItem mntmCliente_1 = new JMenuItem("Clientes");
+		mntmCliente_1.setIcon(new ImageIcon(TelaPrincipal.class.getResource("/icon/report user.png")));
 		mntmCliente_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				new JasperReportCliente();
@@ -144,6 +145,7 @@ public class TelaPrincipal extends JFrame {
 		mnRelatorios.add(mntmCliente_1);
 
 		JMenuItem mntmProdutos = new JMenuItem("Produtos");
+		mntmProdutos.setIcon(new ImageIcon(TelaPrincipal.class.getResource("/icon/Product-report.png")));
 		mntmProdutos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				new JasperReportProduto();
@@ -152,6 +154,7 @@ public class TelaPrincipal extends JFrame {
 		mnRelatorios.add(mntmProdutos);
 
 		JMenuItem mntmVendas = new JMenuItem("Vendas");
+		mntmVendas.setIcon(new ImageIcon(TelaPrincipal.class.getResource("/icon/sales-report.png")));
 		mntmVendas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				new JasperReportVendas();
@@ -171,7 +174,7 @@ public class TelaPrincipal extends JFrame {
 		TelaCadastroVenda telacadastrovenda = new TelaCadastroVenda();
 		telacadastrovenda.setCloseAction(e -> tabbedPane
 				.remove(telacadastrovenda));
-		tabbedPane.addTab("Vanda", telacadastrovenda);
+		tabbedPane.addTab("Venda", telacadastrovenda);
 		mostraUltima();
 	}
 

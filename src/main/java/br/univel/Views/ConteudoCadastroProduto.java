@@ -46,6 +46,7 @@ import br.univel.Produto.ProdutoDaoImp;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.ImageIcon;
 
 public class ConteudoCadastroProduto extends JPanel {
 	private JTextField txtid;
@@ -96,6 +97,7 @@ public class ConteudoCadastroProduto extends JPanel {
 		panel.add(label);
 
 		btnExcluir = new JButton("Excluir");
+		btnExcluir.setIcon(new ImageIcon(ConteudoCadastroProduto.class.getResource("/icon/Delete.png")));
 		btnExcluir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				excluirProduto();
@@ -105,10 +107,12 @@ public class ConteudoCadastroProduto extends JPanel {
 		panel.add(btnExcluir);
 		
 		btnSalvar = new JButton("Salvar");
+		btnSalvar.setIcon(new ImageIcon(ConteudoCadastroProduto.class.getResource("/icon/Save.png")));
 		btnSalvar.setEnabled(false);
 		panel.add(btnSalvar);
 
 		btncancelar = new JButton("Cancelar");
+		btncancelar.setIcon(new ImageIcon(ConteudoCadastroProduto.class.getResource("/icon/close.png")));
 		btncancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				txtid.setText("");
@@ -125,6 +129,7 @@ public class ConteudoCadastroProduto extends JPanel {
 		panel.add(btncancelar);
 
 		btnCadastrar = new JButton("Cadastrar");
+		btnCadastrar.setIcon(new ImageIcon(ConteudoCadastroProduto.class.getResource("/icon/1449205752_product.png")));
 		btnCadastrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				salvar();
