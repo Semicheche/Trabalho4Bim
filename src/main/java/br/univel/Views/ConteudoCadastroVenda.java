@@ -206,16 +206,6 @@ public class ConteudoCadastroVenda extends JPanel {
 		});
 		panel.add(btnconfirmar);
 		
-		btnConcluirVenda = new JButton("Concluir Venda");
-		btnConcluirVenda.setIcon(new ImageIcon(ConteudoCadastroVenda.class.getResource("/icon/Actions.png")));
-		btnConcluirVenda.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				//ComfirmarVenda();
-			}
-		});
-		btnConcluirVenda.setEnabled(false);
-		panel.add(btnConcluirVenda);
-		
 		JPanel panel_1 = new JPanel();
 		add(panel_1, BorderLayout.CENTER);
 		GridBagLayout gbl_panel_1 = new GridBagLayout();
@@ -293,7 +283,7 @@ public class ConteudoCadastroVenda extends JPanel {
 			}
 		});
 		GridBagConstraints gbc_txtvalorpago = new GridBagConstraints();
-		gbc_txtvalorpago.gridwidth = 3;
+		gbc_txtvalorpago.gridwidth = 2;
 		gbc_txtvalorpago.insets = new Insets(0, 0, 5, 5);
 		gbc_txtvalorpago.fill = GridBagConstraints.HORIZONTAL;
 		gbc_txtvalorpago.gridx = 9;
@@ -324,11 +314,11 @@ public class ConteudoCadastroVenda extends JPanel {
 		
 		JScrollPane scrollPane_2 = new JScrollPane();
 		GridBagConstraints gbc_scrollPane_2 = new GridBagConstraints();
-		gbc_scrollPane_2.gridwidth = 4;
+		gbc_scrollPane_2.gridwidth = 3;
 		gbc_scrollPane_2.gridheight = 7;
 		gbc_scrollPane_2.insets = new Insets(0, 0, 5, 5);
 		gbc_scrollPane_2.fill = GridBagConstraints.BOTH;
-		gbc_scrollPane_2.gridx = 0;
+		gbc_scrollPane_2.gridx = 1;
 		gbc_scrollPane_2.gridy = 4;
 		panel_1.add(scrollPane_2, gbc_scrollPane_2);
 		
@@ -349,11 +339,11 @@ public class ConteudoCadastroVenda extends JPanel {
 			
 		});
 		GridBagConstraints gbc_scrollPane = new GridBagConstraints();
-		gbc_scrollPane.gridwidth = 7;
+		gbc_scrollPane.gridwidth = 5;
 		gbc_scrollPane.gridheight = 7;
 		gbc_scrollPane.insets = new Insets(0, 0, 5, 5);
 		gbc_scrollPane.fill = GridBagConstraints.BOTH;
-		gbc_scrollPane.gridx = 4;
+		gbc_scrollPane.gridx = 5;
 		gbc_scrollPane.gridy = 4;
 		panel_1.add(scrollPane, gbc_scrollPane);
 		
@@ -369,20 +359,6 @@ public class ConteudoCadastroVenda extends JPanel {
 		});
 		scrollPane.setViewportView(tableProduto);
 		
-		JScrollPane scrollPane_1 = new JScrollPane();
-		scrollPane_1.setEnabled(false);
-		GridBagConstraints gbc_scrollPane_1 = new GridBagConstraints();
-		gbc_scrollPane_1.gridwidth = 5;
-		gbc_scrollPane_1.gridheight = 7;
-		gbc_scrollPane_1.insets = new Insets(0, 0, 5, 0);
-		gbc_scrollPane_1.fill = GridBagConstraints.BOTH;
-		gbc_scrollPane_1.gridx = 12;
-		gbc_scrollPane_1.gridy = 4;
-		panel_1.add(scrollPane_1, gbc_scrollPane_1);
-		
-		tableVendaProduto = new JTable(modelitemsvendas);
-		scrollPane_1.setViewportView(tableVendaProduto);
-		
 		JButton button = new JButton("");
 		button.setIcon(new ImageIcon(ConteudoCadastroVenda.class.getResource("/icon/Next-.png")));
 		button.addActionListener(new ActionListener() {
@@ -393,9 +369,23 @@ public class ConteudoCadastroVenda extends JPanel {
 		GridBagConstraints gbc_button = new GridBagConstraints();
 		gbc_button.anchor = GridBagConstraints.NORTH;
 		gbc_button.insets = new Insets(0, 0, 5, 5);
-		gbc_button.gridx = 11;
-		gbc_button.gridy = 5;
+		gbc_button.gridx = 10;
+		gbc_button.gridy = 4;
 		panel_1.add(button, gbc_button);
+		
+		JScrollPane scrollPane_1 = new JScrollPane();
+		scrollPane_1.setEnabled(false);
+		GridBagConstraints gbc_scrollPane_1 = new GridBagConstraints();
+		gbc_scrollPane_1.gridwidth = 5;
+		gbc_scrollPane_1.gridheight = 7;
+		gbc_scrollPane_1.insets = new Insets(0, 0, 5, 5);
+		gbc_scrollPane_1.fill = GridBagConstraints.BOTH;
+		gbc_scrollPane_1.gridx = 11;
+		gbc_scrollPane_1.gridy = 4;
+		panel_1.add(scrollPane_1, gbc_scrollPane_1);
+		
+		tableVendaProduto = new JTable(modelitemsvendas);
+		scrollPane_1.setViewportView(tableVendaProduto);
 		
 		JButton button_1 = new JButton("");
 		button_1.setIcon(new ImageIcon(ConteudoCadastroVenda.class.getResource("/icon/Previous-icon.png")));
@@ -406,7 +396,7 @@ public class ConteudoCadastroVenda extends JPanel {
 		});
 		GridBagConstraints gbc_button_1 = new GridBagConstraints();
 		gbc_button_1.insets = new Insets(0, 0, 5, 5);
-		gbc_button_1.gridx = 11;
+		gbc_button_1.gridx = 10;
 		gbc_button_1.gridy = 6;
 		panel_1.add(button_1, gbc_button_1);
 		
@@ -472,7 +462,7 @@ public class ConteudoCadastroVenda extends JPanel {
 			
 		}
 		idvenda = 0;
-		modelitemsvendas.lista.remove(modelitemsvendas.lista.size()-1);
+		modelitemsvendas.lista.clear();
 		modelitemsvendas.fireTableDataChanged();
 	}
 
@@ -488,7 +478,6 @@ public class ConteudoCadastroVenda extends JPanel {
 			v.setTotal(total);
 			
 			vdao.inserir(v);
-			//btnConcluirVenda.setEnabled(true);
 			idvenda = vdao.listar().get(vdao.listar().size()-1).getIdvenda();
 			confirmarVenda();
 		}
@@ -496,7 +485,6 @@ public class ConteudoCadastroVenda extends JPanel {
 
 	ClienteDaoImpl cdao = new ClienteDaoImpl();
 	private JTextField txtvalorpago;
-	private JButton btnConcluirVenda;
 	
 	protected void AdicionarCliente() {
 		txtid.setText((String.valueOf(cdao.listar().get(tableClietne.getSelectedRow()).getId())));
@@ -539,6 +527,7 @@ public class ConteudoCadastroVenda extends JPanel {
 		total = total.add(items.getCustoproduto().multiply(items.getQuantidade()));
 		
 		modelitemsvendas.lista.add(items);
+		modelitemsvendas.fireTableDataChanged();
 		DecimalFormat df = new DecimalFormat("#,##0.00");
 					
 		lbltotal.setText(df.format(total));
