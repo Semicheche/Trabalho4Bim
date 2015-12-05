@@ -4,3 +4,7 @@
 
 #login: admin
 #Senha: admin
+
+
+#padrão de Projetos ultilizado
+	usado o singleton para conexão com o BD.
