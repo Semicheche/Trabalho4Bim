@@ -7,6 +7,8 @@ import java.util.ArrayList;
 
 import javax.swing.table.AbstractTableModel;
 
+import br.univel.Categoria.Categoria;
+import br.univel.Categoria.CategoriaDaoImp;
 import br.univel.Produto.Produto;
 import br.univel.Produto.ProdutoDaoImp;
 
@@ -67,6 +69,7 @@ public class ModelProduto extends AbstractTableModel {
 				return p.getId();
 			case 1:
 				return p.getCategoria();
+			
 			case 2:
 				return p.getNome();
 			case 3:

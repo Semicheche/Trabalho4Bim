@@ -46,6 +46,7 @@ import br.univel.Produto.ProdutoDaoImp;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+
 import javax.swing.ImageIcon;
 
 public class ConteudoCadastroProduto extends JPanel {
@@ -62,7 +63,7 @@ public class ConteudoCadastroProduto extends JPanel {
 	private JButton btnExcluir;
 	private JButton btncancelar;
 	private JButton btnCadastrar;
-	private int idCategoria;
+	private Object categoria;
 	ModelProduto model;
 
 	/**
@@ -271,8 +272,9 @@ public class ConteudoCadastroProduto extends JPanel {
 		add(combocategoria, gbc_combocategoria);
 		for (int i = 0; i <lista.size(); i++) {			
 			combocategoria.addItem(lista.get(i).getCategoria());
-			idCategoria = lista.get(i).getId();
+			
 		}
+		
 
 		JScrollPane scrollPane = new JScrollPane();
 		GridBagConstraints gbc_scrollPane = new GridBagConstraints();
@@ -343,11 +345,19 @@ public class ConteudoCadastroProduto extends JPanel {
 
 	protected void salvar() {
 		Produto p = new Produto();
+		CategoriaDaoImp cdao = new CategoriaDaoImp();
+		int cat = 0;
+
 		if(!txtid.getText().equals(""))
 			p.setId(Integer.valueOf(txtid.getText()));
 		else
 			p.setId(0);
-		p.setCategoria(idCategoria);
+		categoria =  combocategoria.getSelectedItem();
+		for (Categoria c : cdao.listar()) {
+			if(c.getCategoria().equals(categoria))
+				cat = c.getId();
+		}
+		p.setCategoria(cat);
 		p.setNome(txtnome.getText());
 		p.setCodigodebarras(Integer.valueOf(txtcodigobarra.getText()));
 		p.setDescricao(txtdescricao.getText());

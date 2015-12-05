@@ -1,1 +1,6 @@
 # Trabalho4Bim
+
+#ESSE LOGIN PARA ENTRAR QUANDO O BANCO NAO ESTIVER USUARIOS
+
+#login: admin
+#Senha: admin
