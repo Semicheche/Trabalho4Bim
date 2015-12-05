@@ -7,6 +7,7 @@ import java.awt.FlowLayout;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
@@ -23,9 +24,12 @@ import javax.swing.JTable;
 import br.univel.Categoria.Categoria;
 import br.univel.Categoria.CategoriaDaoImp;
 import br.univel.Models.ModelCategoria;
+import br.univel.Produto.Produto;
+import br.univel.Produto.ProdutoDaoImp;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+
 import javax.swing.ImageIcon;
 
 public class ConteudoCadastroCategoria extends JPanel {
@@ -119,12 +123,27 @@ public class ConteudoCadastroCategoria extends JPanel {
 	}
 
 	protected void excluirCategoria() {
+		ProdutoDaoImp pdao = new ProdutoDaoImp();
 		CategoriaDaoImp cdao = new CategoriaDaoImp();
 		Categoria c = new Categoria();
 		c.setId(cdao.listar().get(table.getSelectedRow()).getId());
-		cdao.excluir(c);
-		model.fireTableDataChanged();
-		txtcategoria.setText("");
+		boolean valor = true;
+		
+		for (Produto p : pdao.listar()) {
+			if(p.getCategoria() == c.getId()){
+				JOptionPane.showMessageDialog(null, "NAO E POSSIVEL EXCLUIR CAATEGORIA!!!\n Categoria Vinculada a Algun Produto");
+				valor = false;
+				break;
+			}
+		}
+		
+		if(valor){
+			cdao.excluir(c);
+			JOptionPane.showMessageDialog(null, "Categoria Excluida com Sucesso!!!");
+			table.setModel(new ModelCategoria());
+		}
+			txtcategoria.setText("");
+		
 	}
 
 	protected void editar() {
@@ -142,6 +161,8 @@ public class ConteudoCadastroCategoria extends JPanel {
 		
 		cdao.inserir(c);
 		txtcategoria.setText("");
+		JOptionPane.showMessageDialog(null, "Categoria Criada com Sucesso!!!");
+		table.setModel(new ModelCategoria());
 	}
 
 }

@@ -63,7 +63,6 @@ public class ConteudoCadastroProduto extends JPanel {
 	private JButton btncancelar;
 	private JButton btnCadastrar;
 	private int idCategoria;
-	private JButton btnSalvar;
 	ModelProduto model;
 
 	/**
@@ -105,11 +104,6 @@ public class ConteudoCadastroProduto extends JPanel {
 		});
 		btnExcluir.setEnabled(false);
 		panel.add(btnExcluir);
-		
-		btnSalvar = new JButton("Salvar");
-		btnSalvar.setIcon(new ImageIcon(ConteudoCadastroProduto.class.getResource("/icon/Save.png")));
-		btnSalvar.setEnabled(false);
-		panel.add(btnSalvar);
 
 		btncancelar = new JButton("Cancelar");
 		btncancelar.setIcon(new ImageIcon(ConteudoCadastroProduto.class.getResource("/icon/close.png")));
@@ -297,7 +291,6 @@ public class ConteudoCadastroProduto extends JPanel {
 			}
 			@Override
 			public void mousePressed(MouseEvent e) {
-				btnSalvar.setEnabled(true);
 				btncancelar.setEnabled(true);
 				btnExcluir.setEnabled(true);
 				
@@ -318,8 +311,8 @@ public class ConteudoCadastroProduto extends JPanel {
 		
 		p.setId(Integer.valueOf(txtid.getText()));
 		pdao.excluir(p);
-		model.fireTableDataChanged();
 		JOptionPane.showMessageDialog(null, "Item Excluido com Sucesso!");
+		table.setModel(new ModelProduto());
 		cancelar();
 	}
 
@@ -350,8 +343,10 @@ public class ConteudoCadastroProduto extends JPanel {
 
 	protected void salvar() {
 		Produto p = new Produto();
-		
-		p.setId(Integer.valueOf(txtid.getText()));
+		if(!txtid.getText().equals(""))
+			p.setId(Integer.valueOf(txtid.getText()));
+		else
+			p.setId(0);
 		p.setCategoria(idCategoria);
 		p.setNome(txtnome.getText());
 		p.setCodigodebarras(Integer.valueOf(txtcodigobarra.getText()));
@@ -361,7 +356,7 @@ public class ConteudoCadastroProduto extends JPanel {
 		p.setMargemdelucro(BigDecimal.valueOf(Double.valueOf(txtmargemlucro
 				.getText().replace(",", "."))));
 
-		if(txtid.getText().equals(0)){
+		if(p.getId() == 0){
 			pdao.inserir(p);
 			JOptionPane.showMessageDialog(null, "Item Cadastrado com Sucesso!");
 			table.setModel(new ModelProduto());

@@ -350,7 +350,7 @@ public class ConteudoCadastroCliente extends JPanel {
 	}
 
 	protected void excluir() {
-
+		int opcao = -1;
 		UsuarioDaoImpl udao = new UsuarioDaoImpl();
 		for (int i = 0; i < udao.listar().size(); i++) {
 			int id_cliente = udao.listar().get(i).getId_cliente();
@@ -362,19 +362,20 @@ public class ConteudoCadastroCliente extends JPanel {
 				c.setId(Integer.valueOf(txtid.getText()));
 				cdao.excluir(c);
 
-				model.fireTableDataChanged();
-
+				tablecliente.setModel(new ModelCliente());
 			} else {
-				int opcao = JOptionPane
+				if(id_cliente == udao.listar().get(i).getId_cliente()){
+				opcao = JOptionPane
 						.showConfirmDialog(
 								null,
 								"O Cliente nao pode ser excluido por que ele e um Usuario \n DESEJA REALMENTE EXLCUIR CLIENTE E USUARIO? ",
 								"ATENÇÂO", JOptionPane.YES_NO_CANCEL_OPTION);
-
+								
+				
 				if (opcao == JOptionPane.YES_OPTION) {
 
 					Usuario u = new Usuario();
-					u.setId(id_cliente);
+					u.setId(udao.listar().get(i).getId());
 					udao.excluir(u);
 
 					Cliente c = new Cliente();
@@ -383,22 +384,29 @@ public class ConteudoCadastroCliente extends JPanel {
 					c.setId(Integer.valueOf(txtid.getText()));
 					cdao.excluir(c);
 
-					model.fireTableDataChanged();
+					tablecliente.setModel(new ModelCliente());
+				
 				} else {
-
+					break;
+				}
 				}
 
 			}
 
 		}
+		JOptionPane.showMessageDialog(null,"Cliente Excluido com Sucesso!");
+		tablecliente.setModel(new ModelCliente());
 		desabilitaBotao();
 	}
 
 	protected void salvar() {
 		Cliente c = new Cliente();
 		ClienteDaoImpl cdao = new ClienteDaoImpl();
+		if(!txtid.getText().equals(""))
+			c.setId(Integer.valueOf(txtid.getText()));
+		else
+			c.setId(0);
 		
-		c.setId(Integer.valueOf(txtid.getText()));
 		c.setNome(txtnome.getText());
 		c.setTelefone(txttelefone.getText());
 		c.setEndereco(txtendereco.getText());
@@ -408,7 +416,7 @@ public class ConteudoCadastroCliente extends JPanel {
 		c.setGenero((Genero) comboBoxgenero.getSelectedItem());
 
 		
-		if (txtid.getText().equals(0)) {
+		if (c.getId() == 0 ) {
 			cdao.inserir(c);
 			JOptionPane.showMessageDialog(null, "Cliente Salvo com Sucesso!");
 			tablecliente.setModel(new ModelCliente());

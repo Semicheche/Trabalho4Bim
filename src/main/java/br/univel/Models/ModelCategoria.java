@@ -15,6 +15,7 @@ public class ModelCategoria extends AbstractTableModel {
 	
 	public ModelCategoria() {
 		lista = (ArrayList<Categoria>) cdao.listar();
+		fireTableDataChanged();
 	}
 	
 	@Override
