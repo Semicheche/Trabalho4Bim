@@ -7,6 +7,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
 import br.univel.Conexao.Conexao;
 import br.univel.Enum.Estado;
 import br.univel.Enum.Genero;
@@ -50,9 +52,10 @@ public class ClienteDaoImpl implements ClienteDao {
 	@Override
 	public void atualizar(Cliente c) {
 		
-		String sql = "UPDATE CLIENTE SET NOME = ?, TELEFONE = ?, ENDERECO = ?, CIDADE = ?, ESTADO = ?, EMAIL = ?, GENERO = ? WHERE ID = ? ";
+		String sql = "UPDATE cliente SET nome = ?, fone = ?, endereco = ?, cidade = ?, estado = ?, email = ?, genero = ? WHERE idcliente = ? ";
 		
 		try {
+			
 			PreparedStatement ps = conexao.getConnection().prepareStatement(sql);
 			ps.setString(1, c.getNome());
 			ps.setString(2, c.getTelefone());
@@ -63,10 +66,12 @@ public class ClienteDaoImpl implements ClienteDao {
 			ps.setString(7, c.getGenero().toString());
 			ps.setInt(8, c.getId());
 			
+			ps.executeUpdate();
+			
 			ps.close();
 						
 		} catch (SQLException e) {
-			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "Erro ao atualizar o item\n ERRO:"+e);
 		}
 
 	}

@@ -162,6 +162,13 @@ public class TelaPrincipal extends JFrame {
 			}
 		});
 		mnRelatorios.add(mntmVendas);
+		
+		JMenu mnNewMenu_1 = new JMenu("");
+		mnNewMenu_1.setIcon(new ImageIcon(TelaPrincipal.class.getResource("/icon/search-icon.png")));
+		menuBar.add(mnNewMenu_1);
+		
+		JMenuItem mntmVenda = new JMenuItem("Vendas");
+		mnNewMenu_1.add(mntmVenda);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));

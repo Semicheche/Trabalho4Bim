@@ -41,7 +41,7 @@ public class CategoriaDaoImp implements CategoriaDAO {
 	@Override
 	public void excluir(Categoria c) {
 		
-		String sql = "DELETE FROM categoriaproduto WHERE idusuario = ?";
+		String sql = "DELETE FROM categoriaproduto WHERE idcategoriaproduto = ?";
 		try {
 			PreparedStatement ps = conexao.getConnection().prepareStatement(sql);
 			ps.setInt(1, c.getId());

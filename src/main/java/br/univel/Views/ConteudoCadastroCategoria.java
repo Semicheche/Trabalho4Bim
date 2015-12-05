@@ -122,6 +122,7 @@ public class ConteudoCadastroCategoria extends JPanel {
 		CategoriaDaoImp cdao = new CategoriaDaoImp();
 		Categoria c = new Categoria();
 		c.setId(cdao.listar().get(table.getSelectedRow()).getId());
+		cdao.excluir(c);
 		model.fireTableDataChanged();
 		txtcategoria.setText("");
 	}

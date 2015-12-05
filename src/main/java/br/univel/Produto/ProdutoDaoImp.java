@@ -43,7 +43,7 @@ public class ProdutoDaoImp implements ProdutoDAO {
 
 	@Override
 	public void atualizar(Produto p) {
-		String sql = "UPDATE PRODUTO SET CATEGORIAPRODUTO_IDCATEGORIAPRODUTO = ?, NOME = ?, CODIGOBARRA = ?, DESCRICAO = ?, UNIDADE = ?, CUSTO = ?, LUCRO = ? WHERE ID = ?";
+		String sql = "UPDATE PRODUTO SET CATEGORIAPRODUTO_IDCATEGORIAPRODUTO = ?, NOME = ?, CODIGOBARRA = ?, DESCRICAO = ?, UNIDADE = ?, CUSTO = ?, LUCRO = ? WHERE IDPRODUTO = ?";
 		try {
 			PreparedStatement ps = conexao.getConnection().prepareStatement(sql);
 			ps.setInt(1, p.getCategoria());
@@ -54,6 +54,12 @@ public class ProdutoDaoImp implements ProdutoDAO {
 			ps.setBigDecimal(6, p.getCusto());
 			ps.setBigDecimal(7, p.getMargemdelucro());
 			ps.setInt(8, p.getId());
+			
+			ps.executeUpdate();
+			
+			
+			ps.close();
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

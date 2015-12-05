@@ -50,6 +50,8 @@ import java.util.Locale;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import javax.swing.ImageIcon;
+import java.awt.Color;
+import java.awt.SystemColor;
 
 public class ConteudoCadastroVenda extends JPanel {
 	
@@ -292,23 +294,29 @@ public class ConteudoCadastroVenda extends JPanel {
 		txtvalorpago.setColumns(10);
 		
 		JLabel lblCliente = new JLabel("Cliente");
+		lblCliente.setBackground(Color.GRAY);
 		GridBagConstraints gbc_lblCliente = new GridBagConstraints();
+		gbc_lblCliente.gridwidth = 3;
 		gbc_lblCliente.insets = new Insets(0, 0, 5, 5);
-		gbc_lblCliente.gridx = 2;
+		gbc_lblCliente.gridx = 1;
 		gbc_lblCliente.gridy = 3;
 		panel_1.add(lblCliente, gbc_lblCliente);
 		
 		JLabel lblProdutos = new JLabel("Produtos");
+		lblProdutos.setBackground(SystemColor.activeCaption);
 		GridBagConstraints gbc_lblProdutos = new GridBagConstraints();
+		gbc_lblProdutos.gridwidth = 3;
 		gbc_lblProdutos.insets = new Insets(0, 0, 5, 5);
-		gbc_lblProdutos.gridx = 7;
+		gbc_lblProdutos.gridx = 6;
 		gbc_lblProdutos.gridy = 3;
 		panel_1.add(lblProdutos, gbc_lblProdutos);
 		
 		JLabel lblNewLabel = new JLabel("Items da Nota");
+		lblNewLabel.setBackground(SystemColor.activeCaption);
 		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
+		gbc_lblNewLabel.gridwidth = 4;
 		gbc_lblNewLabel.insets = new Insets(0, 0, 5, 5);
-		gbc_lblNewLabel.gridx = 14;
+		gbc_lblNewLabel.gridx = 11;
 		gbc_lblNewLabel.gridy = 3;
 		panel_1.add(lblNewLabel, gbc_lblNewLabel);
 		

@@ -398,6 +398,7 @@ public class ConteudoCadastroCliente extends JPanel {
 		Cliente c = new Cliente();
 		ClienteDaoImpl cdao = new ClienteDaoImpl();
 		
+		c.setId(Integer.valueOf(txtid.getText()));
 		c.setNome(txtnome.getText());
 		c.setTelefone(txttelefone.getText());
 		c.setEndereco(txtendereco.getText());
@@ -407,14 +408,13 @@ public class ConteudoCadastroCliente extends JPanel {
 		c.setGenero((Genero) comboBoxgenero.getSelectedItem());
 
 		
-		if (txtid.getText().equals("")) {
+		if (txtid.getText().equals(0)) {
 			cdao.inserir(c);
 			JOptionPane.showMessageDialog(null, "Cliente Salvo com Sucesso!");
 			tablecliente.setModel(new ModelCliente());
 		} else {
 			cdao.atualizar(c);
-			JOptionPane.showMessageDialog(null,
-					"Cliente atualizado com Sucesso!");
+			JOptionPane.showMessageDialog(null,"Cliente atualizado com Sucesso!");
 			tablecliente.setModel(new ModelCliente());
 
 			desabilitaBotao();

@@ -340,7 +340,7 @@ public class ConteudoCadastroProduto extends JPanel {
 		
 		for (Categoria categoria : cdao.listar()) {
 			if(p.get(linha).getCategoria() == categoria.getId())
-			combocategoria.setSelectedItem(categoria.getCategoria());	
+				combocategoria.setSelectedItem(categoria.getCategoria());	
 		}		
 		combounidade.setSelectedItem(p.get(linha).getUnidade());
 		model.fireTableDataChanged();
@@ -350,17 +350,18 @@ public class ConteudoCadastroProduto extends JPanel {
 
 	protected void salvar() {
 		Produto p = new Produto();
-
+		
+		p.setId(Integer.valueOf(txtid.getText()));
 		p.setCategoria(idCategoria);
 		p.setNome(txtnome.getText());
 		p.setCodigodebarras(Integer.valueOf(txtcodigobarra.getText()));
 		p.setDescricao(txtdescricao.getText());
 		p.setUnidade(Unidade.valueOf(combounidade.getSelectedItem().toString()));
-		p.setCusto(BigDecimal.valueOf(Double.valueOf(txtcusto.getText())));
+		p.setCusto(BigDecimal.valueOf(Double.valueOf(txtcusto.getText().replace(",", "."))));
 		p.setMargemdelucro(BigDecimal.valueOf(Double.valueOf(txtmargemlucro
-				.getText())));
+				.getText().replace(",", "."))));
 
-		if(txtid.getText().equals("")){
+		if(txtid.getText().equals(0)){
 			pdao.inserir(p);
 			JOptionPane.showMessageDialog(null, "Item Cadastrado com Sucesso!");
 			table.setModel(new ModelProduto());
