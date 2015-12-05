@@ -1,5 +1,6 @@
 package br.univel.Models;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.table.AbstractTableModel;
@@ -22,6 +23,11 @@ public class ModelCliente extends AbstractTableModel {
 	ClienteDaoImpl cdao = new ClienteDaoImpl();
 	
 	protected List<Cliente> lista;
+	
+	public void preencherResultado(ArrayList<Cliente> result){
+		this.lista = result;
+		fireTableDataChanged();
+	}
 	
 	public ModelCliente() {
 		lista = cdao.listar();
@@ -93,6 +99,13 @@ public class ModelCliente extends AbstractTableModel {
 			return "Ouve algun erro";
 			
 		}
+	}
+	
+	public Cliente getClienteAt(int i){
+		if(i >= this.lista.size())
+			return null;
+		
+		return this.lista.get(i); 
 	}
 
 }

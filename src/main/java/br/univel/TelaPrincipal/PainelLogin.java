@@ -50,6 +50,7 @@ import javax.swing.JToggleButton;
 import javax.swing.SwingConstants;
 import javax.swing.ImageIcon;
 import javax.swing.JSplitPane;
+import javax.swing.border.TitledBorder;
 
 /**
  * 
@@ -70,6 +71,7 @@ public class PainelLogin extends JPanel {
 	 * Create the panel.
 	 */
 	public PainelLogin() {
+		setBorder(new TitledBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null), "", TitledBorder.LEADING, TitledBorder.BELOW_BOTTOM, null, new Color(0, 0, 0)));
 
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
@@ -88,10 +90,12 @@ public class PainelLogin extends JPanel {
 		add(separator_1, gbc_separator_1);
 				
 				JLabel label = new JLabel("");
+				label.setBackground(Color.WHITE);
 				label.setIcon(new ImageIcon(PainelLogin.class.getResource("/icon/keys-icon.png")));
 				GridBagConstraints gbc_label = new GridBagConstraints();
+				gbc_label.gridwidth = 2;
 				gbc_label.insets = new Insets(0, 0, 5, 5);
-				gbc_label.gridx = 3;
+				gbc_label.gridx = 2;
 				gbc_label.gridy = 3;
 				add(label, gbc_label);
 		
@@ -119,41 +123,41 @@ public class PainelLogin extends JPanel {
 		gbc_separator.gridx = 5;
 		gbc_separator.gridy = 4;
 		add(separator, gbc_separator);
-
-		JLabel lblLogin = new JLabel("Login");
-		lblLogin.setFont(new Font("Arial", Font.BOLD, 13));
-		GridBagConstraints gbc_lblLogin = new GridBagConstraints();
-		gbc_lblLogin.insets = new Insets(0, 0, 5, 5);
-		gbc_lblLogin.anchor = GridBagConstraints.EAST;
-		gbc_lblLogin.gridx = 3;
-		gbc_lblLogin.gridy = 5;
-		add(lblLogin, gbc_lblLogin);
+		
+				JLabel lblLogin = new JLabel("Login");
+				lblLogin.setFont(new Font("Arial", Font.BOLD, 13));
+				GridBagConstraints gbc_lblLogin = new GridBagConstraints();
+				gbc_lblLogin.insets = new Insets(0, 0, 5, 5);
+				gbc_lblLogin.anchor = GridBagConstraints.EAST;
+				gbc_lblLogin.gridx = 2;
+				gbc_lblLogin.gridy = 5;
+				add(lblLogin, gbc_lblLogin);
 
 		txtlogin = new JTextField();
 		GridBagConstraints gbc_txtlogin = new GridBagConstraints();
-		gbc_txtlogin.gridwidth = 2;
+		gbc_txtlogin.gridwidth = 3;
 		gbc_txtlogin.fill = GridBagConstraints.HORIZONTAL;
 		gbc_txtlogin.insets = new Insets(0, 0, 5, 5);
-		gbc_txtlogin.gridx = 4;
+		gbc_txtlogin.gridx = 3;
 		gbc_txtlogin.gridy = 5;
 		add(txtlogin, gbc_txtlogin);
 		txtlogin.setColumns(10);
-
-		JLabel lblSenha = new JLabel("Senha");
-		lblSenha.setFont(new Font("Arial", Font.BOLD, 13));
-		GridBagConstraints gbc_lblSenha = new GridBagConstraints();
-		gbc_lblSenha.anchor = GridBagConstraints.EAST;
-		gbc_lblSenha.insets = new Insets(0, 0, 5, 5);
-		gbc_lblSenha.gridx = 3;
-		gbc_lblSenha.gridy = 6;
-		add(lblSenha, gbc_lblSenha);
+		
+				JLabel lblSenha = new JLabel("Senha");
+				lblSenha.setFont(new Font("Arial", Font.BOLD, 13));
+				GridBagConstraints gbc_lblSenha = new GridBagConstraints();
+				gbc_lblSenha.anchor = GridBagConstraints.EAST;
+				gbc_lblSenha.insets = new Insets(0, 0, 5, 5);
+				gbc_lblSenha.gridx = 2;
+				gbc_lblSenha.gridy = 6;
+				add(lblSenha, gbc_lblSenha);
 
 		passwordField = new JPasswordField();
 		GridBagConstraints gbc_passwordField = new GridBagConstraints();
-		gbc_passwordField.gridwidth = 2;
+		gbc_passwordField.gridwidth = 3;
 		gbc_passwordField.fill = GridBagConstraints.HORIZONTAL;
 		gbc_passwordField.insets = new Insets(0, 0, 5, 5);
-		gbc_passwordField.gridx = 4;
+		gbc_passwordField.gridx = 3;
 		gbc_passwordField.gridy = 6;
 		add(passwordField, gbc_passwordField);
 

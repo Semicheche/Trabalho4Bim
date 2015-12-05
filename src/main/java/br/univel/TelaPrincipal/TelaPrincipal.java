@@ -2,20 +2,23 @@ package br.univel.TelaPrincipal;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JComponent;
-import javax.swing.JMenuBar;
-import javax.swing.JMenu;
-import javax.swing.JMenuItem;
-import javax.swing.SwingConstants;
-
-import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.HashMap;
+import java.util.Map;
 
+import javax.swing.ImageIcon;
+import javax.swing.JComponent;
+import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
+import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
+
+import org.jdesktop.swingx.JXBusyLabel;
 
 import br.univel.Jasper.JasperReportCliente;
 import br.univel.Jasper.JasperReportProduto;
@@ -24,11 +27,6 @@ import br.univel.Views.TelaCadastroCategoria;
 import br.univel.Views.TelaCadastroCliente;
 import br.univel.Views.TelaCadastroProduto;
 import br.univel.Views.TelaCadastroVenda;
-
-import java.util.HashMap;
-import java.util.Map;
-
-import javax.swing.ImageIcon;
 
 public class TelaPrincipal extends JFrame {
 
@@ -39,6 +37,7 @@ public class TelaPrincipal extends JFrame {
 	private JPanel contentPane;
 	private JTabbedPane tabbedPane;
 	private BlockPanel glass;
+	private Carregar glasses;
 	
 	private Map<Integer, JComponent> mapa = new HashMap<Integer, JComponent>();
 
@@ -92,7 +91,7 @@ public class TelaPrincipal extends JFrame {
 		mntmCliente.setIcon(new ImageIcon(TelaPrincipal.class.getResource("/icon/1449205797_Add-Male-User.png")));
 		mntmCliente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				abrirTelaCliente();
+				abrirTelaCliente();					
 			}
 		});
 		mnNewMenu.add(mntmCliente);
@@ -102,7 +101,7 @@ public class TelaPrincipal extends JFrame {
 		mntmBloquear.setIcon(new ImageIcon(TelaPrincipal.class.getResource("/icon/padlock.png")));
 		mntmBloquear.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				block();
+				blockLoad();
 			}
 		});
 
@@ -162,13 +161,6 @@ public class TelaPrincipal extends JFrame {
 			}
 		});
 		mnRelatorios.add(mntmVendas);
-		
-		JMenu mnNewMenu_1 = new JMenu("");
-		mnNewMenu_1.setIcon(new ImageIcon(TelaPrincipal.class.getResource("/icon/search-icon.png")));
-		menuBar.add(mnNewMenu_1);
-		
-		JMenuItem mntmVenda = new JMenuItem("Vendas");
-		mnNewMenu_1.add(mntmVenda);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
@@ -197,13 +189,13 @@ public class TelaPrincipal extends JFrame {
 	private void blockParaLogin() {
 		Runnable acaoOk = () -> {
 			glass.setVisible(false);
-			glass = new BlockPanel();
+			glasses = new Carregar();
 		};
 
 		// ---- USAR A INDICAÇÃO DE PROGRESSO.
-		// JXBusyLabel busy = new JXBusyLabel();
-		// busy.setBusy(true);
-		// glass = new BlockPanel(busy);
+//		 JXBusyLabel busy = new JXBusyLabel();
+//		 busy.setBusy(true);
+//		 glass = new Carregar(busy);
 		// -----------------------------------
 
 		// ---- USAR O PAINEL DE LOGIN.
@@ -215,11 +207,52 @@ public class TelaPrincipal extends JFrame {
 
 		glass.setVisible(true);
 	}
+		
+	private void blockLoad() {
+		
+			Runnable acaoOk = () -> {
+				glasses.setVisible(false);
+				glasses = new Carregar();
+			};
 
-	protected void block() {
+			// ---- USAR A INDICAÇÃO DE PROGRESSO.
+			 JXBusyLabel busy = new JXBusyLabel();
+			 busy.setBusy(true);
+			 glasses = new Carregar(busy);
+			// -----------------------------------
 
-		setGlassPane(glass);
-		glass.setVisible(true);
+			// ---- USAR O PAINEL DE LOGIN.
+//			PainelLogin painelLogin = new PainelLogin(acaoOk);
+//			glass = new BlockPanel(painelLogin);
+			// -----------------------------------
+
+			setGlassPane(glasses);
+
+			glasses.setVisible(true);
+			
+			new Thread(new Runnable() {
+
+				@Override
+				public void run() {
+					for (int i = 0; i < 5; i++) {
+						try {
+							Thread.sleep(1000);
+						} catch (InterruptedException e) {
+							e.printStackTrace();
+						}
+					}
+					glasses.setVisible(false);
+				}
+			}).start();
+		}
+
+	
+	
+
+	public void block() {
+
+		setGlassPane(glasses);
+		glasses.setVisible(true);
 
 		new Thread(new Runnable() {
 
@@ -232,7 +265,7 @@ public class TelaPrincipal extends JFrame {
 						e.printStackTrace();
 					}
 				}
-				glass.setVisible(false);
+				glasses.setVisible(false);
 			}
 		}).start();
 	}
@@ -250,7 +283,6 @@ public class TelaPrincipal extends JFrame {
 	protected void abrirTelaProduto() {
 		
 		TelaCadastroProduto telacadastroproduto = new TelaCadastroProduto();
-		
 		telacadastroproduto.setCloseAction(e -> tabbedPane
 				.remove(telacadastroproduto));
 		tabbedPane.addTab("Produto", telacadastroproduto);
@@ -262,5 +294,4 @@ public class TelaPrincipal extends JFrame {
 		tabbedPane.setSelectedIndex(tabbedPane.getTabCount()-1);
 	}
 		
-	
 }

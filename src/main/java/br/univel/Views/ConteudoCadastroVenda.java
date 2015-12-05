@@ -1,30 +1,37 @@
 package br.univel.Views;
 
-import javax.swing.JPanel;
-
 import java.awt.BorderLayout;
-
-import javax.swing.JButton;
-
-import java.awt.GridBagLayout;
-
-import javax.swing.JLabel;
-
+import java.awt.Color;
+import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
-
-import javax.swing.JTextField;
-
+import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.awt.event.ActionListener;
+import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.math.BigDecimal;
+import java.sql.Timestamp;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+import java.util.Locale;
 
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-
-import java.awt.FlowLayout;
-
+import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+
+import org.exolab.castor.dsml.Consumer;
 
 import br.univel.Cliente.Cliente;
 import br.univel.Cliente.ClienteDaoImpl;
@@ -33,25 +40,11 @@ import br.univel.Models.ModelCliente;
 import br.univel.Models.ModelProduto;
 import br.univel.Produto.Produto;
 import br.univel.Produto.ProdutoDaoImp;
+import br.univel.TelaPrincipal.TelaPrincipal;
 import br.univel.Venda.Venda;
 import br.univel.Venda.VendaDaoImp;
 import br.univel.itemsvendas.ItemsVendas;
 import br.univel.itemsvendas.ItemsVendasDAOImpl;
-
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.math.BigDecimal;
-import java.security.acl.LastOwnerException;
-import java.sql.Timestamp;
-import java.text.DecimalFormat;
-import java.text.Format;
-import java.text.NumberFormat;
-import java.util.Locale;
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
-import javax.swing.ImageIcon;
-import java.awt.Color;
-import java.awt.SystemColor;
 
 public class ConteudoCadastroVenda extends JPanel {
 	
@@ -244,7 +237,6 @@ public class ConteudoCadastroVenda extends JPanel {
 		panel_1.add(lblNome, gbc_lblNome);
 		
 		txtnome = new JTextField();
-		txtnome.setEditable(false);
 		GridBagConstraints gbc_txtnome = new GridBagConstraints();
 		gbc_txtnome.gridwidth = 5;
 		gbc_txtnome.insets = new Insets(0, 0, 5, 5);
@@ -258,11 +250,13 @@ public class ConteudoCadastroVenda extends JPanel {
 		GridBagConstraints gbc_lblValorPago = new GridBagConstraints();
 		gbc_lblValorPago.insets = new Insets(0, 0, 5, 5);
 		gbc_lblValorPago.anchor = GridBagConstraints.EAST;
-		gbc_lblValorPago.gridx = 8;
+		gbc_lblValorPago.gridx = 10;
 		gbc_lblValorPago.gridy = 1;
 		panel_1.add(lblValorPago, gbc_lblValorPago);
 		
 		txtvalorpago = new JTextField();
+		txtvalorpago.setEnabled(false);
+		txtvalorpago.setEditable(false);
 		txtvalorpago.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusLost(FocusEvent e) {
@@ -285,10 +279,10 @@ public class ConteudoCadastroVenda extends JPanel {
 			}
 		});
 		GridBagConstraints gbc_txtvalorpago = new GridBagConstraints();
-		gbc_txtvalorpago.gridwidth = 2;
+		gbc_txtvalorpago.gridwidth = 4;
 		gbc_txtvalorpago.insets = new Insets(0, 0, 5, 5);
 		gbc_txtvalorpago.fill = GridBagConstraints.HORIZONTAL;
-		gbc_txtvalorpago.gridx = 9;
+		gbc_txtvalorpago.gridx = 11;
 		gbc_txtvalorpago.gridy = 1;
 		panel_1.add(txtvalorpago, gbc_txtvalorpago);
 		txtvalorpago.setColumns(10);
@@ -417,7 +411,7 @@ public class ConteudoCadastroVenda extends JPanel {
 		gbc_lblTotal.gridy = 11;
 		panel_1.add(lblTotal, gbc_lblTotal);
 		
-		lbltotal = new JLabel("0");
+		lbltotal = new JLabel("R$ 0,00");
 		GridBagConstraints gbc_lbltotal = new GridBagConstraints();
 		gbc_lbltotal.insets = new Insets(0, 0, 5, 5);
 		gbc_lbltotal.gridx = 15;
@@ -431,7 +425,7 @@ public class ConteudoCadastroVenda extends JPanel {
 		gbc_lblTroco.gridy = 12;
 		panel_1.add(lblTroco, gbc_lblTroco);
 		
-		lblvalorrecebido = new JLabel("0");
+		lblvalorrecebido = new JLabel("R$ 0,00");
 		GridBagConstraints gbc_lblvalorrecebido = new GridBagConstraints();
 		gbc_lblvalorrecebido.insets = new Insets(0, 0, 5, 5);
 		gbc_lblvalorrecebido.gridx = 15;
@@ -446,14 +440,18 @@ public class ConteudoCadastroVenda extends JPanel {
 		gbc_lblTroco_1.gridy = 13;
 		panel_1.add(lblTroco_1, gbc_lblTroco_1);
 		
-		lbltroco = new JLabel("0");
+		lbltroco = new JLabel("R$ 0,00");
 		GridBagConstraints gbc_lbltroco = new GridBagConstraints();
 		gbc_lbltroco.insets = new Insets(0, 0, 5, 5);
 		gbc_lbltroco.gridx = 15;
 		gbc_lbltroco.gridy = 13;
 		panel_1.add(lbltroco, gbc_lbltroco);
+		
+		
+		
 
 	}
+
 
 	protected void confirmarVenda() {
 		ItemsVendas iv = new ItemsVendas();
@@ -518,6 +516,11 @@ public class ConteudoCadastroVenda extends JPanel {
 			total = total.subtract(itemretirado);
 			lbltotal.setText(nfBR.format(total));
 			modelitemsvendas.fireTableDataChanged();
+			
+			if(modelitemsvendas.lista.size() == 0){
+				txtvalorpago.setEnabled(false);
+				txtvalorpago.setEditable(false);
+			}
 		}else
 			JOptionPane.showMessageDialog(null, "Selecione o item que deseja Remover!!");
 	}
@@ -533,13 +536,15 @@ public class ConteudoCadastroVenda extends JPanel {
 		items.setCustoproduto(pdao.listar().get(tableProduto.getSelectedRow()).getCusto());
 		
 		total = total.add(items.getCustoproduto().multiply(items.getQuantidade()));
-		
+		txtvalorpago.setEnabled(true);
+		txtvalorpago.setEditable(true);
 		modelitemsvendas.lista.add(items);
 		modelitemsvendas.fireTableDataChanged();
 		DecimalFormat df = new DecimalFormat("#,##0.00");
 					
 		lbltotal.setText(df.format(total));
 	}
+			
 		
 }
 
